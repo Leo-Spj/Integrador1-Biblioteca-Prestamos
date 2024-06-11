@@ -1,0 +1,5 @@
+# MySQL database connection settings
+db.driver=com.mysql.cj.jdbc.Driver
+db.url=jdbc:mysql://localhost:3306/biblioteca-prestamos?useSSL=false&serverTimezone=UTC-5
+db.username=root
+db.password=
