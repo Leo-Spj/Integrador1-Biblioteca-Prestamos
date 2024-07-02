@@ -1,4 +1,4 @@
-package com.utp.biblioteca.resources.dao;
+package com.utp.biblioteca.resources.modelo.dao;
 
 import com.utp.biblioteca.resources.configuracion.Conexion;
 import com.utp.biblioteca.resources.modelo.Usuario;
@@ -9,20 +9,14 @@ import java.util.List;
 
 public class UsuarioDao implements CrudDao<Usuario, Integer> {
 
-    Conexion con;
-    Connection conn;
-    PreparedStatement ps;
-    ResultSet rs;
-
-    public UsuarioDao() {
-        con = new Conexion();
+    private Connection getConnection() throws SQLException {
+        return Conexion.getConnection();
     }
 
     @Override
     public void crear(Usuario entidad) {
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("INSERT INTO Usuario (nombres, apellidos, dni, correo, contraseña, rol_id, estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Usuario (nombres, apellidos, dni, correo, contraseña, rol_id, estado) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             ps.setString(1, entidad.getNombres());
             ps.setString(2, entidad.getApellidos());
             ps.setInt(3, entidad.getDni());
@@ -39,10 +33,9 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
     @Override
     public List<Usuario> buscarTodos() {
         List<Usuario> usuarios = new ArrayList<>();
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("SELECT * FROM Usuario");
-            rs = ps.executeQuery();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Usuario");
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setUsuario_id(rs.getInt("usuario_id"));
@@ -62,22 +55,22 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
     }
 
     @Override
-    public Usuario buscarUno(Integer integer) {
+    public Usuario buscarUno(Integer id) {
         Usuario usuario = new Usuario();
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("SELECT * FROM Usuario WHERE usuario_id = ?");
-            ps.setInt(1, integer);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                usuario.setUsuario_id(rs.getInt("usuario_id"));
-                usuario.setNombres(rs.getString("nombres"));
-                usuario.setApellidos(rs.getString("apellidos"));
-                usuario.setDni(rs.getInt("dni"));
-                usuario.setCorreo(rs.getString("correo"));
-                usuario.setContraseña(rs.getString("contraseña"));
-                usuario.setRol_id(rs.getInt("rol_id"));
-                usuario.setEstado(rs.getBoolean("estado"));
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Usuario WHERE usuario_id = ?")) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    usuario.setUsuario_id(rs.getInt("usuario_id"));
+                    usuario.setNombres(rs.getString("nombres"));
+                    usuario.setApellidos(rs.getString("apellidos"));
+                    usuario.setDni(rs.getInt("dni"));
+                    usuario.setCorreo(rs.getString("correo"));
+                    usuario.setContraseña(rs.getString("contraseña"));
+                    usuario.setRol_id(rs.getInt("rol_id"));
+                    usuario.setEstado(rs.getBoolean("estado"));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,9 +80,8 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
 
     @Override
     public void actualizar(Usuario entidad) {
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("UPDATE Usuario SET nombres = ?, apellidos = ?, dni = ?, correo = ?, contraseña = ?, rol_id = ?, estado = ? WHERE usuario_id = ?");
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE Usuario SET nombres = ?, apellidos = ?, dni = ?, correo = ?, contraseña = ?, rol_id = ?, estado = ? WHERE usuario_id = ?")) {
             ps.setString(1, entidad.getNombres());
             ps.setString(2, entidad.getApellidos());
             ps.setInt(3, entidad.getDni());
@@ -105,11 +97,10 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
     }
 
     @Override
-    public void eliminar(Integer integer) {
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("DELETE FROM Usuario WHERE usuario_id = ?");
-            ps.setInt(1, integer);
+    public void eliminar(Integer id) {
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("DELETE FROM Usuario WHERE usuario_id = ?")) {
+            ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,14 +108,14 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
     }
 
     @Override
-    public Boolean existe(Integer integer) {
+    public Boolean existe(Integer id) {
         boolean existe = false;
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("SELECT * FROM Usuario WHERE usuario_id = ?");
-            ps.setInt(1, integer);
-            rs = ps.executeQuery();
-            existe = rs.next();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Usuario WHERE usuario_id = ?")) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                existe = rs.next();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

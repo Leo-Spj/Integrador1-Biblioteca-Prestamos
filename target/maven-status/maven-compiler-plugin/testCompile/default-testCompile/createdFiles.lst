@@ -1,4 +1,1 @@
-configuracion\DatabaseConnectionTest.class
-dao\StoredProcedureDAOTest.class
-dao\UsuarioDaoTest.class
-dao\LibroDaoTest.class
+dao/CrearLibroTest.class

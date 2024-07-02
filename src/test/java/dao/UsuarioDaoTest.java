@@ -1,6 +1,6 @@
 package dao;
 
-import com.utp.biblioteca.resources.dao.UsuarioDao;
+import com.utp.biblioteca.resources.modelo.dao.UsuarioDao;
 import com.utp.biblioteca.resources.modelo.Usuario;
 import org.junit.jupiter.api.Test;
 

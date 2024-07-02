@@ -1,4 +1,4 @@
-package com.utp.biblioteca.resources.dao;
+package com.utp.biblioteca.resources.modelo.dao;
 
 import com.utp.biblioteca.resources.configuracion.Conexion;
 import com.utp.biblioteca.resources.modelo.Rol;
@@ -9,20 +9,14 @@ import java.util.List;
 
 public class RolDao implements CrudDao<Rol, Integer> {
 
-    Conexion con;
-    Connection conn;
-    PreparedStatement ps;
-    ResultSet rs;
-
-    public RolDao() {
-        con = new Conexion();
+    private Connection getConnection() throws SQLException {
+        return Conexion.getConnection();
     }
 
     @Override
     public void crear(Rol entidad) {
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("INSERT INTO Rol (nombre) VALUES (?)");
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Rol (nombre) VALUES (?)")) {
             ps.setString(1, entidad.getNombre());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -33,10 +27,9 @@ public class RolDao implements CrudDao<Rol, Integer> {
     @Override
     public List<Rol> buscarTodos() {
         List<Rol> roles = new ArrayList<>();
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("SELECT * FROM Rol");
-            rs = ps.executeQuery();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Rol");
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Rol rol = new Rol();
                 rol.setRol_id(rs.getInt("rol_id"));
@@ -50,16 +43,16 @@ public class RolDao implements CrudDao<Rol, Integer> {
     }
 
     @Override
-    public Rol buscarUno(Integer integer) {
+    public Rol buscarUno(Integer id) {
         Rol rol = new Rol();
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("SELECT * FROM Rol WHERE rol_id = ?");
-            ps.setInt(1, integer);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                rol.setRol_id(rs.getInt("rol_id"));
-                rol.setNombre(rs.getString("nombre"));
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Rol WHERE rol_id = ?")) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    rol.setRol_id(rs.getInt("rol_id"));
+                    rol.setNombre(rs.getString("nombre"));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,9 +62,8 @@ public class RolDao implements CrudDao<Rol, Integer> {
 
     @Override
     public void actualizar(Rol entidad) {
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("UPDATE Rol SET nombre = ? WHERE rol_id = ?");
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE Rol SET nombre = ? WHERE rol_id = ?")) {
             ps.setString(1, entidad.getNombre());
             ps.setInt(2, entidad.getRol_id());
             ps.executeUpdate();
@@ -81,11 +73,10 @@ public class RolDao implements CrudDao<Rol, Integer> {
     }
 
     @Override
-    public void eliminar(Integer integer) {
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("DELETE FROM Rol WHERE rol_id = ?");
-            ps.setInt(1, integer);
+    public void eliminar(Integer id) {
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("DELETE FROM Rol WHERE rol_id = ?")) {
+            ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,14 +84,14 @@ public class RolDao implements CrudDao<Rol, Integer> {
     }
 
     @Override
-    public Boolean existe(Integer integer) {
+    public Boolean existe(Integer id) {
         boolean existe = false;
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("SELECT * FROM Rol WHERE rol_id = ?");
-            ps.setInt(1, integer);
-            rs = ps.executeQuery();
-            existe = rs.next();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Rol WHERE rol_id = ?")) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                existe = rs.next();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

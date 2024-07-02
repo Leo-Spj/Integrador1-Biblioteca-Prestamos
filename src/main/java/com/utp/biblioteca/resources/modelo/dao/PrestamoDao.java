@@ -1,4 +1,4 @@
-package com.utp.biblioteca.resources.dao;
+package com.utp.biblioteca.resources.modelo.dao;
 
 import com.utp.biblioteca.resources.configuracion.Conexion;
 import com.utp.biblioteca.resources.modelo.Libro;
@@ -10,20 +10,14 @@ import java.util.List;
 
 public class PrestamoDao implements CrudDao<Prestamo, Integer> {
 
-    Conexion con;
-    Connection conn;
-    PreparedStatement ps;
-    ResultSet rs;
-
-    public PrestamoDao() {
-        con = new Conexion();
+    private Connection getConnection() throws SQLException {
+        return Conexion.getConnection();
     }
 
     @Override
     public void crear(Prestamo entidad) {
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("INSERT INTO Prestamo (usuario_id, libro_id, fecha_prestamo, fecha_limite, fecha_devolucion, devuelto) VALUES (?, ?, ?, ?, ?, ?)");
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Prestamo (usuario_id, libro_id, fecha_prestamo, fecha_limite, fecha_devolucion, devuelto) VALUES (?, ?, ?, ?, ?, ?)")) {
             ps.setInt(1, entidad.getUsuario_id());
             ps.setInt(2, entidad.getLibro_id());
             ps.setDate(3, entidad.getFecha_prestamo());
@@ -39,10 +33,9 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
     @Override
     public List<Prestamo> buscarTodos() {
         List<Prestamo> prestamos = new ArrayList<>();
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("SELECT * FROM Prestamo");
-            rs = ps.executeQuery();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Prestamo");
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Prestamo prestamo = new Prestamo();
                 prestamo.setPrestamo_id(rs.getInt("prestamo_id"));
@@ -61,21 +54,21 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
     }
 
     @Override
-    public Prestamo buscarUno(Integer integer) {
+    public Prestamo buscarUno(Integer id) {
         Prestamo prestamo = new Prestamo();
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("SELECT * FROM Prestamo WHERE prestamo_id = ?");
-            ps.setInt(1, integer);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                prestamo.setPrestamo_id(rs.getInt("prestamo_id"));
-                prestamo.setUsuario_id(rs.getInt("usuario_id"));
-                prestamo.setLibro_id(rs.getInt("libro_id"));
-                prestamo.setFecha_prestamo(rs.getDate("fecha_prestamo"));
-                prestamo.setFecha_limite(rs.getDate("fecha_limite"));
-                prestamo.setFecha_devolucion(rs.getDate("fecha_devolucion"));
-                prestamo.setDevuelto(rs.getBoolean("devuelto"));
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Prestamo WHERE prestamo_id = ?")) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    prestamo.setPrestamo_id(rs.getInt("prestamo_id"));
+                    prestamo.setUsuario_id(rs.getInt("usuario_id"));
+                    prestamo.setLibro_id(rs.getInt("libro_id"));
+                    prestamo.setFecha_prestamo(rs.getDate("fecha_prestamo"));
+                    prestamo.setFecha_limite(rs.getDate("fecha_limite"));
+                    prestamo.setFecha_devolucion(rs.getDate("fecha_devolucion"));
+                    prestamo.setDevuelto(rs.getBoolean("devuelto"));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,9 +78,8 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
 
     @Override
     public void actualizar(Prestamo entidad) {
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("UPDATE Prestamo SET usuario_id = ?, libro_id = ?, fecha_prestamo = ?, fecha_limite = ?, fecha_devolucion = ?, devuelto = ? WHERE prestamo_id = ?");
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE Prestamo SET usuario_id = ?, libro_id = ?, fecha_prestamo = ?, fecha_limite = ?, fecha_devolucion = ?, devuelto = ? WHERE prestamo_id = ?")) {
             ps.setInt(1, entidad.getUsuario_id());
             ps.setInt(2, entidad.getLibro_id());
             ps.setDate(3, entidad.getFecha_prestamo());
@@ -102,11 +94,10 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
     }
 
     @Override
-    public void eliminar(Integer integer) {
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("DELETE FROM Prestamo WHERE prestamo_id = ?");
-            ps.setInt(1, integer);
+    public void eliminar(Integer id) {
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("DELETE FROM Prestamo WHERE prestamo_id = ?")) {
+            ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,28 +105,27 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
     }
 
     @Override
-    public Boolean existe(Integer integer) {
+    public Boolean existe(Integer id) {
         boolean existe = false;
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("SELECT * FROM Prestamo WHERE prestamo_id = ?");
-            ps.setInt(1, integer);
-            rs = ps.executeQuery();
-            existe = rs.next();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Prestamo WHERE prestamo_id = ?")) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                existe = rs.next();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return existe;
     }
 
-    // los 3 libros mas prestados "TOP"
+    // Método para obtener los 3 libros más prestados "TOP"
     public List<Libro> buscarTop(int top) {
         List<Libro> libros = new ArrayList<>();
-        try {
-            conn = con.getConectar();
-            ps = conn.prepareStatement("SELECT libro_id, COUNT(*) as count FROM Prestamo GROUP BY libro_id ORDER BY count DESC LIMIT ?");
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT libro_id, COUNT(*) as count FROM Prestamo GROUP BY libro_id ORDER BY count DESC LIMIT ?")) {
             ps.setInt(1, top);
-            rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int libro_id = rs.getInt("libro_id");
                 Libro libro = new LibroDao().buscarUno(libro_id);

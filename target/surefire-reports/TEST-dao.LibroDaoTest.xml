@@ -1,122 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="dao.LibroDaoTest" time="0.936" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="dao.LibroDaoTest" time="0.424" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
-    <property name="sun.cpu.isalist" value="amd64"/>
-    <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\Leo\Documents\NetBeansProjects\Integrador1-Biblioteca-Prestamos\target\test-classes;C:\Users\Leo\Documents\NetBeansProjects\Integrador1-Biblioteca-Prestamos\target\classes;C:\Users\Leo\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\Leo\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\Leo\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Leo\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\Leo\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Leo\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Leo\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Leo\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
-    <property name="java.vm.vendor" value="Amazon.com Inc."/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/target/test-classes:/home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/target/classes:/home/leo/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar:/home/leo/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar:/home/leo/.m2/repository/org/apache/commons/commons-dbcp2/2.12.0/commons-dbcp2-2.12.0.jar:/home/leo/.m2/repository/org/apache/commons/commons-pool2/2.12.0/commons-pool2-2.12.0.jar:/home/leo/.m2/repository/commons-logging/commons-logging/1.3.0/commons-logging-1.3.0.jar:/home/leo/.m2/repository/jakarta/transaction/jakarta.transaction-api/1.3.3/jakarta.transaction-api-1.3.3.jar:/home/leo/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/leo/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/home/leo/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/leo/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/leo/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/leo/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:"/>
+    <property name="java.vm.vendor" value="JetBrains s.r.o."/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="user.variant" value=""/>
-    <property name="java.vendor.url" value="https://aws.amazon.com/corretto/"/>
-    <property name="user.timezone" value="America/Bogota"/>
-    <property name="os.name" value="Windows 11"/>
+    <property name="java.vendor.url" value="https://openjdk.java.net/"/>
+    <property name="user.timezone" value="America/Lima"/>
+    <property name="os.name" value="Linux"/>
     <property name="java.vm.specification.version" value="17"/>
-    <property name="user.country" value="MX"/>
+    <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.boot.library.path" value="C:\Users\Leo\.jdks\corretto-17.0.11\bin"/>
-    <property name="sun.java.command" value="C:\Users\Leo\AppData\Local\Temp\surefire15700443393864398611\surefirebooter-20240701192429625_3.jar C:\Users\Leo\AppData\Local\Temp\surefire15700443393864398611 2024-07-01T19-24-29_207-jvmRun1 surefire-20240701192429625_1tmp surefire_0-20240701192429625_2tmp"/>
+    <property name="sun.boot.library.path" value="/home/leo/.sdkman/candidates/java/17.0.11-jbr/lib"/>
+    <property name="sun.java.command" value="/home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/target/surefire/surefirebooter-20240702002230009_3.jar /home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/target/surefire 2024-07-02T00-22-29_316-jvmRun1 surefire-20240702002230009_1tmp surefire_0-20240702002230009_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="dao.LibroDaoTest"/>
-    <property name="surefire.test.class.path" value="C:\Users\Leo\Documents\NetBeansProjects\Integrador1-Biblioteca-Prestamos\target\test-classes;C:\Users\Leo\Documents\NetBeansProjects\Integrador1-Biblioteca-Prestamos\target\classes;C:\Users\Leo\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\Leo\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\Leo\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Leo\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\Leo\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Leo\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Leo\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Leo\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
+    <property name="surefire.test.class.path" value="/home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/target/test-classes:/home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/target/classes:/home/leo/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar:/home/leo/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar:/home/leo/.m2/repository/org/apache/commons/commons-dbcp2/2.12.0/commons-dbcp2-2.12.0.jar:/home/leo/.m2/repository/org/apache/commons/commons-pool2/2.12.0/commons-pool2-2.12.0.jar:/home/leo/.m2/repository/commons-logging/commons-logging/1.3.0/commons-logging-1.3.0.jar:/home/leo/.m2/repository/jakarta/transaction/jakarta.transaction-api/1.3.3/jakarta.transaction-api-1.3.3.jar:/home/leo/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/leo/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/home/leo/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/leo/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/leo/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/leo/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="C:\Users\Leo"/>
+    <property name="user.home" value="/home/leo"/>
     <property name="user.language" value="es"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2024-04-16"/>
-    <property name="java.home" value="C:\Users\Leo\.jdks\corretto-17.0.11"/>
-    <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\Leo\Documents\NetBeansProjects\Integrador1-Biblioteca-Prestamos"/>
+    <property name="java.home" value="/home/leo/.sdkman/candidates/java/17.0.11-jbr"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/home/leo/Escritorio/Integrador1-Biblioteca-Prestamos"/>
     <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Leo\AppData\Local\Temp\surefire15700443393864398611\surefirebooter-20240701192429625_3.jar"/>
-    <property name="user.script" value=""/>
+    <property name="intellij.os.virtualization" value="none"/>
+    <property name="jbr.virtualization.information" value="No virtualization detected"/>
+    <property name="surefire.real.class.path" value="/home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/target/surefire/surefirebooter-20240702002230009_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="17.0.11+9-LTS"/>
-    <property name="user.name" value="Leo"/>
-    <property name="path.separator" value=";"/>
-    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.version" value="17.0.11+1-b1207.20"/>
+    <property name="user.name" value="leo"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.8.0-35-generic"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="file.encoding" value="Cp1252"/>
+    <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="java.vendor.version" value="Corretto-17.0.11.9.1"/>
-    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans-22\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
-    <property name="localRepository" value="C:\Users\Leo\.m2\repository"/>
-    <property name="java.vendor.url.bug" value="https://github.com/corretto/corretto-17/issues/"/>
-    <property name="java.io.tmpdir" value="C:\Users\Leo\AppData\Local\Temp\"/>
+    <property name="java.vendor.version" value="JBR-17.0.11+1-1207.20-jcef"/>
+    <property name="maven.ext.class.path" value="/usr/lib/apache-netbeans/java/maven-nblib/netbeans-eventspy.jar"/>
+    <property name="localRepository" value="/home/leo/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
     <property name="java.version" value="17.0.11"/>
-    <property name="user.dir" value="C:\Users\Leo\Documents\NetBeansProjects\Integrador1-Biblioteca-Prestamos"/>
+    <property name="user.dir" value="/home/leo/Escritorio/Integrador1-Biblioteca-Prestamos"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="sun.os.patch.level" value=""/>
-    <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Users\Leo\.jdks\corretto-17.0.11\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\PowerShell\7\;C:\Program Files\GitHub CLI\;C:\Users\Leo\.jdks\corretto-17.0.11\bin;C:\Users\Leo\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Leo\AppData\Local\Programs\Python\Python312\;C:\Users\Leo\AppData\Local\Microsoft\WindowsApps;C:\Users\Leo\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Leo\AppData\Roaming\npm;C:\Program Files\JetBrains\IntelliJ IDEA 2024.1.2\bin;;C:\ghcup\bin;C:\Users\Leo\AppData\Local\GitHubDesktop\bin;C:\laragon\bin\mysql\mysql-8.0.30-winx64\bin;C:\msys64\mingw64\bin;C:\msys64\usr\bin;C:\Program Files\Apache\maven\apache-maven-3.9.8\bin;;."/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="java.vendor" value="Amazon.com Inc."/>
-    <property name="java.vm.version" value="17.0.11+9-LTS"/>
+    <property name="java.vendor" value="JetBrains s.r.o."/>
+    <property name="java.vm.version" value="17.0.11+1-b1207.20"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testBuscarTodosLibros" classname="dao.LibroDaoTest" time="0.892">
+  <testcase name="testBuscarTodosLibros" classname="dao.LibroDaoTest" time="0.399">
     <system-out><![CDATA[Libro{libro_id=1, isbn='3888580894', titulo='Cien años de soledad', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/0289XLbZ/1-Cien-a-os-de-soledad.jpg', descripcion='Novela icónica que sigue la historia de la familia Buendía en el pueblo ficticio de Macondo.', stock=2}
 Libro{libro_id=2, isbn='5215707454', titulo='El amor en los tiempos del cólera', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/vZTbbf7V/2-el-amor-en-tiempos-de-c-lera.jpg', descripcion='Historia de amor entre Fermina Daza y Florentino Ariza que abarca varias décadas.', stock=3}
 Libro{libro_id=3, isbn='2997016528', titulo='Crónica de una muerte anunciada', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/5NnbhnzJ/3-Cr-nica-de-una-muerte-anunciada.jpg', descripcion='Historia sobre la muerte de Santiago Nasar, narrada como una crónica periodística.', stock=3}
-Libro{libro_id=4, isbn='1948210141', titulo='El coronel no tiene quien le escriba', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/wjrHvMFb/4-El-coronel-no-tiene-quien-le-escriba.jpg', descripcion='Relato sobre un coronel retirado que espera una pensión que nunca llega.', stock=3}
-Libro{libro_id=5, isbn='5396283330', titulo='Relato de un náufrago', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/XJSbfPRf/5-Relato-de-un-n-ufrago.jpg', descripcion='Historia basada en hechos reales sobre un marinero que sobrevive diez días a la deriva en el Caribe.', stock=3}
-Libro{libro_id=6, isbn='4282237437', titulo='El otoño del patriarca', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/6QGKGKm6/6-El-oto-o-del-patriarca.jpg', descripcion='Novela que describe la decadencia de un dictador caribeño.', stock=3}
-Libro{libro_id=7, isbn='5219989508', titulo='Memoria de mis putas tristes', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/pTftqZvg/7-Memoria-de-mis-putas-tristes.jpg', descripcion='Historia de un hombre de 90 años que decide regalarse una noche de amor con una joven virgen.', stock=1}
-Libro{libro_id=8, isbn='4123306029', titulo='Noticia de un secuestro', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/GtbnNyh9/8-Noticia-de-un-secuestro.jpg', descripcion='Crónica periodística sobre una serie de secuestros en Colombia llevados a cabo por el cartel de Medellín.', stock=1}
-Libro{libro_id=9, isbn='8434688259', titulo='Doce cuentos peregrinos', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/hvMRqtfs/9-Doce-cuentos-peregrinos.jpg', descripcion='Conjunto de relatos que tienen en común a personajes latinoamericanos viviendo en Europa.', stock=3}
-Libro{libro_id=10, isbn='7001079571', titulo='La hojarasca', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/c44NBwbb/10-La-hojarasca.jpg', descripcion='Primera novela del autor, que introduce el pueblo de Macondo y sus habitantes.', stock=2}
-Libro{libro_id=11, isbn='8843607213', titulo='El general en su laberinto', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/L4VpPNNP/11-El-general-en-su-laberinto.jpg', descripcion='Novela histórica que narra los últimos días de Simón Bolívar.', stock=2}
-Libro{libro_id=12, isbn='8798519701', titulo='Vivir para contarla', autor=Autor{autor_id=1, nombre='Gabriel García Márquez'}, link_imagen='https://i.postimg.cc/ncRfRM8c/12-Vivir-para-contarla.jpg', descripcion='Autobiografía del autor, que abarca su infancia y juventud.', stock=1}
-Libro{libro_id=13, isbn='7134435711', titulo='La casa de los espíritus', autor=Autor{autor_id=2, nombre='Isabel Allende'}, link_imagen='https://i.postimg.cc/4xYkrZZv/13-La-casa-de-los-esp-ritus.jpg', descripcion='Saga familiar que mezcla realismo mágico con la historia política de Chile.', stock=2}
-Libro{libro_id=14, isbn='8455392077', titulo='Eva Luna', autor=Autor{autor_id=2, nombre='Isabel Allende'}, link_imagen='https://i.postimg.cc/vZCFyjHJ/14-Eva-Luna.jpg', descripcion='Novela que sigue la vida de Eva Luna, una joven huérfana con un talento innato para contar historias.', stock=1}
-Libro{libro_id=15, isbn='7185986487', titulo='De amor y de sombra', autor=Autor{autor_id=2, nombre='Isabel Allende'}, link_imagen='https://i.postimg.cc/YSgcC3vh/15-De-amor-y-de-sombra.jpg', descripcion='Historia de amor ambientada en un país latinoamericano bajo una dictadura militar.', stock=1}
-Libro{libro_id=16, isbn='8767162147', titulo='Paula', autor=Autor{autor_id=2, nombre='Isabel Allende'}, link_imagen='https://i.postimg.cc/xCSwJzmg/16-Paula.jpg', descripcion='Libro de memorias escrito tras la enfermedad y muerte de la hija de la autora.', stock=3}
-Libro{libro_id=17, isbn='2647566867', titulo='Hija de la fortuna', autor=Autor{autor_id=2, nombre='Isabel Allende'}, link_imagen='https://i.postimg.cc/mDN0QgN4/17-Hija-de-la-fortuna.jpg', descripcion='Historia de una joven chilena que viaja a California durante la fiebre del oro en busca de su amor perdido.', stock=3}
-Libro{libro_id=18, isbn='6325164774', titulo='El amante japonés', autor=Autor{autor_id=2, nombre='Isabel Allende'}, link_imagen='https://i.postimg.cc/NFsZbvpH/18-El-amante-japon-s.jpg', descripcion='Historia de amor entre una joven polaca y un jardinero japonés en el San Francisco de la Segunda Guerra Mundial.', stock=2}
-Libro{libro_id=19, isbn='6084252216', titulo='La suma de los días', autor=Autor{autor_id=2, nombre='Isabel Allende'}, link_imagen='https://i.postimg.cc/kGTzpYph/19-La-suma-de-los-d-as.jpg', descripcion='Continuación de las memorias de Allende, centrada en su vida familiar en California.', stock=2}
-Libro{libro_id=20, isbn='4988450015', titulo='Inés del alma mía', autor=Autor{autor_id=2, nombre='Isabel Allende'}, link_imagen='https://i.postimg.cc/3rftzGw6/20-Ines-del-alma-m-a.jpg', descripcion='Novela histórica sobre Inés Suárez, una conquistadora española en el siglo XVI.', stock=2}
-Libro{libro_id=21, isbn='2860112969', titulo='Ficciones', autor=Autor{autor_id=3, nombre='Jorge Luis Borges'}, link_imagen='https://i.postimg.cc/NfWpjwmk/21-Ficciones.jpg', descripcion='Colección de cuentos que exploran temas como la metafísica, la literatura y la identidad.', stock=3}
-Libro{libro_id=22, isbn='9472143119', titulo='El Aleph', autor=Autor{autor_id=3, nombre='Jorge Luis Borges'}, link_imagen='https://i.postimg.cc/L8Lvq0VK/22-El-Aleph.jpg', descripcion='Conjunto de relatos que incluyen elementos de la filosofía, la teología y la literatura.', stock=3}
-Libro{libro_id=23, isbn='5305404287', titulo='El libro de arena', autor=Autor{autor_id=3, nombre='Jorge Luis Borges'}, link_imagen='https://i.postimg.cc/yYJLKNgN/23-El-libro-de-arena.jpg', descripcion='Colección de cuentos que abordan temas como el infinito y la identidad.', stock=2}
-Libro{libro_id=24, isbn='4605999020', titulo='Historia universal de la infamia', autor=Autor{autor_id=3, nombre='Jorge Luis Borges'}, link_imagen='https://i.postimg.cc/fbsCYjH3/24-Historia-universal-de-la-infamia.jpg', descripcion='Serie de biografías ficticias de criminales y aventureros.', stock=3}
-Libro{libro_id=25, isbn='5430430360', titulo='El informe de Brodie', autor=Autor{autor_id=3, nombre='Jorge Luis Borges'}, link_imagen='https://i.postimg.cc/SsNGvQbk/25-El-informe-de-Brodie.jpg', descripcion='Colección de cuentos que exploran lo fantástico y lo metafísico.', stock=1}
-Libro{libro_id=26, isbn='4692161890', titulo='La memoria de Shakespeare', autor=Autor{autor_id=3, nombre='Jorge Luis Borges'}, link_imagen='https://i.postimg.cc/VNFRgrTK/26-La-memoria-de-Shakespeare.jpg', descripcion='Colección de cuentos publicados póstumamente que abordan temas recurrentes del autor.', stock=3}
-Libro{libro_id=27, isbn='3527112981', titulo='Seis problemas para don Isidro Parodi', autor=Autor{autor_id=3, nombre='Jorge Luis Borges'}, link_imagen='https://i.postimg.cc/SsTGF0m8/27-Seis-problemas-para-don-Isidro-Parodi.jpg', descripcion='Colección de relatos policiales escritos en colaboración con Adolfo Bioy Casares bajo el seudónimo de H. Bustos Domecq.', stock=3}
-Libro{libro_id=28, isbn='8862721725', titulo='Manual de zoología fantástica', autor=Autor{autor_id=3, nombre='Jorge Luis Borges'}, link_imagen='https://i.postimg.cc/kG2v7j5H/28-Manual-de-zoolog-a-fant-stica.jpg', descripcion='Compendio de seres mitológicos y fantásticos de diversas culturas.', stock=2}
-Libro{libro_id=29, isbn='3754841856', titulo='Pedro Páramo', autor=Autor{autor_id=4, nombre='Juan Rulfo'}, link_imagen='https://i.postimg.cc/Rh2Qhc6Z/29-Pedro-P-ramo.jpg', descripcion='Novela sobre Juan Preciado, quien viaja al pueblo de Comala en busca de su padre, Pedro Páramo.', stock=2}
-Libro{libro_id=30, isbn='5405199911', titulo='Rayuela', autor=Autor{autor_id=5, nombre='Julio Cortázar'}, link_imagen='https://i.postimg.cc/DfNcxKj3/30-Rayuela.jpg', descripcion='Novela que se puede leer de varias maneras, explorando la vida de un grupo de intelectuales en París y Buenos Aires.', stock=1}
-Libro{libro_id=31, isbn='7423166542', titulo='Bestiario', autor=Autor{autor_id=5, nombre='Julio Cortázar'}, link_imagen='https://i.postimg.cc/Hs79KPRc/31-Bestiario.jpg', descripcion='Primera colección de cuentos publicada por Cortázar, donde lo fantástico irrumpe en lo cotidiano.', stock=2}
-Libro{libro_id=32, isbn='1087162506', titulo='Final del juego', autor=Autor{autor_id=5, nombre='Julio Cortázar'}, link_imagen='https://i.postimg.cc/wj8QdQYW/32-Final-del-juego.jpg', descripcion='Conjunto de relatos que incluyen elementos de lo fantástico y lo absurdo.', stock=2}
-Libro{libro_id=33, isbn='7895373356', titulo='Los premios', autor=Autor{autor_id=5, nombre='Julio Cortázar'}, link_imagen='https://i.postimg.cc/xd9GXjCM/33-Los-premios.jpg', descripcion='Novela que sigue a un grupo de personas que ganan un viaje en barco y sus experiencias a bordo.', stock=3}
-Libro{libro_id=34, isbn='1552680208', titulo='Las armas secretas', autor=Autor{autor_id=5, nombre='Julio Cortázar'}, link_imagen='https://i.postimg.cc/sgY9fGV3/34-Las-armas-secretas.jpg', descripcion='Colección de cuentos que incluye algunos de los relatos más conocidos del autor.', stock=1}
-Libro{libro_id=35, isbn='5581758914', titulo='La vuelta al día en ochenta mundos', autor=Autor{autor_id=5, nombre='Julio Cortázar'}, link_imagen='https://i.postimg.cc/8CwRM8J3/35-La-vuelta-al-d-a-en-ochenta-mundos.jpg', descripcion='Colección de ensayos, cuentos y reflexiones sobre diversos temas, con ilustraciones y fotografías.', stock=2}
-Libro{libro_id=36, isbn='5640784008', titulo='62 Modelo para armar', autor=Autor{autor_id=5, nombre='Julio Cortázar'}, link_imagen='https://i.postimg.cc/1ttpKWDz/36-62-Modelo-para-armar.jpg', descripcion='Novela experimental que sigue a un grupo de personajes en diversas ciudades de Europa.', stock=2}
-Libro{libro_id=37, isbn='7604486737', titulo='Un tal Lucas', autor=Autor{autor_id=5, nombre='Julio Cortázar'}, link_imagen='https://i.postimg.cc/PxR1VmMQ/37-Un-tal-Lucas.jpg', descripcion='Conjunto de relatos, poemas y reflexiones protagonizados', stock=3}
-Libro{libro_id=38, isbn='2259208617', titulo='Como agua para chocolate', autor=Autor{autor_id=6, nombre='Laura Esquivel'}, link_imagen='https://i.postimg.cc/Vv0nxdGQ/38-Como-agua-para-chocolate.jpg', descripcion='Novela que combina recetas de cocina con una historia de amor en tiempos de la Revolución Mexicana.', stock=1}
-Libro{libro_id=39, isbn='6143579964', titulo='La ley del amor', autor=Autor{autor_id=6, nombre='Laura Esquivel'}, link_imagen='https://i.postimg.cc/pT4q5N3v/39-La-ley-del-amor.jpg', descripcion='Novela que mezcla elementos de ciencia ficción y romance en un futuro distópico.', stock=2}
-Libro{libro_id=40, isbn='1974320067', titulo='Tan veloz como el deseo', autor=Autor{autor_id=6, nombre='Laura Esquivel'}, link_imagen='https://i.postimg.cc/9091G8j7/40-Tan-veloz-como-el-deseo.jpg', descripcion='Novela sobre un hombre con el don de interpretar los deseos de las personas a través del oído.', stock=3}
-Libro{libro_id=41, isbn='2113103506', titulo='Malinche', autor=Autor{autor_id=6, nombre='Laura Esquivel'}, link_imagen='https://i.postimg.cc/nc83HJvY/41-Malinche.jpg', descripcion='Novela histórica sobre la vida de Malinche, la intérprete y amante de Hernán Cortés.', stock=3}
-Libro{libro_id=42, isbn='8725928128', titulo='La ciudad y los perros', autor=Autor{autor_id=7, nombre='Mario Vargas Llosa'}, link_imagen='https://i.postimg.cc/Kc39Szg8/42-La-ciudad-y-los-perros.jpg', descripcion='Novela sobre la vida en una academia militar en Lima, Perú, y las tensiones sociales y personales de los cadetes.', stock=1}
-Libro{libro_id=43, isbn='6447523443', titulo='La fiesta del chivo', autor=Autor{autor_id=7, nombre='Mario Vargas Llosa'}, link_imagen='https://i.postimg.cc/2842yKGp/43-La-fiesta-del-chivo.jpg', descripcion='Historia basada en la dictadura de Rafael Leónidas Trujillo en República Dominicana.', stock=1}
-Libro{libro_id=44, isbn='1203345490', titulo='Conversación en La Catedral', autor=Autor{autor_id=7, nombre='Mario Vargas Llosa'}, link_imagen='https://i.postimg.cc/T300q5BC/44-Conversaci-n-en-La-Catedral.jpg', descripcion='Novela que explora la corrupción y la decadencia moral en Perú durante la dictadura de Manuel A. Odría.', stock=2}
-Libro{libro_id=45, isbn='7323111686', titulo='La casa verde', autor=Autor{autor_id=7, nombre='Mario Vargas Llosa'}, link_imagen='https://i.postimg.cc/YCM8WzDv/45-La-casa-verde.jpg', descripcion='Novela que entrelaza varias historias en la selva peruana y en un burdel.', stock=3}
-Libro{libro_id=46, isbn='6197490784', titulo='Pantaleón y las visitadoras', autor=Autor{autor_id=7, nombre='Mario Vargas Llosa'}, link_imagen='https://i.postimg.cc/VNHF2Qft/46-Pantale-n-y-las-visitadoras.jpg', descripcion='Novela satírica sobre un oficial del ejército peruano encargado de organizar un servicio de prostitutas para las tropas en la Amazonía.', stock=1}
-Libro{libro_id=47, isbn='1148782808', titulo='Los cachorros', autor=Autor{autor_id=7, nombre='Mario Vargas Llosa'}, link_imagen='https://i.postimg.cc/rppJhFkc/47-Los-cachorros.jpg', descripcion='Novela corta que sigue la vida de un grupo de amigos en Lima desde su infancia hasta la adultez.', stock=2}
-Libro{libro_id=48, isbn='2102104421', titulo='Travesuras de la niña mala', autor=Autor{autor_id=7, nombre='Mario Vargas Llosa'}, link_imagen='https://i.postimg.cc/ZRBLS7nM/48-Travesuras-de-la-ni-a-mala.jpg', descripcion='Historia de amor entre Ricardo Somocurcio y una mujer que aparece y desaparece a lo largo de su vida.', stock=2}
-Libro{libro_id=49, isbn='2810822794', titulo='El sueño del celta', autor=Autor{autor_id=7, nombre='Mario Vargas Llosa'}, link_imagen='https://i.postimg.cc/Jnf54NB4/49-El-sue-o-del-celta.jpg', descripcion='Novela basada en la vida de Roger Casement, un diplomático británico que denunció los abusos coloniales en el Congo y Perú.', stock=1}
-Libro{libro_id=50, isbn='3337921053', titulo='El laberinto de la soledad', autor=Autor{autor_id=8, nombre='Octavio Paz'}, link_imagen='https://i.postimg.cc/Hnb4JrQ0/50-El-laberinto-de-la-soledad.jpg', descripcion='Ensayo sobre la identidad mexicana y el carácter del pueblo mexicano.', stock=2}
-Libro{libro_id=51, isbn='4639190320', titulo='Sor Juana Inés de la Cruz o Las trampas de la fe', autor=Autor{autor_id=8, nombre='Octavio Paz'}, link_imagen='https://i.postimg.cc/1RFK7jLg/51-Sor-Juana-In-s-de-la-Cruz-o-Las-trampas-de-la-fe.jpg', descripcion='Biografía de la poeta y monja mexicana Sor Juana Inés de la Cruz.', stock=1}
-Libro{libro_id=52, isbn='1380981131', titulo='El arco y la lira', autor=Autor{autor_id=8, nombre='Octavio Paz'}, link_imagen='https://i.postimg.cc/28f7sxD0/52-El-arco-y-la-lira.jpg', descripcion='Ensayo sobre la poesía y su relación con la vida y la cultura.', stock=3}
-Libro{libro_id=53, isbn='1935045932', titulo='Piedra de sol', autor=Autor{autor_id=8, nombre='Octavio Paz'}, link_imagen='https://i.postimg.cc/fTjfD0WD/53-Piedra-de-sol.jpg', descripcion='Extenso poema circular que refleja las preocupaciones filosóficas y estéticas del autor.', stock=2}
-Libro{libro_id=54, isbn='8484165258', titulo='Veinte poemas de amor y una canción desesperada', autor=Autor{autor_id=9, nombre='Pablo Neruda'}, link_imagen='https://i.postimg.cc/XYjcJ7XF/54-Veinte-poemas-de-amor-y-una-cancion-desesperada.jpg', descripcion='Colección de poemas que exploran el amor y la pérdida.', stock=3}
-Libro{libro_id=55, isbn='2803601269', titulo='Canto general', autor=Autor{autor_id=9, nombre='Pablo Neruda'}, link_imagen='https://i.postimg.cc/ht287W7Y/55-Canto-general.jpg', descripcion='Extensa obra poética que traza la historia de América Latina desde la prehistoria hasta el siglo XX.', stock=2}
-Libro{libro_id=56, isbn='5036265268', titulo='Residencia en la tierra', autor=Autor{autor_id=9, nombre='Pablo Neruda'}, link_imagen='https://i.postimg.cc/MGX77P7p/56-Residencia-en-la-tierra.jpg', descripcion='Serie de poemas que exploran la alienación y el absurdo de la existencia humana.', stock=1}
-Libro{libro_id=57, isbn='6626438257', titulo='Memorial de Isla Negra', autor=Autor{autor_id=9, nombre='Pablo Neruda'}, link_imagen='https://i.postimg.cc/yN5FvmjX/57-Memorial-de-Isla-Negra.jpg', descripcion='Poemario autobiográfico que recorre la vida del poeta y su relación con Chile.', stock=1}
 ]]></system-out>
   </testcase>
 </testsuite>

@@ -9,10 +9,9 @@ public class DatabaseConnectionTest {
 
     @Test
     public void testGetConectar() {
-        Conexion conexion = new Conexion();
         Connection conn = null;
         try {
-            conn = conexion.getConectar();
+            conn = Conexion.getConnection();
         } catch (Exception e) {
             e.printStackTrace();
         }
