@@ -56,6 +56,84 @@ public class LibroDao implements CrudDao<Libro, Integer> {
         return libros;
     }
 
+    public List<Libro> buscarPorTitulo(String titulo) {
+        List<Libro> libros = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Libro WHERE titulo LIKE ?")) {
+            ps.setString(1, "%" + titulo + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                AutorDao autorDao = new AutorDao();
+                Autor autor = autorDao.buscarUno(rs.getInt("autor_id"));
+
+                Libro libro = new Libro();
+                libro.setLibro_id(rs.getInt("libro_id"));
+                libro.setIsbn(rs.getString("isbn"));
+                libro.setTitulo(rs.getString("titulo"));
+                libro.setAutor(autor);
+                libro.setLink_imagen(rs.getString("link_imagen"));
+                libro.setDescripcion(rs.getString("descripcion"));
+                libro.setStock(rs.getInt("stock"));
+                libros.add(libro);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return libros;
+    }
+
+    public List<Libro> buscarPorAutor(String autor) {
+        List<Libro> libros = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT L.* FROM Libro L INNER JOIN Autor A ON L.autor_id = A.autor_id WHERE A.nombre LIKE ?")) {
+            ps.setString(1, "%" + autor + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                AutorDao autorDao = new AutorDao();
+                Autor autorObj = autorDao.buscarUno(rs.getInt("autor_id"));
+
+                Libro libro = new Libro();
+                libro.setLibro_id(rs.getInt("libro_id"));
+                libro.setIsbn(rs.getString("isbn"));
+                libro.setTitulo(rs.getString("titulo"));
+                libro.setAutor(autorObj);
+                libro.setLink_imagen(rs.getString("link_imagen"));
+                libro.setDescripcion(rs.getString("descripcion"));
+                libro.setStock(rs.getInt("stock"));
+                libros.add(libro);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return libros;
+    }
+
+    public List<Libro> buscarPorIsbn(String isbn) {
+        List<Libro> libros = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Libro WHERE isbn LIKE ?")) {
+            ps.setString(1, "%" + isbn + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                AutorDao autorDao = new AutorDao();
+                Autor autor = autorDao.buscarUno(rs.getInt("autor_id"));
+
+                Libro libro = new Libro();
+                libro.setLibro_id(rs.getInt("libro_id"));
+                libro.setIsbn(rs.getString("isbn"));
+                libro.setTitulo(rs.getString("titulo"));
+                libro.setAutor(autor);
+                libro.setLink_imagen(rs.getString("link_imagen"));
+                libro.setDescripcion(rs.getString("descripcion"));
+                libro.setStock(rs.getInt("stock"));
+                libros.add(libro);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return libros;
+    }
+
     public int cantidadPaginas(int cantidad) {
         int cantidadPaginas = 0;
         try (Connection conn = getConnection();
