@@ -1,6 +1,7 @@
 package com.utp.biblioteca.resources.modelo.dao;
 
 import com.utp.biblioteca.resources.configuracion.Conexion;
+import com.utp.biblioteca.resources.modelo.Rol;
 import com.utp.biblioteca.resources.modelo.Usuario;
 
 import java.sql.*;
@@ -22,7 +23,7 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
             ps.setInt(3, entidad.getDni());
             ps.setString(4, entidad.getCorreo());
             ps.setString(5, entidad.getContraseña());
-            ps.setInt(6, entidad.getRol_id());
+            ps.setInt(6, entidad.getRol().getRol_id());
             ps.setBoolean(7, entidad.isEstado());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -38,13 +39,17 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Usuario usuario = new Usuario();
+
+                RolDao rolDao = new RolDao();
+                Rol rol = rolDao.buscarUno(rs.getInt("rol_id"));
+
                 usuario.setUsuario_id(rs.getInt("usuario_id"));
                 usuario.setNombres(rs.getString("nombres"));
                 usuario.setApellidos(rs.getString("apellidos"));
                 usuario.setDni(rs.getInt("dni"));
                 usuario.setCorreo(rs.getString("correo"));
                 usuario.setContraseña(rs.getString("contraseña"));
-                usuario.setRol_id(rs.getInt("rol_id"));
+                usuario.setRol(rol);
                 usuario.setEstado(rs.getBoolean("estado"));
                 usuarios.add(usuario);
             }
@@ -62,13 +67,16 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
+                    RolDao rolDao = new RolDao();
+                    Rol rol = rolDao.buscarUno(rs.getInt("rol_id"));
+
                     usuario.setUsuario_id(rs.getInt("usuario_id"));
                     usuario.setNombres(rs.getString("nombres"));
                     usuario.setApellidos(rs.getString("apellidos"));
                     usuario.setDni(rs.getInt("dni"));
                     usuario.setCorreo(rs.getString("correo"));
                     usuario.setContraseña(rs.getString("contraseña"));
-                    usuario.setRol_id(rs.getInt("rol_id"));
+                    usuario.setRol(rol);
                     usuario.setEstado(rs.getBoolean("estado"));
                 }
             }
@@ -87,7 +95,7 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
             ps.setInt(3, entidad.getDni());
             ps.setString(4, entidad.getCorreo());
             ps.setString(5, entidad.getContraseña());
-            ps.setInt(6, entidad.getRol_id());
+            ps.setInt(6, entidad.getRol().getRol_id());
             ps.setBoolean(7, entidad.isEstado());
             ps.setInt(8, entidad.getUsuario_id());
             ps.executeUpdate();

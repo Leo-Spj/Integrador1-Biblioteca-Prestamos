@@ -8,7 +8,7 @@ public class Usuario {
     private int dni;
     private String correo;
     private String contraseña;
-    private int rol_id;
+    private Rol rol;
     private boolean estado;
 
     public int getUsuario_id() {
@@ -59,12 +59,12 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
-    public int getRol_id() {
-        return rol_id;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRol_id(int rol_id) {
-        this.rol_id = rol_id;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     public boolean isEstado() {
@@ -84,7 +84,7 @@ public class Usuario {
                 ", dni=" + dni +
                 ", correo='" + correo + '\'' +
                 ", contraseña='" + contraseña + '\'' +
-                ", rol_id=" + rol_id +
+                ", rol=" + rol.getNombre() +
                 ", estado=" + estado +
                 '}';
     }
