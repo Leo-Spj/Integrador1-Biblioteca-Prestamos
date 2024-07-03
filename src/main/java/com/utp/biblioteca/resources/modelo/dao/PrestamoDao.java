@@ -4,6 +4,7 @@ import com.utp.biblioteca.resources.configuracion.Conexion;
 import com.utp.biblioteca.resources.modelo.Libro;
 import com.utp.biblioteca.resources.modelo.Prestamo;
 import com.utp.biblioteca.resources.modelo.Usuario;
+import com.utp.biblioteca.resources.modelo.dao.sp.StoredProcedureRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
 
     @Override
     public void crear(Prestamo entidad) {
-        try (Connection conn = getConnection();
+        throw new UnsupportedOperationException("No usen este método. Utilicen 'spRealizarPrestamo' de 'StoredProcedureRepository'.");
+        /*try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO Prestamo (usuario_id, libro_id, fecha_prestamo, fecha_limite, fecha_devolucion, devuelto) VALUES (?, ?, ?, ?, ?, ?)")) {
             ps.setInt(1, entidad.getUsuario().getUsuario_id());
             ps.setInt(2, entidad.getLibro().getLibro_id());
@@ -28,7 +30,7 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
@@ -91,7 +93,8 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
 
     @Override
     public void actualizar(Prestamo entidad) {
-        try (Connection conn = getConnection();
+        throw new UnsupportedOperationException("No usen este método. Utilicen 'spDevolverLibro' de 'StoredProcedureRepository'.");
+        /*try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement("UPDATE Prestamo SET usuario_id = ?, libro_id = ?, fecha_prestamo = ?, fecha_limite = ?, fecha_devolucion = ?, devuelto = ? WHERE prestamo_id = ?")) {
             ps.setInt(1, entidad.getUsuario().getUsuario_id());
             ps.setInt(2, entidad.getLibro().getLibro_id());
@@ -103,7 +106,7 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
