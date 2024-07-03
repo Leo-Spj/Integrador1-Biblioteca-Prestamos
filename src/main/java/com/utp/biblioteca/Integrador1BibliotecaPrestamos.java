@@ -4,7 +4,7 @@
 
 package com.utp.biblioteca;
 
-import com.utp.biblioteca.views.NewJFrame;
+import com.utp.biblioteca.views.App;
 
 /**
  *
@@ -14,7 +14,7 @@ public class Integrador1BibliotecaPrestamos {
 
     public static void main(String[] args) {
 
-        NewJFrame app = new NewJFrame();
+        App app = new App();
         app.setVisible(true);
 
     }

@@ -4,17 +4,42 @@
  */
 package com.utp.biblioteca.views;
 
+import com.utp.biblioteca.resources.modelo.Libro;
+import com.utp.biblioteca.resources.modelo.dao.LibroDao;
+
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
 /**
  *
  * @author Leo
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class App extends javax.swing.JFrame {
 
+    private DefaultTableModel model_librosPrestamos;
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public App() {
         initComponents();
+        iniciandoTablaPrestamos();
+    }
+
+    public void iniciandoTablaPrestamos(){
+        model_librosPrestamos = (DefaultTableModel) tbl_librosBusqueda_prestamos.getModel();
+        LibroDao libroDao = new LibroDao();
+        List<Libro> libros = libroDao.buscarTodos();
+        model_librosPrestamos.setRowCount(0);
+        for (Libro libro : libros) {
+            Object[] row = new Object[]{
+                    libro.getLibro_id(),
+                    libro.getIsbn(),
+                    libro.getTitulo(),
+                    libro.getAutor().getNombre(),
+                    libro.getStock()
+            };
+            model_librosPrestamos.addRow(row);
+        }
     }
 
     /**
@@ -76,6 +101,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
         Lab_Libros.setText("Libros");
 
+        txtF_barraBusquedaLibros_prestamos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtF_barraBusquedaLibros_prestamosKeyPressed(evt);
+            }
+        });
+
         tbl_librosBusqueda_prestamos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -122,8 +153,9 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbl_librosBusqueda_prestamos);
         if (tbl_librosBusqueda_prestamos.getColumnModel().getColumnCount() > 0) {
-            tbl_librosBusqueda_prestamos.getColumnModel().getColumn(0).setPreferredWidth(24);
-            tbl_librosBusqueda_prestamos.getColumnModel().getColumn(4).setPreferredWidth(24);
+            tbl_librosBusqueda_prestamos.getColumnModel().getColumn(0).setPreferredWidth(16);
+            tbl_librosBusqueda_prestamos.getColumnModel().getColumn(4).setPreferredWidth(36);
+            tbl_librosBusqueda_prestamos.getColumnModel().getColumn(4).setMaxWidth(36);
         }
 
         cbx_buscarAtributo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Titulo", "Autor", "ISBN" }));
@@ -525,6 +557,29 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtF_barraBusquedaLibros_prestamosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtF_barraBusquedaLibros_prestamosKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            String seleccionCbx = cbx_buscarAtributo.getSelectedItem().toString();
+            if ("Titulo".equals(seleccionCbx)) {
+                String tituloBusqueda = txtF_barraBusquedaLibros_prestamos.getText();
+                LibroDao libroDao = new LibroDao();
+                List<Libro> libros = libroDao.buscarPorTitulo(tituloBusqueda);
+
+                model_librosPrestamos.setRowCount(0);
+                for (Libro libro : libros) {
+                    Object[] row = new Object[]{
+                            libro.getLibro_id(),
+                            libro.getIsbn(),
+                            libro.getTitulo(),
+                            libro.getAutor().getNombre(),
+                            libro.getStock()
+                    };
+                    model_librosPrestamos.addRow(row);
+                }
+            }
+        }
+    }//GEN-LAST:event_txtF_barraBusquedaLibros_prestamosKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -542,20 +597,23 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                new App().setVisible(true);
             }
         });
     }

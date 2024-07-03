@@ -108,6 +108,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtF_barraBusquedaLibros_prestamos">
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtF_barraBusquedaLibros_prestamosKeyPressed"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
                   <AuxValues>
@@ -129,7 +132,7 @@
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="24" resizable="true">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="16" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>
@@ -149,7 +152,7 @@
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="24" resizable="true">
+                            <Column maxWidth="36" minWidth="-1" prefWidth="36" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>

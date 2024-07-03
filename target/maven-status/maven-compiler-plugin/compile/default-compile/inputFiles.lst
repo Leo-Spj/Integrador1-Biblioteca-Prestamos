@@ -10,6 +10,6 @@
 /home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/src/main/java/com/utp/biblioteca/resources/modelo/dao/PrestamoDao.java
 /home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/src/main/java/com/utp/biblioteca/resources/modelo/Libro.java
 /home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/src/main/java/com/utp/biblioteca/resources/modelo/dao/sp/StoredProcedureRepository.java
-/home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/src/main/java/com/utp/biblioteca/views/NewJFrame.java
+/home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/src/main/java/com/utp/biblioteca/views/App.java
 /home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/src/main/java/com/utp/biblioteca/resources/modelo/dao/LibroDao.java
 /home/leo/Escritorio/Integrador1-Biblioteca-Prestamos/src/main/java/com/utp/biblioteca/resources/modelo/dao/UsuarioDao.java
