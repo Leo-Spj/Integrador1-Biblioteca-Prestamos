@@ -3,6 +3,7 @@ package com.utp.biblioteca.resources.modelo.dao;
 import com.utp.biblioteca.resources.configuracion.Conexion;
 import com.utp.biblioteca.resources.modelo.Libro;
 import com.utp.biblioteca.resources.modelo.Prestamo;
+import com.utp.biblioteca.resources.modelo.Usuario;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
     public void crear(Prestamo entidad) {
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO Prestamo (usuario_id, libro_id, fecha_prestamo, fecha_limite, fecha_devolucion, devuelto) VALUES (?, ?, ?, ?, ?, ?)")) {
-            ps.setInt(1, entidad.getUsuario_id());
-            ps.setInt(2, entidad.getLibro_id());
+            ps.setInt(1, entidad.getUsuario().getUsuario_id());
+            ps.setInt(2, entidad.getLibro().getLibro_id());
             ps.setDate(3, entidad.getFecha_prestamo());
             ps.setDate(4, entidad.getFecha_limite());
             ps.setDate(5, entidad.getFecha_devolucion());
@@ -38,9 +39,15 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Prestamo prestamo = new Prestamo();
+
+                UsuarioDao usuarioDao = new UsuarioDao();
+                Usuario usuario = usuarioDao.buscarUno(rs.getInt("usuario_id"));
+                LibroDao libroDao = new LibroDao();
+                Libro libro = libroDao.buscarUno(rs.getInt("libro_id"));
+
                 prestamo.setPrestamo_id(rs.getInt("prestamo_id"));
-                prestamo.setUsuario_id(rs.getInt("usuario_id"));
-                prestamo.setLibro_id(rs.getInt("libro_id"));
+                prestamo.setUsuario(usuario);
+                prestamo.setLibro(libro);
                 prestamo.setFecha_prestamo(rs.getDate("fecha_prestamo"));
                 prestamo.setFecha_limite(rs.getDate("fecha_limite"));
                 prestamo.setFecha_devolucion(rs.getDate("fecha_devolucion"));
@@ -61,9 +68,15 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
+
+                    UsuarioDao usuarioDao = new UsuarioDao();
+                    Usuario usuario = usuarioDao.buscarUno(rs.getInt("usuario_id"));
+                    LibroDao libroDao = new LibroDao();
+                    Libro libro = libroDao.buscarUno(rs.getInt("libro_id"));
+
                     prestamo.setPrestamo_id(rs.getInt("prestamo_id"));
-                    prestamo.setUsuario_id(rs.getInt("usuario_id"));
-                    prestamo.setLibro_id(rs.getInt("libro_id"));
+                    prestamo.setUsuario(usuario);
+                    prestamo.setLibro(libro);
                     prestamo.setFecha_prestamo(rs.getDate("fecha_prestamo"));
                     prestamo.setFecha_limite(rs.getDate("fecha_limite"));
                     prestamo.setFecha_devolucion(rs.getDate("fecha_devolucion"));
@@ -80,8 +93,8 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
     public void actualizar(Prestamo entidad) {
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement("UPDATE Prestamo SET usuario_id = ?, libro_id = ?, fecha_prestamo = ?, fecha_limite = ?, fecha_devolucion = ?, devuelto = ? WHERE prestamo_id = ?")) {
-            ps.setInt(1, entidad.getUsuario_id());
-            ps.setInt(2, entidad.getLibro_id());
+            ps.setInt(1, entidad.getUsuario().getUsuario_id());
+            ps.setInt(2, entidad.getLibro().getLibro_id());
             ps.setDate(3, entidad.getFecha_prestamo());
             ps.setDate(4, entidad.getFecha_limite());
             ps.setDate(5, entidad.getFecha_devolucion());
@@ -127,8 +140,8 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
             ps.setInt(1, top);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                int libro_id = rs.getInt("libro_id");
-                Libro libro = new LibroDao().buscarUno(libro_id);
+                LibroDao libroDao = new LibroDao();
+                Libro libro = libroDao.buscarUno(rs.getInt("libro_id"));
                 libros.add(libro);
             }
         } catch (SQLException e) {

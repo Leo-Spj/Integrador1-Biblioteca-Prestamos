@@ -5,8 +5,8 @@ import java.sql.Date;
 public class Prestamo {
 
     private int prestamo_id;
-    private int usuario_id;
-    private int libro_id;
+    private Usuario usuario;
+    private Libro libro;
     private Date fecha_prestamo;
     private Date fecha_limite;
     private Date fecha_devolucion;
@@ -20,20 +20,20 @@ public class Prestamo {
         this.prestamo_id = prestamo_id;
     }
 
-    public int getUsuario_id() {
-        return usuario_id;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public int getLibro_id() {
-        return libro_id;
+    public Libro getLibro() {
+        return libro;
     }
 
-    public void setLibro_id(int libro_id) {
-        this.libro_id = libro_id;
+    public void setLibro(Libro libro) {
+        this.libro = libro;
     }
 
     public Date getFecha_prestamo() {
@@ -72,8 +72,8 @@ public class Prestamo {
     public String toString() {
         return "Prestamo{" +
                 "prestamo_id=" + prestamo_id +
-                ", usuario_id=" + usuario_id +
-                ", libro_id=" + libro_id +
+                ", usuario=" + usuario+
+                ", libro=" + libro +
                 ", fecha_prestamo=" + fecha_prestamo +
                 ", fecha_limite=" + fecha_limite +
                 ", fecha_devolucion=" + fecha_devolucion +
