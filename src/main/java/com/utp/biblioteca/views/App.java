@@ -96,6 +96,18 @@ public class App extends javax.swing.JFrame {
         txtF_idLibro_devolucion = new javax.swing.JTextField();
         txtf_fecha_devolucion = new javax.swing.JTextField();
         btn_realizarDevolucion = new javax.swing.JButton();
+        panel_registarUsuario = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        txtF_dni_registroUsuario = new javax.swing.JTextField();
+        txtF_nombre_registroUsuario = new javax.swing.JTextField();
+        txtxF_apellido_registroUsuario = new javax.swing.JTextField();
+        txtF_corro_registroUsuario = new javax.swing.JTextField();
+        btn_crearUsuario_registroUsuario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -543,6 +555,96 @@ public class App extends javax.swing.JFrame {
 
         pestañas.addTab("Devoluciones", panel_devoluciones);
 
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel16.setText("Registrar Usuario");
+
+        jLabel17.setText("DNI");
+
+        jLabel18.setText("Nombre");
+
+        jLabel19.setText("Apellido");
+
+        jLabel20.setText("Correo");
+
+        btn_crearUsuario_registroUsuario.setText("Crear Usuario");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                    .addGap(76, 76, 76)
+                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtF_dni_registroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btn_crearUsuario_registroUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                                .addComponent(txtF_nombre_registroUsuario)
+                                .addComponent(txtxF_apellido_registroUsuario)
+                                .addComponent(txtF_corro_registroUsuario))))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(127, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtF_dni_registroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(txtF_nombre_registroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtxF_apellido_registroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtF_corro_registroUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(btn_crearUsuario_registroUsuario)
+                .addGap(26, 26, 26))
+        );
+
+        javax.swing.GroupLayout panel_registarUsuarioLayout = new javax.swing.GroupLayout(panel_registarUsuario);
+        panel_registarUsuario.setLayout(panel_registarUsuarioLayout);
+        panel_registarUsuarioLayout.setHorizontalGroup(
+            panel_registarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_registarUsuarioLayout.createSequentialGroup()
+                .addGap(228, 228, 228)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(245, Short.MAX_VALUE))
+        );
+        panel_registarUsuarioLayout.setVerticalGroup(
+            panel_registarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_registarUsuarioLayout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(134, Short.MAX_VALUE))
+        );
+
+        pestañas.addTab("Registrar Usuario", panel_registarUsuario);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -568,11 +670,11 @@ public class App extends javax.swing.JFrame {
                 model_librosPrestamos.setRowCount(0);
                 for (Libro libro : libros) {
                     Object[] row = new Object[]{
-                            libro.getLibro_id(),
-                            libro.getIsbn(),
-                            libro.getTitulo(),
-                            libro.getAutor().getNombre(),
-                            libro.getStock()
+                        libro.getLibro_id(),
+                        libro.getIsbn(),
+                        libro.getTitulo(),
+                        libro.getAutor().getNombre(),
+                        libro.getStock()
                     };
                     model_librosPrestamos.addRow(row);
                 }
@@ -620,6 +722,7 @@ public class App extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Lab_Libros;
+    private javax.swing.JButton btn_crearUsuario_registroUsuario;
     private javax.swing.JButton btn_realizarDevolucion;
     private javax.swing.JButton btn_realizarPrestamo;
     private javax.swing.JComboBox<String> cbx_buscarAtributo;
@@ -630,7 +733,12 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -642,6 +750,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -649,6 +758,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel panelLibros;
     private javax.swing.JPanel panel_devoluciones;
     private javax.swing.JPanel panel_prestamos;
+    private javax.swing.JPanel panel_registarUsuario;
     private javax.swing.JTabbedPane pestañas;
     private javax.swing.JTable tbl_historialUsuario_devolucion;
     private javax.swing.JTable tbl_librosBusqueda_prestamos;
@@ -657,12 +767,16 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField txtF_barraBusquedaLibros_prestamos;
     private javax.swing.JTextField txtF_buscarDNI_devolucion;
     private javax.swing.JTextField txtF_buscarDNI_prestamo;
+    private javax.swing.JTextField txtF_corro_registroUsuario;
     private javax.swing.JTextField txtF_diasAprestar_prestamo;
     private javax.swing.JTextField txtF_dni_devolucion;
     private javax.swing.JTextField txtF_dni_prestamo;
+    private javax.swing.JTextField txtF_dni_registroUsuario;
     private javax.swing.JTextField txtF_fecha_prestamo;
     private javax.swing.JTextField txtF_idLibro_devolucion;
     private javax.swing.JTextField txtF_idLibro_prestamo;
+    private javax.swing.JTextField txtF_nombre_registroUsuario;
     private javax.swing.JTextField txtf_fecha_devolucion;
+    private javax.swing.JTextField txtxF_apellido_registroUsuario;
     // End of variables declaration//GEN-END:variables
 }
