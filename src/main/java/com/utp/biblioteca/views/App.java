@@ -152,7 +152,7 @@ public class App extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -161,6 +161,11 @@ public class App extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbl_librosBusqueda_prestamos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tbl_librosBusqueda_prestamosKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(tbl_librosBusqueda_prestamos);
@@ -678,9 +683,20 @@ public class App extends javax.swing.JFrame {
                     };
                     model_librosPrestamos.addRow(row);
                 }
+
+                if(libros.isEmpty()){
+                    model_librosPrestamos.setRowCount(0);
+                    Libro libro = new Libro();
+                    libro.setTitulo(txtF_barraBusquedaLibros_prestamos.getText());
+                    model_librosPrestamos.addRow(new Object[]{libro.getLibro_id(), libro.getIsbn(), libro.getTitulo(), libro.getAutor().getNombre(), libro.getStock()});
+                }
             }
         }
     }//GEN-LAST:event_txtF_barraBusquedaLibros_prestamosKeyPressed
+
+    private void tbl_librosBusqueda_prestamosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_librosBusqueda_prestamosKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_librosBusqueda_prestamosKeyPressed
 
     /**
      * @param args the command line arguments
