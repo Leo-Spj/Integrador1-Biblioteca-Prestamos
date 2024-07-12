@@ -119,6 +119,11 @@ public class App extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         tbl_recuenciaPrestamos_reportes = new javax.swing.JTable();
         btn_descargarFrecuenciaPrestamos_reportes = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tbl_quienesTienenElLibro_reportes1 = new javax.swing.JTable();
+        btn_quienesTienenElLibro_reportes1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -693,6 +698,23 @@ public class App extends javax.swing.JFrame {
 
         btn_descargarFrecuenciaPrestamos_reportes.setText("Descargar");
 
+        jLabel1.setText("Quienes tiene el libro?:");
+
+        tbl_quienesTienenElLibro_reportes1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane8.setViewportView(tbl_quienesTienenElLibro_reportes1);
+
+        btn_quienesTienenElLibro_reportes1.setText("Descargar");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -702,17 +724,31 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel8Layout.createSequentialGroup()
+                                        .addGap(192, 192, 192)
+                                        .addComponent(btn_descargarFrecuenciaPrestamos_reportes)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(btn_descargarFrecuenciaPrestamos_reportes)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_quienesTienenElLibro_reportes1)
+                        .addGap(197, 197, 197))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -721,10 +757,18 @@ public class App extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_descargarFrecuenciaPrestamos_reportes)
-                .addGap(27, 27, 27))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_quienesTienenElLibro_reportes1)
+                .addGap(39, 39, 39))
         );
 
         javax.swing.GroupLayout panel_reportesLayout = new javax.swing.GroupLayout(panel_reportes);
@@ -1017,9 +1061,11 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton btn_crearUsuario_registroUsuario;
     private javax.swing.JButton btn_descargarFrecuenciaPrestamos_reportes;
     private javax.swing.JButton btn_descargarLibrosSinStock_reportes;
+    private javax.swing.JButton btn_quienesTienenElLibro_reportes1;
     private javax.swing.JButton btn_realizarPrestamo;
     private javax.swing.JButton btn_usuariosAtrasados_reportes;
     private javax.swing.JComboBox<String> cbx_buscarAtributo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
@@ -1049,7 +1095,9 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panelLibros;
     private javax.swing.JPanel panel_devoluciones;
     private javax.swing.JPanel panel_prestamos;
@@ -1059,6 +1107,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTable tbl_historialUsuario_devolucion;
     private javax.swing.JTable tbl_librosBusqueda_prestamos;
     private javax.swing.JTable tbl_librosSinStock_reportes;
+    private javax.swing.JTable tbl_quienesTienenElLibro_reportes1;
     private javax.swing.JTable tbl_recuenciaPrestamos_reportes;
     private javax.swing.JTable tbl_usuarioEncontrado_devolucion;
     private javax.swing.JTable tbl_usuarioEncontrado_prestamo;
