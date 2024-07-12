@@ -184,13 +184,17 @@ BEGIN
     DECLARE v_estado BOOLEAN;
     DECLARE v_stock INT;
     DECLARE v_prestamos_activos INT;
+    DECLARE v_libro_prestado BOOLEAN;
 
     SELECT estado INTO v_estado FROM Usuario WHERE dni = p_usuario_dni;
     SELECT stock INTO v_stock FROM Libro WHERE libro_id = p_libro_id;
     SELECT COUNT(*) INTO v_prestamos_activos FROM Prestamo WHERE usuario_id = (SELECT usuario_id FROM Usuario WHERE dni = p_usuario_dni) AND devuelto = FALSE;
+    SELECT EXISTS(SELECT 1 FROM Prestamo WHERE usuario_id = (SELECT usuario_id FROM Usuario WHERE dni = p_usuario_dni) AND libro_id = p_libro_id AND devuelto = FALSE) INTO v_libro_prestado;
 
-    IF v_prestamos_activos >= 1 THEN
-        SET p_mensaje = 'El usuario ya tiene un libro sin devolver. No puede realizar más préstamos hasta devolverlo.';
+    IF v_libro_prestado THEN
+        SET p_mensaje = 'El usuario ya tiene este libro prestado y aún no lo ha devuelto.';
+    ELSEIF v_prestamos_activos >= 2 THEN
+        SET p_mensaje = 'El usuario ya tiene 2 préstamos activos.';
     ELSEIF v_estado = TRUE AND v_stock > 0 THEN
         INSERT INTO Prestamo (usuario_id, libro_id, fecha_prestamo, fecha_limite) VALUES ((SELECT usuario_id FROM Usuario WHERE dni = p_usuario_dni), p_libro_id, CURRENT_DATE, CURRENT_DATE + INTERVAL p_dias DAY);
         SET p_mensaje = 'Préstamo realizado con éxito.';
@@ -202,14 +206,26 @@ BEGIN
 END //
 DELIMITER ;
 
--- Procedimiento para devolver un libro
 DELIMITER //
 CREATE PROCEDURE sp_devolver_libro(IN p_prestamo_id INT)
 BEGIN
-UPDATE Prestamo
-SET fecha_devolucion = CURRENT_DATE,
-devuelto = TRUE
-WHERE prestamo_id = p_prestamo_id;
+    DECLARE v_usuario_id INT;
+
+    -- Actualizar el préstamo para marcarlo como devuelto
+    UPDATE Prestamo
+    SET fecha_devolucion = CURRENT_DATE, devuelto = TRUE
+    WHERE prestamo_id = p_prestamo_id;
+
+    -- Obtener el ID del usuario asociado al préstamo
+    SELECT usuario_id INTO v_usuario_id FROM Prestamo WHERE prestamo_id = p_prestamo_id;
+
+    -- Verificar si el usuario tiene otros préstamos pendientes
+    IF (SELECT COUNT(*) FROM Prestamo WHERE usuario_id = v_usuario_id AND devuelto = FALSE) = 0 THEN
+        -- Actualizar el estado del usuario a habilitado (TRUE) si no tiene préstamos pendientes
+        UPDATE Usuario
+        SET estado = TRUE
+        WHERE usuario_id = v_usuario_id;
+    END IF;
 END //
 DELIMITER ;
 
