@@ -66,9 +66,12 @@ INSERT INTO Rol (nombre) VALUES
 INSERT INTO Usuario (nombres, apellidos, dni, correo, contraseña, rol_id) VALUES
 ('Bibliotecario', 'Bibliotecario', 12345678, 'biblioteca@utp.edu.pe', 'biblioteca123', 1);
 
+-- usuarios bloqueados
+INSERT INTO Usuario (nombres, apellidos, dni, rol_id, estado) VALUES
+('Usuario2', 'Usuario', 87654321, 2, FALSE),
+('Usuario3', 'Usuario2', 87654322, 2, FALSE);
+
 INSERT INTO Usuario (nombres, apellidos, dni, rol_id) VALUES
-('Usuario2', 'Usuario', 87654321, 2),
-('Usuario3', 'Usuario2', 87654322, 2),
 ('Usuario4', 'Usuario3', 87654323, 2);
 
 -- Insertar registros en Autor
@@ -158,35 +161,44 @@ INSERT INTO Libro (isbn, titulo, autor_id,link_imagen ,descripcion, stock) VALUE
 ('6626438257', 'Memorial de Isla Negra', 9, 'https://i.postimg.cc/yN5FvmjX/57-Memorial-de-Isla-Negra.jpg', 'Poemario autobiográfico que recorre la vida del poeta y su relación con Chile.', 1);
 
 INSERT INTO prestamo (usuario_id, libro_id, fecha_prestamo, fecha_limite, fecha_devolucion, devuelto) VALUES
-(2, 7, '2021-09-01', '2021-09-15', '2021-09-15', TRUE),
-(3, 48, '2021-09-01', '2021-09-15', '2021-09-15', TRUE),
-(4, 39, '2021-09-01', '2021-09-15', '2021-09-15', TRUE);
+(2, 7, '2024-07-01', '2024-07-8', '2024-07-8', TRUE),
+(3, 48, '2024-07-01', '2024-07-8', '2024-07-8', TRUE),
+(4, 39, '2024-07-01', '2024-07-8', '2024-07-8', TRUE);
+
+-- prestamos sin devolver
+INSERT INTO prestamo (usuario_id, libro_id, fecha_prestamo, fecha_limite) VALUES
+(2, 7, '2024-07-08', '2024-07-11'),
+(3, 48, '2024-07-08', '2024-07-11');
 
 -- Stored Procedures
 
 -- Procedimiento para realizar un préstamo comprobando que el "estado" del usuario sea TRUE
 DELIMITER //
-CREATE PROCEDURE sp_realizar_prestamo(IN p_usuario_dni INT, IN p_libro_id INT, IN p_dias INT)
+CREATE PROCEDURE sp_realizar_prestamo(
+    IN p_usuario_dni INT,
+    IN p_libro_id INT,
+    IN p_dias INT,
+    OUT p_mensaje VARCHAR(255)
+)
 BEGIN
-DECLARE v_estado BOOLEAN;
-DECLARE v_stock INT;
+    DECLARE v_estado BOOLEAN;
+    DECLARE v_stock INT;
+    DECLARE v_prestamos_activos INT;
 
-SELECT estado INTO v_estado
-FROM Usuario
-WHERE dni = p_usuario_dni;
+    SELECT estado INTO v_estado FROM Usuario WHERE dni = p_usuario_dni;
+    SELECT stock INTO v_stock FROM Libro WHERE libro_id = p_libro_id;
+    SELECT COUNT(*) INTO v_prestamos_activos FROM Prestamo WHERE usuario_id = (SELECT usuario_id FROM Usuario WHERE dni = p_usuario_dni) AND devuelto = FALSE;
 
-SELECT stock INTO v_stock
-FROM Libro
-WHERE libro_id = p_libro_id;
-
-IF v_estado = TRUE AND v_stock > 0 THEN
-INSERT INTO Prestamo (usuario_id, libro_id, fecha_prestamo, fecha_limite)
-VALUES ((SELECT usuario_id FROM Usuario WHERE dni = p_usuario_dni), p_libro_id, CURRENT_DATE, CURRENT_DATE + INTERVAL p_dias DAY);
-ELSEIF v_stock < 1 THEN
-SELECT 'No hay stock disponible para este libro' AS mensaje;
-ELSE
-SELECT 'El usuario no puede realizar préstamos' AS mensaje;
-END IF;
+    IF v_prestamos_activos >= 1 THEN
+        SET p_mensaje = 'El usuario ya tiene un libro sin devolver. No puede realizar más préstamos hasta devolverlo.';
+    ELSEIF v_estado = TRUE AND v_stock > 0 THEN
+        INSERT INTO Prestamo (usuario_id, libro_id, fecha_prestamo, fecha_limite) VALUES ((SELECT usuario_id FROM Usuario WHERE dni = p_usuario_dni), p_libro_id, CURRENT_DATE, CURRENT_DATE + INTERVAL p_dias DAY);
+        SET p_mensaje = 'Préstamo realizado con éxito.';
+    ELSEIF v_stock < 1 THEN
+        SET p_mensaje = 'No hay stock disponible para este libro';
+    ELSE
+        SET p_mensaje = 'El usuario no puede realizar préstamos';
+    END IF;
 END //
 DELIMITER ;
 
