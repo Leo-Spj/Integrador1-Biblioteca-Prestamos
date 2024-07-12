@@ -175,6 +175,7 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbl_librosBusqueda_prestamos.getTableHeader().setReorderingAllowed(false);
         tbl_librosBusqueda_prestamos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_librosBusqueda_prestamosMouseClicked(evt);
@@ -408,6 +409,7 @@ public class App extends javax.swing.JFrame {
             }
         });
         tbl_usuarioEncontrado_devolucion.setPreferredSize(new java.awt.Dimension(273, 80));
+        tbl_usuarioEncontrado_devolucion.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tbl_usuarioEncontrado_devolucion);
         if (tbl_usuarioEncontrado_devolucion.getColumnModel().getColumnCount() > 0) {
             tbl_usuarioEncontrado_devolucion.getColumnModel().getColumn(3).setPreferredWidth(64);
