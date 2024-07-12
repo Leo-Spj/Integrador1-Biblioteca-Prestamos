@@ -5,8 +5,14 @@
 package com.utp.biblioteca.views;
 
 import com.utp.biblioteca.resources.modelo.Libro;
+import com.utp.biblioteca.resources.modelo.Prestamo;
+import com.utp.biblioteca.resources.modelo.Usuario;
 import com.utp.biblioteca.resources.modelo.dao.LibroDao;
+import com.utp.biblioteca.resources.modelo.dao.PrestamoDao;
+import com.utp.biblioteca.resources.modelo.dao.UsuarioDao;
+import com.utp.biblioteca.resources.modelo.dao.sp.StoredProcedureRepository;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
@@ -62,19 +68,15 @@ public class App extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtF_buscarDNI_prestamo = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btn_realizarPrestamo = new javax.swing.JButton();
         txtF_idLibro_prestamo = new javax.swing.JTextField();
         txtF_dni_prestamo = new javax.swing.JTextField();
-        txtF_fecha_prestamo = new javax.swing.JTextField();
         txtF_diasAprestar_prestamo = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_usuarioEncontrado_prestamo = new javax.swing.JTable();
         panel_devoluciones = new javax.swing.JPanel();
@@ -179,9 +181,9 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_librosBusqueda_prestamos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tbl_librosBusqueda_prestamosKeyPressed(evt);
+        tbl_librosBusqueda_prestamos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_librosBusqueda_prestamosMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbl_librosBusqueda_prestamos);
@@ -219,14 +221,17 @@ public class App extends javax.swing.JFrame {
                     .addComponent(cbx_buscarAtributo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Usuario DNI");
 
         txtF_buscarDNI_prestamo.setToolTipText("");
-
-        jLabel3.setText("Usuario NO registrado");
+        txtF_buscarDNI_prestamo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtF_buscarDNI_prestamoKeyPressed(evt);
+            }
+        });
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -236,11 +241,16 @@ public class App extends javax.swing.JFrame {
 
         jLabel6.setText("DNI");
 
-        jLabel7.setText("Fecha");
-
         jLabel8.setText("Días");
 
         btn_realizarPrestamo.setText("Realizar Prestamo");
+        btn_realizarPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_realizarPrestamoActionPerformed(evt);
+            }
+        });
+
+        txtF_diasAprestar_prestamo.setText("7");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -256,13 +266,11 @@ public class App extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel6)
-                                .addComponent(jLabel7)
                                 .addComponent(jLabel8))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtF_idLibro_prestamo)
                                 .addComponent(txtF_dni_prestamo)
-                                .addComponent(txtF_fecha_prestamo)
                                 .addComponent(txtF_diasAprestar_prestamo, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
@@ -281,22 +289,16 @@ public class App extends javax.swing.JFrame {
                     .addComponent(txtF_dni_prestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtF_fecha_prestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtF_diasAprestar_prestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                    .addComponent(txtF_diasAprestar_prestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(29, 29, 29)
                 .addComponent(btn_realizarPrestamo)
-                .addGap(18, 18, 18))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
-
-        jLabel1.setText("Usuario bloqueado");
 
         tbl_usuarioEncontrado_prestamo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "DNI", "Nombre", "Apellidos", "Estado"
@@ -317,6 +319,11 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbl_usuarioEncontrado_prestamo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_usuarioEncontrado_prestamoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_usuarioEncontrado_prestamo);
         if (tbl_usuarioEncontrado_prestamo.getColumnModel().getColumnCount() > 0) {
             tbl_usuarioEncontrado_prestamo.getColumnModel().getColumn(3).setPreferredWidth(64);
@@ -331,19 +338,16 @@ public class App extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
-                    .addComponent(txtF_buscarDNI_prestamo)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtF_buscarDNI_prestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(15, 15, 15))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(154, 154, 154))
+                .addGap(160, 160, 160))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,15 +356,11 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtF_buscarDNI_prestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(56, 56, 56)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panel_prestamosLayout = new javax.swing.GroupLayout(panel_prestamos);
@@ -842,20 +842,79 @@ public class App extends javax.swing.JFrame {
                     };
                     model_librosPrestamos.addRow(row);
                 }
-
-                /*if(libros.isEmpty()){
-                    model_librosPrestamos.setRowCount(0);
-                    Libro libro = new Libro();
-                    libro.setTitulo(txtF_barraBusquedaLibros_prestamos.getText());
-                    model_librosPrestamos.addRow(new Object[]{libro.getLibro_id(), libro.getIsbn(), libro.getTitulo(), libro.getAutor().getNombre(), libro.getStock()});
-                }*/
             }
         }
     }//GEN-LAST:event_txtF_barraBusquedaLibros_prestamosKeyPressed
 
-    private void tbl_librosBusqueda_prestamosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_librosBusqueda_prestamosKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbl_librosBusqueda_prestamosKeyPressed
+    private void txtF_buscarDNI_prestamoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtF_buscarDNI_prestamoKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            String dni = txtF_buscarDNI_prestamo.getText();
+            if (dni.isEmpty()) {
+                return;
+            }
+            UsuarioDao usuarioDao = new UsuarioDao();
+            Usuario usuario = usuarioDao.buscarPorDni(Integer.parseInt(dni));
+
+            DefaultTableModel model = (DefaultTableModel) tbl_usuarioEncontrado_prestamo.getModel();
+            model.setRowCount(0);
+            Object[] row = new Object[]{
+                usuario.getDni(),
+                usuario.getNombres(),
+                usuario.getApellidos(),
+                usuario.isEstado()
+            };
+            model.addRow(row);
+
+            //si no se encuentra el usuario alertar
+            if (usuario.getDni() == 0) {
+                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+                return;
+            }
+
+            if(usuario.isEstado()){
+                txtF_dni_prestamo.setText(dni);
+            } else {
+                txtF_dni_prestamo.setText("");
+                JOptionPane.showMessageDialog(null, "El usuario no puede realizar prestamos");
+            }
+
+            if (usuario.getDni() == 0) {
+                model.setRowCount(0);
+                txtF_dni_prestamo.setText("");
+            }
+        }
+    }//GEN-LAST:event_txtF_buscarDNI_prestamoKeyPressed
+
+    private void tbl_usuarioEncontrado_prestamoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_usuarioEncontrado_prestamoMouseClicked
+        int row = tbl_usuarioEncontrado_prestamo.getSelectedRow();
+        int dni = (int) tbl_usuarioEncontrado_prestamo.getValueAt(row, 0);
+        boolean estado = (boolean) tbl_usuarioEncontrado_prestamo.getValueAt(row, 3);
+        if(!estado){
+            JOptionPane.showMessageDialog(null, "El usuario no puede realizar prestamos");
+            return;
+        }
+        txtF_dni_prestamo.setText(dni + "");
+    }//GEN-LAST:event_tbl_usuarioEncontrado_prestamoMouseClicked
+
+    private void tbl_librosBusqueda_prestamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_librosBusqueda_prestamosMouseClicked
+        int row = tbl_librosBusqueda_prestamos.getSelectedRow();
+        txtF_idLibro_prestamo.setText(tbl_librosBusqueda_prestamos.getValueAt(row, 0).toString());
+    }//GEN-LAST:event_tbl_librosBusqueda_prestamosMouseClicked
+
+    private void btn_realizarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {
+        StoredProcedureRepository sp = new StoredProcedureRepository();
+
+        int dni = Integer.parseInt(txtF_dni_prestamo.getText());
+        int libroId = Integer.parseInt(txtF_idLibro_prestamo.getText());
+        int dias = Integer.parseInt(txtF_diasAprestar_prestamo.getText());
+
+        String mensaje = sp.spRealizarPrestamo(dni, libroId, dias);
+        JOptionPane.showMessageDialog(this, mensaje);
+
+        txtF_dni_prestamo.setText("");
+        txtF_idLibro_prestamo.setText("");
+        txtF_diasAprestar_prestamo.setText("");
+    }//GEN-LAST:event_btn_realizarPrestamoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -904,7 +963,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton btn_realizarPrestamo;
     private javax.swing.JButton btn_usuariosAtrasados_reportes;
     private javax.swing.JComboBox<String> cbx_buscarAtributo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -920,11 +978,9 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -963,7 +1019,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField txtF_dni_devolucion;
     private javax.swing.JTextField txtF_dni_prestamo;
     private javax.swing.JTextField txtF_dni_registroUsuario;
-    private javax.swing.JTextField txtF_fecha_prestamo;
     private javax.swing.JTextField txtF_idLibro_devolucion;
     private javax.swing.JTextField txtF_idLibro_prestamo;
     private javax.swing.JTextField txtF_nombre_registroUsuario;
