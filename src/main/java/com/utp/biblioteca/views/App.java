@@ -89,15 +89,6 @@ public class App extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl_historialUsuario_devolucion = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        txtF_dni_devolucion = new javax.swing.JTextField();
-        txtF_idLibro_devolucion = new javax.swing.JTextField();
-        txtf_fecha_devolucion = new javax.swing.JTextField();
-        btn_realizarDevolucion = new javax.swing.JButton();
         panel_registarUsuario = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -137,6 +128,7 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        tbl_librosBusqueda_prestamos.setAutoCreateRowSorter(true);
         tbl_librosBusqueda_prestamos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -384,9 +376,15 @@ public class App extends javax.swing.JFrame {
 
         jLabel10.setText("DNI");
 
+        txtF_buscarDNI_devolucion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtF_buscarDNI_devolucionKeyPressed(evt);
+            }
+        });
+
         tbl_usuarioEncontrado_devolucion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "DNI", "Nombre", "Apellido", "Estado"
@@ -416,31 +414,17 @@ public class App extends javax.swing.JFrame {
 
         tbl_historialUsuario_devolucion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "ID Prestamo", "Titulo", "Estado"
+                "ID ", "Titulo", "Limite", "Devolucion", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -451,11 +435,18 @@ public class App extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbl_historialUsuario_devolucion.getTableHeader().setReorderingAllowed(false);
+        tbl_historialUsuario_devolucion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_historialUsuario_devolucionMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tbl_historialUsuario_devolucion);
         if (tbl_historialUsuario_devolucion.getColumnModel().getColumnCount() > 0) {
             tbl_historialUsuario_devolucion.getColumnModel().getColumn(0).setPreferredWidth(24);
-            tbl_historialUsuario_devolucion.getColumnModel().getColumn(2).setPreferredWidth(64);
-            tbl_historialUsuario_devolucion.getColumnModel().getColumn(2).setMaxWidth(64);
+            tbl_historialUsuario_devolucion.getColumnModel().getColumn(0).setMaxWidth(24);
+            tbl_historialUsuario_devolucion.getColumnModel().getColumn(4).setPreferredWidth(64);
+            tbl_historialUsuario_devolucion.getColumnModel().getColumn(4).setMaxWidth(64);
         }
 
         jLabel11.setText("Historial del usuario");
@@ -472,10 +463,10 @@ public class App extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(33, 33, 33)
-                        .addComponent(txtF_buscarDNI_devolucion))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(txtF_buscarDNI_devolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4)
+                    .addComponent(jScrollPane3))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -495,82 +486,18 @@ public class App extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel12.setText("Devolución");
-
-        jLabel13.setText("DNI");
-
-        jLabel14.setText("ID Libro");
-
-        jLabel15.setText("Fecha");
-
-        btn_realizarDevolucion.setText("Realizar Devolución");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel12))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_realizarDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel14))
-                                .addGap(32, 32, 32)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtF_dni_devolucion)
-                                    .addComponent(txtF_idLibro_devolucion)
-                                    .addComponent(txtf_fecha_devolucion, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))))))
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel12)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtF_dni_devolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtF_idLibro_devolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(txtf_fecha_devolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btn_realizarDevolucion)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout panel_devolucionesLayout = new javax.swing.GroupLayout(panel_devoluciones);
         panel_devoluciones.setLayout(panel_devolucionesLayout);
         panel_devolucionesLayout.setHorizontalGroup(
             panel_devolucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_devolucionesLayout.createSequentialGroup()
+                .addGap(250, 250, 250)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(138, 138, 138)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 150, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
         panel_devolucionesLayout.setVerticalGroup(
             panel_devolucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panel_devolucionesLayout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pestañas.addTab("Devoluciones", panel_devoluciones);
@@ -849,6 +776,11 @@ public class App extends javax.swing.JFrame {
     private void txtF_buscarDNI_prestamoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtF_buscarDNI_prestamoKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             String dni = txtF_buscarDNI_prestamo.getText();
+
+            //envio dni al panel de prestamos para ver el historial
+            txtF_buscarDNI_devolucion.setText(dni + "");
+            actualizarTablas_devoluciones();
+
             if (dni.isEmpty()) {
                 return;
             }
@@ -901,6 +833,96 @@ public class App extends javax.swing.JFrame {
         txtF_idLibro_prestamo.setText(tbl_librosBusqueda_prestamos.getValueAt(row, 0).toString());
     }//GEN-LAST:event_tbl_librosBusqueda_prestamosMouseClicked
 
+    private void txtF_buscarDNI_devolucionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtF_buscarDNI_devolucionKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            String dni = txtF_buscarDNI_devolucion.getText();
+
+            DefaultTableModel tablaUsuario = (DefaultTableModel) tbl_usuarioEncontrado_devolucion.getModel();
+            DefaultTableModel tablaHistorial = (DefaultTableModel) tbl_historialUsuario_devolucion.getModel();
+
+            if (dni.isEmpty()) {
+                tablaUsuario.setRowCount(0);
+                tablaHistorial.setRowCount(0);
+                return;
+            }
+
+            UsuarioDao usuarioDao = new UsuarioDao();
+            Usuario usuario = usuarioDao.buscarPorDni(Integer.parseInt(dni));
+
+            if (usuario.getDni() == 0) {
+                tablaUsuario.setRowCount(0);
+                tablaHistorial.setRowCount(0);
+                return;
+            }
+
+            actualizarTablas_devoluciones();
+
+        }
+
+    }//GEN-LAST:event_txtF_buscarDNI_devolucionKeyPressed
+
+    private void tbl_historialUsuario_devolucionMouseClicked(java.awt.event.MouseEvent evt) {
+        int row = tbl_historialUsuario_devolucion.getSelectedRow();
+        int prestamoId = (int) tbl_historialUsuario_devolucion.getValueAt(row, 0);
+        boolean estado = (boolean) tbl_historialUsuario_devolucion.getValueAt(row, 4);
+        if (estado) {
+            JOptionPane.showMessageDialog(null, "El libro ya fue devuelto");
+            return;
+        }
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea confirmar la devolución del libro?");
+        if (confirmacion == 0) {
+            try {
+                StoredProcedureRepository sp = new StoredProcedureRepository();
+                sp.spDevolverLibro(prestamoId);
+                JOptionPane.showMessageDialog(null, "Libro devuelto");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al devolver el libro: " + e.getMessage());
+            } finally {
+                actualizarTablas_devoluciones();
+            }
+        }
+    }
+
+    private void actualizarTablas_devoluciones() {
+        String dni = txtF_buscarDNI_devolucion.getText();
+
+        DefaultTableModel tablaHistorial = (DefaultTableModel) tbl_historialUsuario_devolucion.getModel();
+        DefaultTableModel tablaUsuario = (DefaultTableModel) tbl_usuarioEncontrado_devolucion.getModel();
+        if (!dni.isEmpty()) {
+
+            try {
+                //usuario:
+                UsuarioDao usuarioDao = new UsuarioDao();
+                Usuario usuario = usuarioDao.buscarPorDni(Integer.parseInt(dni));
+                tablaUsuario.setRowCount(0);
+                Object[] row = new Object[]{
+                        usuario.getDni(),
+                        usuario.getNombres(),
+                        usuario.getApellidos(),
+                        usuario.isEstado()
+                };
+                tablaUsuario.addRow(row);
+
+                //historial:
+                tablaHistorial.setRowCount(0);
+                List<Prestamo> prestamos = new PrestamoDao().historialUsuarioDni(Integer.parseInt(dni));
+                for (Prestamo prestamo : prestamos) {
+                    Object[] rowPrestamo = new Object[]{
+                        prestamo.getPrestamo_id(),
+                        prestamo.getLibro().getTitulo(),
+                        prestamo.getFecha_limite(),
+                        prestamo.getFecha_devolucion(),
+                        prestamo.isDevuelto()
+                    };
+                    tablaHistorial.addRow(rowPrestamo);
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "DNI inválido: " + dni);
+            }
+
+        }
+    }                                                            
+
     private void btn_realizarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {
         StoredProcedureRepository sp = new StoredProcedureRepository();
 
@@ -914,7 +936,7 @@ public class App extends javax.swing.JFrame {
         txtF_dni_prestamo.setText("");
         txtF_idLibro_prestamo.setText("");
         txtF_diasAprestar_prestamo.setText("");
-    }//GEN-LAST:event_btn_realizarPrestamoActionPerformed
+    }                                                    
 
     /**
      * @param args the command line arguments
@@ -959,16 +981,11 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton btn_crearUsuario_registroUsuario;
     private javax.swing.JButton btn_descargarFrecuenciaPrestamos_reportes;
     private javax.swing.JButton btn_descargarLibrosSinStock_reportes;
-    private javax.swing.JButton btn_realizarDevolucion;
     private javax.swing.JButton btn_realizarPrestamo;
     private javax.swing.JButton btn_usuariosAtrasados_reportes;
     private javax.swing.JComboBox<String> cbx_buscarAtributo;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -984,7 +1001,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -1016,13 +1032,10 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField txtF_buscarDNI_prestamo;
     private javax.swing.JTextField txtF_corro_registroUsuario;
     private javax.swing.JTextField txtF_diasAprestar_prestamo;
-    private javax.swing.JTextField txtF_dni_devolucion;
     private javax.swing.JTextField txtF_dni_prestamo;
     private javax.swing.JTextField txtF_dni_registroUsuario;
-    private javax.swing.JTextField txtF_idLibro_devolucion;
     private javax.swing.JTextField txtF_idLibro_prestamo;
     private javax.swing.JTextField txtF_nombre_registroUsuario;
-    private javax.swing.JTextField txtf_fecha_devolucion;
     private javax.swing.JTextField txtxF_apellido_registroUsuario;
     // End of variables declaration//GEN-END:variables
 }
