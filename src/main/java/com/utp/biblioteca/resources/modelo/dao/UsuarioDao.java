@@ -86,6 +86,32 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
         return usuario;
     }
 
+    public Usuario buscarPorDni(int i) {
+        Usuario usuario = new Usuario();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Usuario WHERE dni = ?")) {
+            ps.setInt(1, i);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    RolDao rolDao = new RolDao();
+                    Rol rol = rolDao.buscarUno(rs.getInt("rol_id"));
+
+                    usuario.setUsuario_id(rs.getInt("usuario_id"));
+                    usuario.setNombres(rs.getString("nombres"));
+                    usuario.setApellidos(rs.getString("apellidos"));
+                    usuario.setDni(rs.getInt("dni"));
+                    usuario.setCorreo(rs.getString("correo"));
+                    usuario.setContraseña(rs.getString("contraseña"));
+                    usuario.setRol(rol);
+                    usuario.setEstado(rs.getBoolean("estado"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
     @Override
     public void actualizar(Usuario entidad) {
         try (Connection conn = getConnection();
