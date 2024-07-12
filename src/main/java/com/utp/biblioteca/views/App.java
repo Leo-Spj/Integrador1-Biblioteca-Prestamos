@@ -6,9 +6,11 @@ package com.utp.biblioteca.views;
 
 import com.utp.biblioteca.resources.modelo.Libro;
 import com.utp.biblioteca.resources.modelo.Prestamo;
+import com.utp.biblioteca.resources.modelo.Rol;
 import com.utp.biblioteca.resources.modelo.Usuario;
 import com.utp.biblioteca.resources.modelo.dao.LibroDao;
 import com.utp.biblioteca.resources.modelo.dao.PrestamoDao;
+import com.utp.biblioteca.resources.modelo.dao.RolDao;
 import com.utp.biblioteca.resources.modelo.dao.UsuarioDao;
 import com.utp.biblioteca.resources.modelo.dao.sp.StoredProcedureRepository;
 
@@ -515,6 +517,11 @@ public class App extends javax.swing.JFrame {
         jLabel20.setText("Correo");
 
         btn_crearUsuario_registroUsuario.setText("Crear Usuario");
+        btn_crearUsuario_registroUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearUsuario_registroUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -860,6 +867,33 @@ public class App extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_txtF_buscarDNI_devolucionKeyPressed
+
+    private void btn_crearUsuario_registroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearUsuario_registroUsuarioActionPerformed
+
+        int dni = Integer.parseInt(txtF_dni_registroUsuario.getText());
+        String nombre = txtF_nombre_registroUsuario.getText();
+        String apellido = txtxF_apellido_registroUsuario.getText();
+        String correo = txtF_corro_registroUsuario.getText();
+
+        Usuario usuario = new Usuario();
+        usuario.setDni(dni);
+        usuario.setNombres(nombre);
+        usuario.setApellidos(apellido);
+        usuario.setCorreo(correo);
+        usuario.setEstado(true);
+
+        RolDao rol = new RolDao();
+        usuario.setRol(rol.buscarUno(2)); // por defecto será Usuario
+
+
+        UsuarioDao usuarioDao = new UsuarioDao();
+        try {
+            usuarioDao.crear(usuario);
+            JOptionPane.showMessageDialog(null, "Usuario creado");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al crear el usuario: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_crearUsuario_registroUsuarioActionPerformed
 
     private void tbl_historialUsuario_devolucionMouseClicked(java.awt.event.MouseEvent evt) {
         int row = tbl_historialUsuario_devolucion.getSelectedRow();
