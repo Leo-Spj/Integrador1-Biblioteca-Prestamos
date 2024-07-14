@@ -279,3 +279,46 @@ AND devuelto = FALSE
 );
 END //
 DELIMITER ;
+
+-- Evento para verificar si hay libros sin stock
+    DELIMITER //
+CREATE PROCEDURE sp_libros_sin_stock()
+BEGIN
+SELECT * FROM Libro WHERE stock = 0;
+END //
+DELIMITER ;
+
+-- Evento para verificar usuarios atrasados
+    DELIMITER //
+CREATE PROCEDURE sp_usuarios_atrasados()
+BEGIN
+SELECT u.* FROM Usuario u
+INNER JOIN Prestamo p ON u.usuario_id = p.usuario_id
+WHERE p.fecha_limite < CURDATE() AND p.devuelto = FALSE;
+END //
+DELIMITER ;
+
+-- Evento para determinar la frecuencia de prestamos
+    DELIMITER //
+CREATE PROCEDURE sp_frecuencia_prestamos()
+BEGIN
+SELECT l.titulo, COUNT(p.prestamo_id) AS frecuencia
+FROM Prestamo p
+         INNER JOIN Libro l ON p.libro_id = l.libro_id
+GROUP BY l.titulo
+ORDER BY frecuencia DESC;
+END //
+DELIMITER ;
+
+--Evento para determinar quien tiene determinado libro prestado
+    DELIMITER //
+CREATE PROCEDURE sp_quienes_tienen_libro(IN libroId INT)
+BEGIN
+SELECT u.* FROM Usuario u
+                    INNER JOIN Prestamo p ON u.usuario_id = p.usuario_id
+WHERE p.libro_id = libroId AND p.devuelto = FALSE;
+END //
+DELIMITER ;
+
+
+

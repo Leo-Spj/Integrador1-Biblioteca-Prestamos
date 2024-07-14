@@ -48,6 +48,7 @@ public class StoredProcedureRepository {
         }
     }
 
+    // Procedimiento para obtener libros sin stock
     public List<Libro> spLibrosSinStock() {
         List<Libro> libros = new ArrayList<>();
         try (Connection conn = getConnection();

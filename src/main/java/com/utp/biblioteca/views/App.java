@@ -4,10 +4,13 @@
  */
 package com.utp.biblioteca.views;
 
+import com.utp.biblioteca.reports.ReportGenerator;
+import com.utp.biblioteca.reports.ReportTableUpdater;
 import com.utp.biblioteca.resources.modelo.Libro;
 import com.utp.biblioteca.resources.modelo.Prestamo;
-import com.utp.biblioteca.resources.modelo.Rol;
 import com.utp.biblioteca.resources.modelo.Usuario;
+import com.utp.biblioteca.resources.modelo.FrecuenciaPrestamo;
+import com.utp.biblioteca.resources.modelo.dao.FrecuenciaPrestamoDao;
 import com.utp.biblioteca.resources.modelo.dao.LibroDao;
 import com.utp.biblioteca.resources.modelo.dao.PrestamoDao;
 import com.utp.biblioteca.resources.modelo.dao.RolDao;
@@ -25,13 +28,20 @@ import java.util.List;
 public class App extends javax.swing.JFrame {
 
     private DefaultTableModel model_librosPrestamos;
+    private DefaultTableModel model_librosSinStock;
+    private DefaultTableModel model_usuariosAtrasados;
+    private DefaultTableModel model_frecuenciaPrestamos;
+    private DefaultTableModel model_quienesTienenElLibro;
     /**
      * Creates new form NewJFrame
      */
     public App() {
         initComponents();
         iniciandoTablaPrestamos();
+        cargarTablasReportes();
     }
+    private final ReportTableUpdater reportTableUpdater = new ReportTableUpdater();
+    private final ReportGenerator reportGenerator = new ReportGenerator();
 
     public void iniciandoTablaPrestamos(){
         model_librosPrestamos = (DefaultTableModel) tbl_librosBusqueda_prestamos.getModel();
@@ -48,6 +58,81 @@ public class App extends javax.swing.JFrame {
             };
             model_librosPrestamos.addRow(row);
         }
+    }
+    
+    private void cargarTablasReportes() {
+        reportTableUpdater.updateLibrosSinStockTable(tbl_librosSinStock_reportes);
+        reportTableUpdater.updateUsuariosAtrasadosTable(tbl_usuariosAtrasados_reportes);
+        reportTableUpdater.updateFrecuenciaPrestamosTable(tbl_recuenciaPrestamos_reportes);
+        int libroIdPredeterminado = 1;
+        reportTableUpdater.updateQuienesTienenLibroTable(tbl_quienesTienenElLibro_reportes1, libroIdPredeterminado);
+    }
+    public void updateLibrosSinStockTable(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        LibroDao libroDao = new LibroDao();
+        List<Libro> librosSinStock = libroDao.buscarLibrosSinStock();
+        model.setRowCount(0);
+        for (Libro libro : librosSinStock) {
+            Object[] row = new Object[]{
+                libro.getLibro_id(),
+                libro.getIsbn(),
+                libro.getTitulo(),
+                libro.getAutor().getNombre(),
+                libro.getStock()
+            };
+            model.addRow(row);
+        }
+        // Llamada para generar el reporte
+        reportGenerator.generateLibrosSinStockReport(librosSinStock);
+    }
+    public void updateUsuariosAtrasadosTable(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        List<Usuario> usuariosAtrasados = usuarioDao.buscarUsuariosAtrasados();
+        model.setRowCount(0);
+        for (Usuario usuario : usuariosAtrasados) {
+            Object[] row = new Object[]{
+                usuario.getUsuario_id(),
+                usuario.getNombres(),
+                usuario.getApellidos(),
+                usuario.getDni(),
+                usuario.isEstado()
+            };
+            model.addRow(row);
+        }
+        reportGenerator.generateUsuariosAtrasadosReport(usuariosAtrasados);
+    }
+
+    public void updateFrecuenciaPrestamosTable(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        FrecuenciaPrestamoDao frecuenciaPrestamoDao = new FrecuenciaPrestamoDao();
+        List<FrecuenciaPrestamo> frecuenciaPrestamos = frecuenciaPrestamoDao.spFrecuenciaPrestamos();
+        model.setRowCount(0);
+        for (FrecuenciaPrestamo fp : frecuenciaPrestamos) {
+            Object[] row = new Object[]{
+                fp.getTitulo(),
+                fp.getFrecuencia()
+            };
+            model.addRow(row);
+        }
+        reportGenerator.generateFrecuenciaPrestamosReport(frecuenciaPrestamos);
+    }
+
+    public void updateQuienesTienenLibroTable(JTable table, int libroId) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        List<Usuario> usuariosConLibro = usuarioDao.spQuienesTienenLibro(libroId);
+        model.setRowCount(0);
+        for (Usuario usuario : usuariosConLibro) {
+            Object[] row = new Object[]{
+                usuario.getUsuario_id(),
+                usuario.getNombres(),
+                usuario.getApellidos(),
+                usuario.getDni()
+            };
+            model.addRow(row);
+        }
+        reportGenerator.generateQuienesTienenLibroReport(libroId, usuariosConLibro);
     }
 
     /**
@@ -622,6 +707,11 @@ public class App extends javax.swing.JFrame {
         jScrollPane5.setViewportView(tbl_librosSinStock_reportes);
 
         btn_usuariosAtrasados_reportes.setText("Descargar");
+        btn_usuariosAtrasados_reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_usuariosAtrasados_reportesActionPerformed(evt);
+            }
+        });
 
         jLabel22.setText("Usuarios atrasados:");
 
@@ -638,7 +728,12 @@ public class App extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(tbl_usuariosAtrasados_reportes);
 
-        btn_descargarLibrosSinStock_reportes.setText("Desacargar");
+        btn_descargarLibrosSinStock_reportes.setText("Descargar");
+        btn_descargarLibrosSinStock_reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_descargarLibrosSinStock_reportesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -697,6 +792,11 @@ public class App extends javax.swing.JFrame {
         jScrollPane7.setViewportView(tbl_recuenciaPrestamos_reportes);
 
         btn_descargarFrecuenciaPrestamos_reportes.setText("Descargar");
+        btn_descargarFrecuenciaPrestamos_reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_descargarFrecuenciaPrestamos_reportesActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Quienes tiene el libro?:");
 
@@ -714,6 +814,11 @@ public class App extends javax.swing.JFrame {
         jScrollPane8.setViewportView(tbl_quienesTienenElLibro_reportes1);
 
         btn_quienesTienenElLibro_reportes1.setText("Descargar");
+        btn_quienesTienenElLibro_reportes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_quienesTienenElLibro_reportes1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -940,6 +1045,27 @@ public class App extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al crear el usuario: " + e.getMessage());
         }
     }//GEN-LAST:event_btn_crearUsuario_registroUsuarioActionPerformed
+
+    private void btn_descargarLibrosSinStock_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_descargarLibrosSinStock_reportesActionPerformed
+        reportTableUpdater.updateLibrosSinStockTable(tbl_librosSinStock_reportes);
+        JOptionPane.showMessageDialog(this, "Reporte de Libros sin Stock generado.");
+    }//GEN-LAST:event_btn_descargarLibrosSinStock_reportesActionPerformed
+
+    private void btn_usuariosAtrasados_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosAtrasados_reportesActionPerformed
+        reportTableUpdater.updateUsuariosAtrasadosTable(tbl_usuariosAtrasados_reportes);
+        JOptionPane.showMessageDialog(this, "Reporte de Usuarios Atrasados generado.");
+    }//GEN-LAST:event_btn_usuariosAtrasados_reportesActionPerformed
+
+    private void btn_descargarFrecuenciaPrestamos_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_descargarFrecuenciaPrestamos_reportesActionPerformed
+        reportTableUpdater.updateFrecuenciaPrestamosTable(tbl_recuenciaPrestamos_reportes);
+        JOptionPane.showMessageDialog(this, "Reporte de Frecuencia de Préstamos generado.");
+    }//GEN-LAST:event_btn_descargarFrecuenciaPrestamos_reportesActionPerformed
+
+    private void btn_quienesTienenElLibro_reportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_quienesTienenElLibro_reportes1ActionPerformed
+        int libroId = Integer.parseInt(jTextField1.getText());
+        reportTableUpdater.updateQuienesTienenLibroTable(tbl_quienesTienenElLibro_reportes1, libroId);
+        JOptionPane.showMessageDialog(this, "Reporte de Quiénes Tienen el Libro generado.");
+    }//GEN-LAST:event_btn_quienesTienenElLibro_reportes1ActionPerformed
 
     private void tbl_historialUsuario_devolucionMouseClicked(java.awt.event.MouseEvent evt) {
         int row = tbl_historialUsuario_devolucion.getSelectedRow();

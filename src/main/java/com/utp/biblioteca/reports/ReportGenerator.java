@@ -8,6 +8,7 @@ import com.utp.biblioteca.resources.modelo.dao.sp.StoredProcedureRepository;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -19,49 +20,42 @@ public class ReportGenerator {
 
     private final StoredProcedureRepository repository = new StoredProcedureRepository();
 
-    public void generateReport(String reportPath, String outputPath, Map<String, Object> parameters) {
-        try (Connection connection = Conexion.getConnection()) {
-            JasperReport jasperReport;
-            if (reportPath.endsWith(".jrxml")) {
-                jasperReport = JasperCompileManager.compileReport(reportPath);
-            } else {
-                jasperReport = (JasperReport) JRLoader.loadObjectFromFile(reportPath);
-            }
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
-            JasperExportManager.exportReportToPdfFile(jasperPrint, outputPath);
-            System.out.println("Report generated successfully: " + outputPath);
 
-        } catch (SQLException | JRException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void generateLibrosSinStockReport() {
-        List<Libro> librosSinStock = repository.spLibrosSinStock();
+    public void generateLibrosSinStockReport(List<Libro> libros) {
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("librosSinStock", new JRBeanCollectionDataSource(librosSinStock));
-        generateReport("path/to/LibrosSinStock.jrxml", "path/to/output/LibrosSinStock.pdf", parameters);
+        parameters.put("ReportTitle", "Libros sin Stock");
+        parameters.put("libros", new JRBeanCollectionDataSource(libros));
+        generateReport("path/to/librosSinStockReport.jrxml", "path/to/output/LibrosSinStock.pdf", parameters);
     }
 
-    public void generateUsuariosAtrasadosReport() {
-        List<Usuario> usuariosAtrasados = repository.spUsuariosAtrasados();
+    public void generateUsuariosAtrasadosReport(List<Usuario> usuarios) {
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("usuariosAtrasados", new JRBeanCollectionDataSource(usuariosAtrasados));
-        generateReport("path/to/UsuariosAtrasados.jrxml", "path/to/output/UsuariosAtrasados.pdf", parameters);
+        parameters.put("ReportTitle", "Usuarios Atrasados");
+        parameters.put("usuarios", new JRBeanCollectionDataSource(usuarios));
+        generateReport("path/to/usuariosAtrasadosReport.jrxml", "path/to/output/UsuariosAtrasados.pdf", parameters);
     }
 
-    public void generateFrecuenciaPrestamosReport() {
-        List<FrecuenciaPrestamo> frecuenciaPrestamos = repository.spFrecuenciaPrestamos();
+    public void generateFrecuenciaPrestamosReport(List<FrecuenciaPrestamo> frecuenciaPrestamos) {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("frecuenciaPrestamos", new JRBeanCollectionDataSource(frecuenciaPrestamos));
         generateReport("path/to/FrecuenciaPrestamos.jrxml", "path/to/output/FrecuenciaPrestamos.pdf", parameters);
     }
 
-    public void generateQuienesTienenLibroReport(int libroId) {
-        List<Usuario> usuariosConLibro = repository.spQuienesTienenLibro(libroId);
+    public void generateQuienesTienenLibroReport(int libroId, List<Usuario> usuariosConLibro) {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("usuariosConLibro", new JRBeanCollectionDataSource(usuariosConLibro));
         generateReport("path/to/QuienesTienenLibro.jrxml", "path/to/output/QuienesTienenLibro.pdf", parameters);
+    }
+
+    public void generateReport(String jrxmlPath, String outputPdfPath, Map<String, Object> parameters) {
+        try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlPath);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+            JasperExportManager.exportReportToPdfFile(jasperPrint, outputPdfPath);
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -155,4 +155,66 @@ public class UsuarioDao implements CrudDao<Usuario, Integer> {
         }
         return existe;
     }
+
+    public List<Usuario> buscarUsuariosAtrasados() {
+        List<Usuario> usuariosAtrasados = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT u.* FROM Usuario u " +
+                             "JOIN Prestamo p ON u.usuario_id = p.usuario_id " +
+                             "WHERE p.fecha_limite < CURRENT_DATE AND p.devuelto = FALSE"
+             );
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                RolDao rolDao = new RolDao();
+                Rol rol = rolDao.buscarUno(rs.getInt("rol_id"));
+
+                Usuario usuario = new Usuario();
+                usuario.setUsuario_id(rs.getInt("usuario_id"));
+                usuario.setNombres(rs.getString("nombres"));
+                usuario.setApellidos(rs.getString("apellidos"));
+                usuario.setDni(rs.getInt("dni"));
+                usuario.setCorreo(rs.getString("correo"));
+                usuario.setContraseña(rs.getString("contraseña"));
+                usuario.setRol(rol);
+                usuario.setEstado(rs.getBoolean("estado"));
+                usuariosAtrasados.add(usuario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuariosAtrasados;
+    }
+
+    public List<Usuario> spQuienesTienenLibro(int libroId) {
+        List<Usuario> usuariosConLibro = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT u.* FROM Usuario u " +
+                             "JOIN Prestamo p ON u.usuario_id = p.usuario_id " +
+                             "WHERE p.libro_id = ? AND p.devuelto = FALSE"
+             )) {
+            ps.setInt(1, libroId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    RolDao rolDao = new RolDao();
+                    Rol rol = rolDao.buscarUno(rs.getInt("rol_id"));
+
+                    Usuario usuario = new Usuario();
+                    usuario.setUsuario_id(rs.getInt("usuario_id"));
+                    usuario.setNombres(rs.getString("nombres"));
+                    usuario.setApellidos(rs.getString("apellidos"));
+                    usuario.setDni(rs.getInt("dni"));
+                    usuario.setCorreo(rs.getString("correo"));
+                    usuario.setContraseña(rs.getString("contraseña"));
+                    usuario.setRol(rol);
+                    usuario.setEstado(rs.getBoolean("estado"));
+                    usuariosConLibro.add(usuario);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuariosConLibro;
+    }
 }
