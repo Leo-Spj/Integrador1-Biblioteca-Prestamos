@@ -16,10 +16,12 @@ import com.utp.biblioteca.resources.modelo.dao.PrestamoDao;
 import com.utp.biblioteca.resources.modelo.dao.RolDao;
 import com.utp.biblioteca.resources.modelo.dao.UsuarioDao;
 import com.utp.biblioteca.resources.modelo.dao.sp.StoredProcedureRepository;
+import com.utp.biblioteca.resources.servicio.AvisosEmail;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  *
@@ -1087,6 +1089,7 @@ public class App extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error al devolver el libro: " + e.getMessage());
             } finally {
+                iniciandoTablaPrestamos();
                 actualizarTablas_devoluciones();
             }
         }
@@ -1140,7 +1143,44 @@ public class App extends javax.swing.JFrame {
         int dias = Integer.parseInt(txtF_diasAprestar_prestamo.getText());
 
         String mensaje = sp.spRealizarPrestamo(dni, libroId, dias);
-        JOptionPane.showMessageDialog(this, mensaje);
+        if (mensaje.startsWith("Préstamo")) {
+
+            CompletableFuture.supplyAsync(() -> {
+                System.out.println("Entró al hilo - Intentando enviar correo...");
+
+                PrestamoDao prestamoDao = new PrestamoDao();
+                Prestamo prestamo = prestamoDao.ultimoPrestamoUsuarioDni(dni);
+
+                AvisosEmail avisosEmail = new AvisosEmail();
+                String cuerpoCorreo = "<html>" +
+                        "<body>" +
+                        "<h1>Prestamo Realizado en Biblioteca Pueblo Libre</h1>" +
+                        "<p>Se ha realizado un préstamo del libro: <strong>" + prestamo.getLibro().getTitulo() + "</strong></p>" +
+                        "<p>No olvide devolverlo antes de la fecha límite: <strong>" + prestamo.getFecha_limite() + "</strong></p>" +
+                        "</body>" +
+                        "</html>";
+
+                // coincidencia de correo regex
+                if (prestamo.getUsuario().getCorreo() != null && prestamo.getUsuario().getCorreo().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+
+                    avisosEmail.enviarCorreo(prestamo.getUsuario().getCorreo(), "Prestamo Realizado en Biblioteca Pueblo Libre", cuerpoCorreo);
+                } else {
+                    /*SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            JOptionPane.showMessageDialog(null, "El usuario no tiene un correo válido");
+                        }
+                    });*/
+                    System.out.println("El usuario no tiene un correo válido");
+                }
+                iniciandoTablaPrestamos();
+                return null;
+            });
+
+            JOptionPane.showMessageDialog(this, mensaje);
+
+        } else {
+            JOptionPane.showMessageDialog(this, mensaje);
+        }
 
         txtF_dni_prestamo.setText("");
         txtF_idLibro_prestamo.setText("");
