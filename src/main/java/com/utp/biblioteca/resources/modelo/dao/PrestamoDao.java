@@ -83,6 +83,35 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
         return prestamos;
     }
 
+    public Prestamo ultimoPrestamoUsuarioDni(int dni) {
+        Prestamo prestamo = new Prestamo();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Prestamo WHERE usuario_id = (SELECT usuario_id FROM Usuario WHERE dni = ?) ORDER BY fecha_prestamo DESC LIMIT 1")) {
+            ps.setInt(1, dni);
+            try (ResultSet rs = ps.executeQuery()) {
+
+                UsuarioDao usuarioDao = new UsuarioDao();
+                Usuario usuario = usuarioDao.buscarPorDni(dni);
+
+                if (rs.next()) {
+                    LibroDao libroDao = new LibroDao();
+                    Libro libro = libroDao.buscarUno(rs.getInt("libro_id"));
+
+                    prestamo.setPrestamo_id(rs.getInt("prestamo_id"));
+                    prestamo.setUsuario(usuario);
+                    prestamo.setLibro(libro);
+                    prestamo.setFecha_prestamo(rs.getDate("fecha_prestamo"));
+                    prestamo.setFecha_limite(rs.getDate("fecha_limite"));
+                    prestamo.setFecha_devolucion(rs.getDate("fecha_devolucion"));
+                    prestamo.setDevuelto(rs.getBoolean("devuelto"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return prestamo;
+    }
+
     @Override
     public Prestamo buscarUno(Integer id) {
         Prestamo prestamo = new Prestamo();
