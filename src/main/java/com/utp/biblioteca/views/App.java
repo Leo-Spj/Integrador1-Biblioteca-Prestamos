@@ -118,7 +118,7 @@ public class App extends javax.swing.JFrame {
             };
             model.addRow(row);
         }
-        //reportGenerator.generateFrecuenciaPrestamosReport(frecuenciaPrestamos);
+        reportGenerator.generateFrecuenciaPrestamosReport(frecuenciaPrestamos);
     }
 
     public void updateQuienesTienenLibroTable(JTable table, int libroId) {
@@ -1064,7 +1064,9 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_usuariosAtrasados_reportesActionPerformed
 
     private void btn_descargarFrecuenciaPrestamos_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_descargarFrecuenciaPrestamos_reportesActionPerformed
+        List<FrecuenciaPrestamo> frecuenciaPrestamo = repository.spFrecuenciaPrestamos();
         reportTableUpdater.updateFrecuenciaPrestamosTable(tbl_recuenciaPrestamos_reportes);
+        reportGenerator.generateFrecuenciaPrestamosReport(frecuenciaPrestamo);
         JOptionPane.showMessageDialog(this, "Reporte de Frecuencia de Préstamos generado.");
     }//GEN-LAST:event_btn_descargarFrecuenciaPrestamos_reportesActionPerformed
 

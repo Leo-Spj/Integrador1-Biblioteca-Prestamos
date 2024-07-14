@@ -107,13 +107,26 @@ public class ReportGenerator {
     }
 
 
-    /*public void generateFrecuenciaPrestamosReport(List<FrecuenciaPrestamo> frecuenciaPrestamos) {
+    public void generateFrecuenciaPrestamosReport(List<FrecuenciaPrestamo> frecuenciaPrestamos) {
+        String jrxmlFilePath = "/Users/brandonluismenesessolorzano/Desktop/Integrador1-Biblioteca-Prestamos/src/main/resources/reports/frecuenciaPrestamosReport.jrxml";
+
+        // Convertir los objetos a un formato adecuado para el reporte
+        List<Map<String, Object>> reportData = new ArrayList<>();
+        for (FrecuenciaPrestamo frecuenciaPrestamo : frecuenciaPrestamos) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("titulo", frecuenciaPrestamo.getTitulo());
+            item.put("frecuencia", frecuenciaPrestamo.getFrecuencia());
+            reportData.add(item);
+        }
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(reportData);
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("frecuenciaPrestamos", new JRBeanCollectionDataSource(frecuenciaPrestamos));
-        generateReport("path/to/FrecuenciaPrestamos.jrxml", "path/to/output/FrecuenciaPrestamos.pdf", parameters);
+        parameters.put("ReportTitle", "Frecuencia de Préstamos");
+
+        generateReport(jrxmlFilePath, "FrecuenciaPrestamosReport.pdf", parameters, dataSource);
     }
 
-    public void generateQuienesTienenLibroReport(int libroId, List<Usuario> usuariosConLibro) {
+    /*public void generateQuienesTienenLibroReport(int libroId, List<Usuario> usuariosConLibro) {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("usuariosConLibro", new JRBeanCollectionDataSource(usuariosConLibro));
         generateReport("path/to/QuienesTienenLibro.jrxml", "path/to/output/QuienesTienenLibro.pdf", parameters);
