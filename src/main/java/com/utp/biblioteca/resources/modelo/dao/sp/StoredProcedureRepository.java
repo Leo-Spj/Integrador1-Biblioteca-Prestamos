@@ -11,9 +11,14 @@ import com.utp.biblioteca.resources.modelo.dao.RolDao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class StoredProcedureRepository {
+
+    private static final Logger LOGGER = Logger.getLogger(StoredProcedureRepository.class.getName());
+
 
     private Connection getConnection() throws SQLException {
         return Conexion.getConnection();
@@ -54,6 +59,8 @@ public class StoredProcedureRepository {
         try (Connection conn = getConnection();
              CallableStatement cs = conn.prepareCall("{CALL sp_libros_sin_stock()}");
              ResultSet rs = cs.executeQuery()) {
+            LOGGER.info("Procedimiento almacenado sp_libros_sin_stock ejecutado correctamente.");
+
             while (rs.next()) {
                 Libro libro = new Libro();
                 libro.setLibro_id(rs.getInt("libro_id"));
@@ -65,8 +72,12 @@ public class StoredProcedureRepository {
                 libro.setStock(rs.getInt("stock"));
                 libros.add(libro);
             }
+            LOGGER.info("Datos de libros sin stock obtenidos correctamente.");
+
         } catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error al ejecutar el procedimiento almacenado sp_libros_sin_stock: ", e);
+
         }
         return libros;
     }

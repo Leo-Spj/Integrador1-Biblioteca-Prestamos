@@ -41,6 +41,7 @@ public class App extends javax.swing.JFrame {
         cargarTablasReportes();
     }
     private final ReportTableUpdater reportTableUpdater = new ReportTableUpdater();
+    private final StoredProcedureRepository repository = new StoredProcedureRepository();
     private final ReportGenerator reportGenerator = new ReportGenerator();
 
     public void iniciandoTablaPrestamos(){
@@ -100,7 +101,7 @@ public class App extends javax.swing.JFrame {
             };
             model.addRow(row);
         }
-        reportGenerator.generateUsuariosAtrasadosReport(usuariosAtrasados);
+        //reportGenerator.generateUsuariosAtrasadosReport(usuariosAtrasados);
     }
 
     public void updateFrecuenciaPrestamosTable(JTable table) {
@@ -115,7 +116,7 @@ public class App extends javax.swing.JFrame {
             };
             model.addRow(row);
         }
-        reportGenerator.generateFrecuenciaPrestamosReport(frecuenciaPrestamos);
+        //reportGenerator.generateFrecuenciaPrestamosReport(frecuenciaPrestamos);
     }
 
     public void updateQuienesTienenLibroTable(JTable table, int libroId) {
@@ -132,7 +133,7 @@ public class App extends javax.swing.JFrame {
             };
             model.addRow(row);
         }
-        reportGenerator.generateQuienesTienenLibroReport(libroId, usuariosConLibro);
+        //reportGenerator.generateQuienesTienenLibroReport(libroId, usuariosConLibro);
     }
 
     /**
@@ -1047,8 +1048,10 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_crearUsuario_registroUsuarioActionPerformed
 
     private void btn_descargarLibrosSinStock_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_descargarLibrosSinStock_reportesActionPerformed
+        List<Libro> librosSinStock = repository.spLibrosSinStock();
         reportTableUpdater.updateLibrosSinStockTable(tbl_librosSinStock_reportes);
-        JOptionPane.showMessageDialog(this, "Reporte de Libros sin Stock generado.");
+        reportGenerator.generateLibrosSinStockReport(librosSinStock);
+        JOptionPane.showMessageDialog(this, "Reporte de Libros sin Stock generado y guardado en output/LibrosSinStock.pdf.");
     }//GEN-LAST:event_btn_descargarLibrosSinStock_reportesActionPerformed
 
     private void btn_usuariosAtrasados_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosAtrasados_reportesActionPerformed
