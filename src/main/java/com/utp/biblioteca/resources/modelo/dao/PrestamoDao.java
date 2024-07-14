@@ -86,7 +86,7 @@ public class PrestamoDao implements CrudDao<Prestamo, Integer> {
     public Prestamo ultimoPrestamoUsuarioDni(int dni) {
         Prestamo prestamo = new Prestamo();
         try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Prestamo WHERE usuario_id = (SELECT usuario_id FROM Usuario WHERE dni = ?) ORDER BY fecha_prestamo DESC LIMIT 1")) {
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Prestamo WHERE usuario_id = (SELECT usuario_id FROM Usuario WHERE dni = ?) ORDER BY prestamo_id DESC LIMIT 1")) {
             ps.setInt(1, dni);
             try (ResultSet rs = ps.executeQuery()) {
 
