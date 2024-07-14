@@ -1086,6 +1086,7 @@ public class App extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error al devolver el libro: " + e.getMessage());
             } finally {
+                iniciandoTablaPrestamos();
                 actualizarTablas_devoluciones();
             }
         }
@@ -1168,6 +1169,7 @@ public class App extends javax.swing.JFrame {
                     });*/
                     System.out.println("El usuario no tiene un correo válido");
                 }
+                iniciandoTablaPrestamos();
                 return null;
             });
 
