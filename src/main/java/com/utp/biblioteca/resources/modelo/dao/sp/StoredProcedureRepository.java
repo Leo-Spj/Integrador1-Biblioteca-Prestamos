@@ -59,7 +59,6 @@ public class StoredProcedureRepository {
         try (Connection conn = getConnection();
              CallableStatement cs = conn.prepareCall("{CALL sp_libros_sin_stock()}");
              ResultSet rs = cs.executeQuery()) {
-            LOGGER.info("Procedimiento almacenado sp_libros_sin_stock ejecutado correctamente.");
 
             while (rs.next()) {
                 Libro libro = new Libro();
@@ -72,11 +71,9 @@ public class StoredProcedureRepository {
                 libro.setStock(rs.getInt("stock"));
                 libros.add(libro);
             }
-            LOGGER.info("Datos de libros sin stock obtenidos correctamente.");
 
         } catch (SQLException e) {
             e.printStackTrace();
-            LOGGER.log(Level.SEVERE, "Error al ejecutar el procedimiento almacenado sp_libros_sin_stock: ", e);
 
         }
         return libros;
