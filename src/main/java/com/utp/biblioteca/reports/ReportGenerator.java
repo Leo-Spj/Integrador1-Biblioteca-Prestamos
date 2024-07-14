@@ -4,6 +4,7 @@ import com.utp.biblioteca.resources.configuracion.Conexion;
 import com.utp.biblioteca.resources.modelo.FrecuenciaPrestamo;
 import com.utp.biblioteca.resources.modelo.Libro;
 import com.utp.biblioteca.resources.modelo.Usuario;
+import com.utp.biblioteca.resources.modelo.dao.UsuarioDao;
 import com.utp.biblioteca.resources.modelo.dao.sp.StoredProcedureRepository;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -29,9 +30,8 @@ public class ReportGenerator {
     private final StoredProcedureRepository repository = new StoredProcedureRepository();
 
 
-    public void generateReport(String jrxmlFilePath, String outputFileName, List<Libro> libros) {
+    public void generateReport(String jrxmlFilePath, String outputFileName, Map<String, Object> parameters, JRBeanCollectionDataSource dataSource) {
         try {
-
             // Verificar si el archivo existe
             if (!Files.exists(Paths.get(jrxmlFilePath))) {
                 JOptionPane.showMessageDialog(null, "El archivo JRXML no se encontró en la ruta especificada.");
@@ -44,24 +44,10 @@ public class ReportGenerator {
                 return;
             }
 
-            // Convertir los objetos a un formato adecuado para el reporte
-            List<Map<String, Object>> reportData = new ArrayList<>();
-            for (Libro libro : libros) {
-                Map<String, Object> item = new HashMap<>();
-                item.put("isbn", libro.getIsbn());
-                item.put("titulo", libro.getTitulo());
-                item.put("autor", libro.getAutor().getNombre());
-                item.put("stock", libro.getStock());
-                reportData.add(item);
-            }
-
-            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(reportData);
-
             // Cargar y compilar el archivo JRXML desde la ruta absoluta
             JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlFilePath);
 
             // Rellenar el reporte con los datos y parámetros
-            Map<String, Object> parameters = new HashMap<>();
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
             // Obtener la ruta de la carpeta de descargas del usuario
@@ -77,20 +63,51 @@ public class ReportGenerator {
             JOptionPane.showMessageDialog(null, "Error al generar el reporte: " + e.getMessage());
         }
     }
-
     public void generateLibrosSinStockReport(List<Libro> libros) {
         String jrxmlFilePath = "/Users/brandonluismenesessolorzano/Desktop/Integrador1-Biblioteca-Prestamos/src/main/resources/reports/librosSinStockReport.jrxml";
-        generateReport(jrxmlFilePath, "LibrosSinStockReport.pdf", libros);
+
+        // Convertir los objetos a un formato adecuado para el reporte
+        List<Map<String, Object>> reportData = new ArrayList<>();
+        for (Libro libro : libros) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("isbn", libro.getIsbn());
+            item.put("titulo", libro.getTitulo());
+            item.put("autor", libro.getAutor().getNombre());
+            item.put("stock", libro.getStock());
+            reportData.add(item);
+        }
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(reportData);
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("ReportTitle", "Libros Sin Stock");
+
+        generateReport(jrxmlFilePath, "LibrosSinStockReport.pdf", parameters, dataSource);
     }
 
-    /*public void generateUsuariosAtrasadosReport(List<Usuario> usuarios) {
+    public void generateUsuariosAtrasadosReport(List<Usuario> usuarios) {
+        String jrxmlFilePath = "/Users/brandonluismenesessolorzano/Desktop/Integrador1-Biblioteca-Prestamos/src/main/resources/reports/usuariosAtrasadosReport.jrxml";
+
+        // Convertir los objetos a un formato adecuado para el reporte
+        List<Map<String, Object>> reportData = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("usuario_id", usuario.getUsuario_id());
+            item.put("nombres", usuario.getNombres());
+            item.put("apellidos", usuario.getApellidos());
+            item.put("dni", usuario.getDni());
+            item.put("estado", usuario.isEstado());
+            reportData.add(item);
+        }
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(reportData);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("ReportTitle", "Usuarios Atrasados");
-        parameters.put("usuarios", new JRBeanCollectionDataSource(usuarios));
-        generateReport("path/to/usuariosAtrasadosReport.jrxml", "path/to/output/UsuariosAtrasados.pdf", parameters);
+
+        generateReport(jrxmlFilePath, "UsuariosAtrasadosReport.pdf", parameters, dataSource);
     }
 
-    public void generateFrecuenciaPrestamosReport(List<FrecuenciaPrestamo> frecuenciaPrestamos) {
+
+    /*public void generateFrecuenciaPrestamosReport(List<FrecuenciaPrestamo> frecuenciaPrestamos) {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("frecuenciaPrestamos", new JRBeanCollectionDataSource(frecuenciaPrestamos));
         generateReport("path/to/FrecuenciaPrestamos.jrxml", "path/to/output/FrecuenciaPrestamos.pdf", parameters);

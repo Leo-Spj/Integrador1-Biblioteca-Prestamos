@@ -103,7 +103,7 @@ public class App extends javax.swing.JFrame {
             };
             model.addRow(row);
         }
-        //reportGenerator.generateUsuariosAtrasadosReport(usuariosAtrasados);
+        reportGenerator.generateUsuariosAtrasadosReport(usuariosAtrasados);
     }
 
     public void updateFrecuenciaPrestamosTable(JTable table) {
@@ -1057,7 +1057,9 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_descargarLibrosSinStock_reportesActionPerformed
 
     private void btn_usuariosAtrasados_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_usuariosAtrasados_reportesActionPerformed
+        List<Usuario> usuariosAtrasados = repository.spUsuariosAtrasados();
         reportTableUpdater.updateUsuariosAtrasadosTable(tbl_usuariosAtrasados_reportes);
+        reportGenerator.generateUsuariosAtrasadosReport(usuariosAtrasados);
         JOptionPane.showMessageDialog(this, "Reporte de Usuarios Atrasados generado.");
     }//GEN-LAST:event_btn_usuariosAtrasados_reportesActionPerformed
 
