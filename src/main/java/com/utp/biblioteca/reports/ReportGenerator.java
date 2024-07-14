@@ -143,7 +143,7 @@ public class ReportGenerator {
 
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(reportData);
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("ReportTitle", "Usuarios con el Libro ID: " + libroId);
+        parameters.put("ReportTitle", "Usuarios con el Libro: " + libroId);
 
         generateReport(jrxmlFilePath, "QuienesTienenLibroReport.pdf", parameters, dataSource);
     }
