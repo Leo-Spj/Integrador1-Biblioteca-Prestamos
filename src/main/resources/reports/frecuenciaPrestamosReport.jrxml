@@ -1,55 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="frecuenciaPrestamosReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="frecuenciaPrestamosReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="86f9ec17-8d83-4857-9ff0-c69d4f878a97">
     <field name="titulo" class="java.lang.String"/>
     <field name="frecuencia" class="java.lang.Integer"/>
     <background>
         <band splitType="Stretch"/>
     </background>
     <title>
-        <band height="50" splitType="Stretch">
+        <band height="60" splitType="Stretch">
             <staticText>
-                <reportElement x="0" y="0" width="555" height="30"/>
+                <reportElement x="0" y="0" width="555" height="60" forecolor="#946B03" backcolor="#2C3E50" uuid="d1a1e7a2-3c76-4d94-b30e-9e073b6c12f3"/>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="18" isBold="true"/>
+                    <font size="23" isBold="true" pdfFontName="Helvetica-Bold"/>
                 </textElement>
                 <text><![CDATA[Frecuencia de Préstamos]]></text>
             </staticText>
         </band>
     </title>
     <columnHeader>
-        <band height="30" splitType="Stretch">
+        <band height="40" splitType="Stretch">
             <staticText>
-                <reportElement x="0" y="0" width="300" height="30" backcolor="#2980B9"/>
+                <reportElement x="0" y="0" width="300" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="db4b104d-9c44-4a7c-bd6b-1047d26bb1ad"/>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
+                    <font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
                 </textElement>
                 <text><![CDATA[Título]]></text>
             </staticText>
             <staticText>
-                <reportElement x="300" y="0" width="255" height="30" backcolor="#2980B9"/>
+                <reportElement x="300" y="0" width="255" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="a5e89636-e7a4-4d66-8e6f-cd865f4d0174"/>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="12" isBold="true"/>
+                    <font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
                 </textElement>
                 <text><![CDATA[Frecuencia]]></text>
             </staticText>
         </band>
     </columnHeader>
     <detail>
-        <band height="20" splitType="Stretch">
+        <band height="25" splitType="Stretch">
             <textField>
-                <reportElement x="0" y="0" width="300" height="20"/>
+                <reportElement x="0" y="0" width="300" height="25" uuid="c1bce78d-9233-4b8b-973a-cfa8f2d48d7a"/>
+                <box>
+                    <topPen lineWidth="0.5" lineStyle="Solid"/>
+                    <leftPen lineWidth="0.5" lineStyle="Solid"/>
+                    <bottomPen lineWidth="0.5" lineStyle="Solid"/>
+                    <rightPen lineWidth="0.5" lineStyle="Solid"/>
+                </box>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="10"/>
+                    <font size="12" pdfFontName="Helvetica"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="300" y="0" width="255" height="20"/>
+                <reportElement x="300" y="0" width="255" height="25" uuid="9c7b5d97-e87b-4e0c-abc3-6d0a4c22b1f4"/>
+                <box>
+                    <topPen lineWidth="0.5" lineStyle="Solid"/>
+                    <leftPen lineWidth="0.5" lineStyle="Solid"/>
+                    <bottomPen lineWidth="0.5" lineStyle="Solid"/>
+                    <rightPen lineWidth="0.5" lineStyle="Solid"/>
+                </box>
                 <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="10"/>
+                    <font size="12" pdfFontName="Helvetica"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$F{frecuencia}]]></textFieldExpression>
             </textField>
         </band>
     </detail>
+    <pageFooter>
+        <band height="52" splitType="Stretch">
+            <textField pattern="dd/MM/yyyy HH:mm:ss">
+                <reportElement x="470" y="10" width="85" height="30" uuid="5c8b5e94-3c8c-4c0b-92db-64d0b3a5e6ea"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="12" isItalic="true" pdfFontName="Helvetica-Oblique"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="370" y="10" width="100" height="30" uuid="785ebf5a-f6e8-4e1f-9fd3-65fc03692f42"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <text><![CDATA[Generado el:]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
 </jasperReport>
