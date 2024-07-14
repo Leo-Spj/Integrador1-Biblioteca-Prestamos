@@ -1,3 +1,12 @@
 # Credenciales - JavaMailAPI
 mail.email=
 mail.password=
+
+
+# Configuración de envío de correos
+mail.smtp.host=smtp.gmail.com
+mail.smtp.ssl.trust=smtp.gmail.com
+mail.smtp.starttls.enable=true
+mail.smtp.port=587
+mail.smtp.ssl.protocols=TLSv1.2
+mail.smtp.auth=true
