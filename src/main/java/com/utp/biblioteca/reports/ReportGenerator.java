@@ -126,11 +126,27 @@ public class ReportGenerator {
         generateReport(jrxmlFilePath, "FrecuenciaPrestamosReport.pdf", parameters, dataSource);
     }
 
-    /*public void generateQuienesTienenLibroReport(int libroId, List<Usuario> usuariosConLibro) {
+    public void generateQuienesTienenLibroReport(List<Usuario> usuarios, int libroId) {
+        String jrxmlFilePath = "/Users/brandonluismenesessolorzano/Desktop/Integrador1-Biblioteca-Prestamos/src/main/resources/reports/quienesTienenLibroReport.jrxml";
+
+        // Convertir los objetos a un formato adecuado para el reporte
+        List<Map<String, Object>> reportData = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("usuario_id", usuario.getUsuario_id());
+            item.put("nombres", usuario.getNombres());
+            item.put("apellidos", usuario.getApellidos());
+            item.put("dni", usuario.getDni());
+            item.put("correo", usuario.getCorreo());
+            reportData.add(item);
+        }
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(reportData);
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("usuariosConLibro", new JRBeanCollectionDataSource(usuariosConLibro));
-        generateReport("path/to/QuienesTienenLibro.jrxml", "path/to/output/QuienesTienenLibro.pdf", parameters);
-    }*/
+        parameters.put("ReportTitle", "Usuarios con el Libro ID: " + libroId);
+
+        generateReport(jrxmlFilePath, "QuienesTienenLibroReport.pdf", parameters, dataSource);
+    }
 
 
 }

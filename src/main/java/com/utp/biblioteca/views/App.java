@@ -135,7 +135,7 @@ public class App extends javax.swing.JFrame {
             };
             model.addRow(row);
         }
-        //reportGenerator.generateQuienesTienenLibroReport(libroId, usuariosConLibro);
+        reportGenerator.generateQuienesTienenLibroReport(usuariosConLibro,libroId);
     }
 
     /**
@@ -1071,9 +1071,29 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_descargarFrecuenciaPrestamos_reportesActionPerformed
 
     private void btn_quienesTienenElLibro_reportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_quienesTienenElLibro_reportes1ActionPerformed
-        int libroId = Integer.parseInt(jTextField1.getText());
-        reportTableUpdater.updateQuienesTienenLibroTable(tbl_quienesTienenElLibro_reportes1, libroId);
-        JOptionPane.showMessageDialog(this, "Reporte de Quiénes Tienen el Libro generado.");
+        try {
+            // Convertir el texto a un entero
+            int libroId = Integer.parseInt(jTextField1.getText());
+
+            // Actualizar la tabla con los datos de usuarios que tienen el libro
+            reportTableUpdater.updateQuienesTienenLibroTable(tbl_quienesTienenElLibro_reportes1, libroId);
+
+            // Generar el reporte
+            UsuarioDao usuarioDao = new UsuarioDao();
+            List<Usuario> usuariosConLibro = usuarioDao.spQuienesTienenLibro(libroId);
+            ReportGenerator reportGenerator = new ReportGenerator();
+            reportGenerator.generateQuienesTienenLibroReport(usuariosConLibro, libroId);
+
+            // Mostrar mensaje de éxito al usuario
+            JOptionPane.showMessageDialog(this, "Reporte de Quiénes Tienen el Libro generado exitosamente.");
+        } catch (NumberFormatException e) {
+            // Manejar excepción si el texto no es un número válido
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID de libro válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            // Manejar otras excepciones posibles
+            JOptionPane.showMessageDialog(this, "Error al generar el reporte: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btn_quienesTienenElLibro_reportes1ActionPerformed
 
     private void tbl_historialUsuario_devolucionMouseClicked(java.awt.event.MouseEvent evt) {
