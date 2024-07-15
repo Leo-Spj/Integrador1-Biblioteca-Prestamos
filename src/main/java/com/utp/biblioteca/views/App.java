@@ -216,6 +216,12 @@ public class App extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        pestañas.setBackground(new java.awt.Color(102, 102, 0));
+        pestañas.setForeground(new java.awt.Color(255, 255, 255));
+
+        panelLibros.setBackground(new java.awt.Color(0, 153, 153));
+
+        Lab_Libros.setForeground(new java.awt.Color(255, 255, 255));
         Lab_Libros.setText("Libros");
 
         txtF_barraBusquedaLibros_prestamos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -290,14 +296,17 @@ public class App extends javax.swing.JFrame {
             panelLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLibrosLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(panelLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLibrosLayout.createSequentialGroup()
                         .addComponent(cbx_buscarAtributo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtF_barraBusquedaLibros_prestamos))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtF_barraBusquedaLibros_prestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Lab_Libros, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
+            .addGroup(panelLibrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         panelLibrosLayout.setVerticalGroup(
             panelLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,9 +319,12 @@ public class App extends javax.swing.JFrame {
                     .addComponent(cbx_buscarAtributo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(0, 153, 153));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Usuario DNI");
 
         txtF_buscarDNI_prestamo.setToolTipText("");
@@ -322,8 +334,10 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        jPanel5.setBackground(new java.awt.Color(204, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel4.setText("Prestamo");
 
         jLabel5.setText("ID Libro");
@@ -332,6 +346,8 @@ public class App extends javax.swing.JFrame {
 
         jLabel8.setText("Días");
 
+        btn_realizarPrestamo.setBackground(new java.awt.Color(0, 153, 153));
+        btn_realizarPrestamo.setForeground(new java.awt.Color(255, 255, 255));
         btn_realizarPrestamo.setText("Realizar Prestamo");
         btn_realizarPrestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -426,7 +442,7 @@ public class App extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -449,7 +465,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panel_prestamosLayout = new javax.swing.GroupLayout(panel_prestamos);
@@ -458,17 +474,22 @@ public class App extends javax.swing.JFrame {
             panel_prestamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_prestamosLayout.createSequentialGroup()
                 .addComponent(panelLibros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_prestamosLayout.setVerticalGroup(
             panel_prestamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelLibros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelLibros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pestañas.addTab("Prestamos", panel_prestamos);
 
+        panel_devoluciones.setBackground(new java.awt.Color(0, 153, 153));
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel9.setText("Usuario");
 
         jLabel10.setText("DNI");
@@ -581,7 +602,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panel_devolucionesLayout = new javax.swing.GroupLayout(panel_devoluciones);
@@ -589,9 +610,9 @@ public class App extends javax.swing.JFrame {
         panel_devolucionesLayout.setHorizontalGroup(
             panel_devolucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_devolucionesLayout.createSequentialGroup()
-                .addGap(250, 250, 250)
+                .addGap(228, 228, 228)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(345, Short.MAX_VALUE))
         );
         panel_devolucionesLayout.setVerticalGroup(
             panel_devolucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -600,8 +621,12 @@ public class App extends javax.swing.JFrame {
 
         pestañas.addTab("Devoluciones", panel_devoluciones);
 
+        panel_registarUsuario.setBackground(new java.awt.Color(0, 153, 153));
+
+        jPanel6.setBackground(new java.awt.Color(204, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jLabel16.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel16.setText("Registrar Usuario");
 
         jLabel17.setText("DNI");
@@ -612,6 +637,8 @@ public class App extends javax.swing.JFrame {
 
         jLabel20.setText("Correo");
 
+        btn_crearUsuario_registroUsuario.setBackground(new java.awt.Color(0, 153, 153));
+        btn_crearUsuario_registroUsuario.setForeground(new java.awt.Color(255, 255, 255));
         btn_crearUsuario_registroUsuario.setText("Crear Usuario");
         btn_crearUsuario_registroUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -647,7 +674,7 @@ public class App extends javax.swing.JFrame {
                                 .addComponent(txtF_corro_registroUsuario))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -681,7 +708,7 @@ public class App extends javax.swing.JFrame {
         panel_registarUsuarioLayout.setHorizontalGroup(
             panel_registarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_registarUsuarioLayout.createSequentialGroup()
-                .addContainerGap(285, Short.MAX_VALUE)
+                .addContainerGap(350, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(258, 258, 258))
         );
@@ -690,11 +717,14 @@ public class App extends javax.swing.JFrame {
             .addGroup(panel_registarUsuarioLayout.createSequentialGroup()
                 .addGap(102, 102, 102)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pestañas.addTab("Registrar Usuario", panel_registarUsuario);
 
+        jPanel7.setBackground(new java.awt.Color(0, 153, 153));
+
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Libros sin Stock");
 
         tbl_librosSinStock_reportes.setModel(new javax.swing.table.DefaultTableModel(
@@ -710,6 +740,7 @@ public class App extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(tbl_librosSinStock_reportes);
 
+        btn_usuariosAtrasados_reportes.setBackground(new java.awt.Color(204, 255, 255));
         btn_usuariosAtrasados_reportes.setText("Descargar");
         btn_usuariosAtrasados_reportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -717,6 +748,7 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Usuarios atrasados:");
 
         tbl_usuariosAtrasados_reportes.setModel(new javax.swing.table.DefaultTableModel(
@@ -732,6 +764,7 @@ public class App extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(tbl_usuariosAtrasados_reportes);
 
+        btn_descargarLibrosSinStock_reportes.setBackground(new java.awt.Color(204, 255, 255));
         btn_descargarLibrosSinStock_reportes.setText("Descargar");
         btn_descargarLibrosSinStock_reportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -758,7 +791,7 @@ public class App extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addComponent(btn_usuariosAtrasados_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -778,8 +811,11 @@ public class App extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
         );
 
+        jPanel8.setBackground(new java.awt.Color(0, 153, 153));
+
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Frecuencia de prestamos");
 
         tbl_recuenciaPrestamos_reportes.setModel(new javax.swing.table.DefaultTableModel(
@@ -795,6 +831,7 @@ public class App extends javax.swing.JFrame {
         ));
         jScrollPane7.setViewportView(tbl_recuenciaPrestamos_reportes);
 
+        btn_descargarFrecuenciaPrestamos_reportes.setBackground(new java.awt.Color(204, 255, 255));
         btn_descargarFrecuenciaPrestamos_reportes.setText("Descargar");
         btn_descargarFrecuenciaPrestamos_reportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -802,6 +839,7 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Quienes tiene el libro?:");
 
         tbl_quienesTienenElLibro_reportes1.setModel(new javax.swing.table.DefaultTableModel(
@@ -817,6 +855,7 @@ public class App extends javax.swing.JFrame {
         ));
         jScrollPane8.setViewportView(tbl_quienesTienenElLibro_reportes1);
 
+        btn_quienesTienenElLibro_reportes1.setBackground(new java.awt.Color(204, 255, 255));
         btn_quienesTienenElLibro_reportes1.setText("Descargar");
         btn_quienesTienenElLibro_reportes1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -838,12 +877,12 @@ public class App extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
                                     .addGroup(jPanel8Layout.createSequentialGroup()
                                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)))
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel8Layout.createSequentialGroup()
@@ -902,7 +941,10 @@ public class App extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pestañas, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pestañas)
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
