@@ -1494,8 +1494,13 @@ public class App extends javax.swing.JFrame {
                     libro.setIsbn(isbn);
                     libro.setTitulo(titulo);
                     AutorDao autorDao = new AutorDao();
-                    Autor autorObj = autorDao.buscarNombre(autor);
-                    libro.setAutor(autorObj);
+                    // si el autor está vacío, borrará el autor del libro
+                    if (autor.isEmpty() || autor == null || autor.equals("")) {
+                        libro.setAutor(null);
+                    } else {
+                        Autor autorObj = autorDao.buscarNombre(autor);
+                        libro.setAutor(autorObj);
+                    }
                     libro.setStock(stock);
 
                     LibroDao libroDao = new LibroDao();
@@ -1536,7 +1541,7 @@ public class App extends javax.swing.JFrame {
             int rowLibros = tbl_libros_actualizarBiblioteca.getSelectedRow();
             if (rowLibros == -1) {
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila en la tabla de libros.");
-            } else if (model.getValueAt(rowLibros, 0) == null || model.getValueAt(rowLibros, 2) == null) {
+            } else if (model.getValueAt(rowLibros, 0) == null || model.getValueAt(rowLibros, 3) == null || model.getValueAt(rowLibros, 3) == "") {
                 model.setValueAt(nombre, rowLibros, 3);
             }
 

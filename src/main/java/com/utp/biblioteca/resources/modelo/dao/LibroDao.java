@@ -208,7 +208,12 @@ public class LibroDao implements CrudDao<Libro, Integer> {
              PreparedStatement ps = conn.prepareStatement("UPDATE Libro SET isbn = ?, titulo = ?, autor_id = ?, link_imagen = ?, descripcion = ?, stock = ? WHERE libro_id = ?")) {
             ps.setString(1, entidad.getIsbn());
             ps.setString(2, entidad.getTitulo());
-            ps.setInt(3, entidad.getAutor().getAutor_id());
+            // si el autor no es nulo
+            if (entidad.getAutor() == null) {
+                ps.setNull(3, Types.INTEGER);
+            } else {
+                ps.setInt(3, entidad.getAutor().getAutor_id());
+            }
             ps.setString(4, entidad.getLink_imagen());
             ps.setString(5, entidad.getDescripcion());
             ps.setInt(6, entidad.getStock());

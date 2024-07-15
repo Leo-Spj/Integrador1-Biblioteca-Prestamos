@@ -30,7 +30,7 @@ CREATE TABLE Libro (
     libro_id INT PRIMARY KEY AUTO_INCREMENT,
     isbn VARCHAR(20) UNIQUE NOT NULL,
     titulo VARCHAR(200) NOT NULL,
-    autor_id INT NOT NULL,
+    autor_id INT,
     link_imagen VARCHAR(255),
     descripcion TEXT,
     stock INT NOT NULL,
