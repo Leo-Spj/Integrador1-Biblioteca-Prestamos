@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="quienesTienenLibroReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="28c38f24-385b-4bab-bcf1-2ae763c6336c">
-    <field name="usuario_id" class="java.lang.Integer"/>
     <field name="nombres" class="java.lang.String"/>
     <field name="apellidos" class="java.lang.String"/>
     <field name="dni" class="java.lang.Integer"/>
     <field name="correo" class="java.lang.String"/>
+    <field name="titulo" class="java.lang.String"/>
     <background>
         <band splitType="Stretch"/>
     </background>
@@ -21,22 +21,9 @@
         </band>
     </title>
     <columnHeader>
-        <band height="40" splitType="Stretch">
+        <band height="45" splitType="Stretch">
             <staticText>
-                <reportElement x="0" y="0" width="55" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="a7702909-524f-4b66-b939-97128d6283a1"/>
-                <box>
-                    <topPen lineWidth="1.0" lineStyle="Solid"/>
-                    <leftPen lineWidth="1.0" lineStyle="Solid"/>
-                    <bottomPen lineWidth="1.0" lineStyle="Solid"/>
-                    <rightPen lineWidth="1.0" lineStyle="Solid"/>
-                </box>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
-                </textElement>
-                <text><![CDATA[ID]]></text>
-            </staticText>
-            <staticText>
-                <reportElement x="55" y="0" width="125" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="cefaedf0-a3ec-437a-8af6-3b0ddd2f0f0c"/>
+                <reportElement x="0" y="0" width="90" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="cefaedf0-a3ec-437a-8af6-3b0ddd2f0f0c"/>
                 <box>
                     <topPen lineWidth="1.0" lineStyle="Solid"/>
                     <leftPen lineWidth="1.0" lineStyle="Solid"/>
@@ -49,7 +36,7 @@
                 <text><![CDATA[Nombres]]></text>
             </staticText>
             <staticText>
-                <reportElement x="180" y="0" width="140" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="ccb57d8a-4f6d-4e30-8d56-e30471d83084"/>
+                <reportElement x="90" y="0" width="90" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="ccb57d8a-4f6d-4e30-8d56-e30471d83084"/>
                 <box>
                     <topPen lineWidth="1.0" lineStyle="Solid"/>
                     <leftPen lineWidth="1.0" lineStyle="Solid"/>
@@ -62,7 +49,7 @@
                 <text><![CDATA[Apellidos]]></text>
             </staticText>
             <staticText>
-                <reportElement x="320" y="0" width="75" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="b48412dc-b30a-463d-98ca-6ea99301686d"/>
+                <reportElement x="180" y="0" width="75" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="b48412dc-b30a-463d-98ca-6ea99301686d"/>
                 <box>
                     <topPen lineWidth="1.0" lineStyle="Solid"/>
                     <leftPen lineWidth="1.0" lineStyle="Solid"/>
@@ -75,7 +62,7 @@
                 <text><![CDATA[DNI]]></text>
             </staticText>
             <staticText>
-                <reportElement x="395" y="0" width="160" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="2f4961aa-3b8b-4348-acbe-ba8d47bf8235"/>
+                <reportElement x="255" y="0" width="145" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="2f4961aa-3b8b-4348-acbe-ba8d47bf8235"/>
                 <box>
                     <topPen lineWidth="1.0" lineStyle="Solid"/>
                     <leftPen lineWidth="1.0" lineStyle="Solid"/>
@@ -87,25 +74,25 @@
                 </textElement>
                 <text><![CDATA[Correo]]></text>
             </staticText>
+            <staticText>
+                <reportElement x="400" y="0" width="155" height="40" forecolor="#946B03" backcolor="#2980B9" uuid="13a39e1c-4901-4efe-b6c8-f8880658f4f7"/>
+                <box>
+                    <topPen lineWidth="1.0" lineStyle="Solid"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid"/>
+                    <bottomPen lineWidth="1.0" lineStyle="Solid"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <text><![CDATA[Título Libro]]></text>
+            </staticText>
         </band>
     </columnHeader>
     <detail>
         <band height="25" splitType="Stretch">
             <textField>
-                <reportElement x="0" y="0" width="55" height="25" uuid="103eee35-fcb6-4668-acd8-536b81c2d418"/>
-                <box>
-                    <topPen lineWidth="0.5" lineStyle="Solid"/>
-                    <leftPen lineWidth="0.5" lineStyle="Solid"/>
-                    <bottomPen lineWidth="0.5" lineStyle="Solid"/>
-                    <rightPen lineWidth="0.5" lineStyle="Solid"/>
-                </box>
-                <textElement textAlignment="Center" verticalAlignment="Middle">
-                    <font size="12" pdfFontName="Helvetica"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{usuario_id}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="55" y="0" width="125" height="25" uuid="98583dd0-1512-4169-a89c-92ed50d63c06"/>
+                <reportElement x="0" y="0" width="90" height="25" uuid="98583dd0-1512-4169-a89c-92ed50d63c06"/>
                 <box>
                     <topPen lineWidth="0.5" lineStyle="Solid"/>
                     <leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -118,7 +105,7 @@
                 <textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="180" y="0" width="140" height="25" uuid="60d84337-74aa-48ea-a08d-46bd035a4098"/>
+                <reportElement x="90" y="0" width="90" height="25" uuid="60d84337-74aa-48ea-a08d-46bd035a4098"/>
                 <box>
                     <topPen lineWidth="0.5" lineStyle="Solid"/>
                     <leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -131,7 +118,7 @@
                 <textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="320" y="0" width="75" height="25" uuid="223bc824-6685-4d6e-ad84-91f7a63eb71a"/>
+                <reportElement x="180" y="0" width="75" height="25" uuid="223bc824-6685-4d6e-ad84-91f7a63eb71a"/>
                 <box>
                     <topPen lineWidth="0.5" lineStyle="Solid"/>
                     <leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -144,7 +131,20 @@
                 <textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="395" y="0" width="160" height="25" uuid="82b06973-ff51-4086-894a-90808318a6b2"/>
+                <reportElement x="255" y="0" width="145" height="25" uuid="82b06973-ff51-4086-894a-90808318a6b2"/>
+                <box>
+                    <topPen lineWidth="0.5" lineStyle="Solid"/>
+                    <leftPen lineWidth="0.5" lineStyle="Solid"/>
+                    <bottomPen lineWidth="0.5" lineStyle="Solid"/>
+                    <rightPen lineWidth="0.5" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="10" pdfFontName="Helvetica"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="400" y="0" width="155" height="25" uuid="13a39e1c-4901-4efe-b6c8-f8880658f4f7"/>
                 <box>
                     <topPen lineWidth="0.5" lineStyle="Solid"/>
                     <leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -154,7 +154,7 @@
                 <textElement textAlignment="Center" verticalAlignment="Middle">
                     <font size="12" pdfFontName="Helvetica"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
             </textField>
         </band>
     </detail>

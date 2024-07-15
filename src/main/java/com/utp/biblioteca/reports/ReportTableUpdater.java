@@ -3,6 +3,7 @@ package com.utp.biblioteca.reports;
 import com.utp.biblioteca.resources.modelo.Libro;
 import com.utp.biblioteca.resources.modelo.Usuario;
 import com.utp.biblioteca.resources.modelo.FrecuenciaPrestamo;
+import com.utp.biblioteca.resources.modelo.UsuarioConLibro;
 import com.utp.biblioteca.resources.modelo.dao.sp.StoredProcedureRepository;
 
 import javax.swing.*;
@@ -41,10 +42,10 @@ public class ReportTableUpdater {
     }
 
     public void updateQuienesTienenLibroTable(JTable table, int libroId) {
-        List<Usuario> usuariosConLibro = repository.spQuienesTienenLibro(libroId);
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"ID", "Nombres", "Apellidos", "DNI", "Correo", "Rol", "Estado"}, 0);
-        for (Usuario usuario : usuariosConLibro) {
-            model.addRow(new Object[]{usuario.getUsuario_id(), usuario.getNombres(), usuario.getApellidos(), usuario.getDni(), usuario.getCorreo(), usuario.getRol().getNombre(), usuario.isEstado()});
+        List<UsuarioConLibro> usuariosConLibro = repository.spQuienesTienenLibro(libroId);
+        DefaultTableModel model = new DefaultTableModel(new Object[]{"Nombres", "Apellidos", "DNI", "Correo", "Título del Libro"}, 0);
+        for (UsuarioConLibro usuario : usuariosConLibro) {
+            model.addRow(new Object[]{usuario.getNombres(), usuario.getApellidos(), usuario.getDni(), usuario.getCorreo(), usuario.getTitulo()});
         }
         table.setModel(model);
     }

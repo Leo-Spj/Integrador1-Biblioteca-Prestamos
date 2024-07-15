@@ -4,6 +4,7 @@ import com.utp.biblioteca.resources.configuracion.Conexion;
 import com.utp.biblioteca.resources.modelo.FrecuenciaPrestamo;
 import com.utp.biblioteca.resources.modelo.Libro;
 import com.utp.biblioteca.resources.modelo.Usuario;
+import com.utp.biblioteca.resources.modelo.UsuarioConLibro;
 import com.utp.biblioteca.resources.modelo.dao.UsuarioDao;
 import com.utp.biblioteca.resources.modelo.dao.sp.StoredProcedureRepository;
 import net.sf.jasperreports.engine.*;
@@ -127,18 +128,18 @@ public class ReportGenerator {
         generateReport(jrxmlFilePath, "FrecuenciaPrestamosReport.pdf", parameters, dataSource);
     }
 
-    public void generateQuienesTienenLibroReport(List<Usuario> usuarios, int libroId) {
+    public void generateQuienesTienenLibroReport(List<UsuarioConLibro> usuarios, int libroId) {
         String jrxmlFilePath = "/Users/brandonluismenesessolorzano/Desktop/Integrador1-Biblioteca-Prestamos/src/main/resources/reports/quienesTienenLibroReport.jrxml";
 
         // Convertir los objetos a un formato adecuado para el reporte
         List<Map<String, Object>> reportData = new ArrayList<>();
-        for (Usuario usuario : usuarios) {
+        for (UsuarioConLibro usuario : usuarios) {
             Map<String, Object> item = new HashMap<>();
-            item.put("usuario_id", usuario.getUsuario_id());
             item.put("nombres", usuario.getNombres());
             item.put("apellidos", usuario.getApellidos());
             item.put("dni", usuario.getDni());
             item.put("correo", usuario.getCorreo());
+            item.put("titulo", usuario.getTitulo());
             reportData.add(item);
         }
 

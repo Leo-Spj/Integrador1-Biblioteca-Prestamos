@@ -6,10 +6,7 @@ package com.utp.biblioteca.views;
 
 import com.utp.biblioteca.reports.ReportGenerator;
 import com.utp.biblioteca.reports.ReportTableUpdater;
-import com.utp.biblioteca.resources.modelo.Libro;
-import com.utp.biblioteca.resources.modelo.Prestamo;
-import com.utp.biblioteca.resources.modelo.Usuario;
-import com.utp.biblioteca.resources.modelo.FrecuenciaPrestamo;
+import com.utp.biblioteca.resources.modelo.*;
 import com.utp.biblioteca.resources.modelo.dao.LibroDao;
 import com.utp.biblioteca.resources.modelo.dao.PrestamoDao;
 import com.utp.biblioteca.resources.modelo.dao.RolDao;
@@ -1033,7 +1030,7 @@ public class App extends javax.swing.JFrame {
         try {
             int libroId = Integer.parseInt(jTextField1.getText());
             reportTableUpdater.updateQuienesTienenLibroTable(tbl_quienesTienenElLibro_reportes1, libroId);
-            List<Usuario> usuariosConLibro = repository.spQuienesTienenLibro(libroId);
+            List<UsuarioConLibro> usuariosConLibro = repository.spQuienesTienenLibro(libroId);
             reportGenerator.generateQuienesTienenLibroReport(usuariosConLibro, libroId);
 
             // Mostrar mensaje de éxito al usuario

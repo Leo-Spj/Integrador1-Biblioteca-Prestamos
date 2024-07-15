@@ -1,10 +1,7 @@
 package com.utp.biblioteca.resources.modelo.dao.sp;
 
 import com.utp.biblioteca.resources.configuracion.Conexion;
-import com.utp.biblioteca.resources.modelo.Autor;
-import com.utp.biblioteca.resources.modelo.FrecuenciaPrestamo;
-import com.utp.biblioteca.resources.modelo.Libro;
-import com.utp.biblioteca.resources.modelo.Usuario;
+import com.utp.biblioteca.resources.modelo.*;
 import com.utp.biblioteca.resources.modelo.dao.AutorDao;
 import com.utp.biblioteca.resources.modelo.dao.RolDao;
 
@@ -120,27 +117,27 @@ public class StoredProcedureRepository {
         return frecuenciaPrestamos;
     }
 
-    public List<Usuario> spQuienesTienenLibro(int libroId) {
-        List<Usuario> usuarios = new ArrayList<>();
+    public List<UsuarioConLibro> spQuienesTienenLibro(int libroId) {
+        List<UsuarioConLibro> usuariosConLibro = new ArrayList<>();
         try (Connection conn = getConnection();
              CallableStatement cs = conn.prepareCall("{CALL sp_quienes_tienen_libro(?)}")) {
             cs.setInt(1, libroId);
             try (ResultSet rs = cs.executeQuery()) {
                 while (rs.next()) {
-                    Usuario usuario = new Usuario();
-                    usuario.setUsuario_id(rs.getInt("usuario_id"));
-                    usuario.setNombres(rs.getString("nombres"));
-                    usuario.setApellidos(rs.getString("apellidos"));
-                    usuario.setDni(rs.getInt("dni"));
-                    usuario.setCorreo(rs.getString("correo"));
-                    usuario.setRol(new RolDao().buscarUno(rs.getInt("rol_id")));
-                    usuario.setEstado(rs.getBoolean("estado"));
-                    usuarios.add(usuario);
+                    UsuarioConLibro usuarioConLibro = new UsuarioConLibro();
+                    usuarioConLibro.setNombres(rs.getString("nombres"));
+                    usuarioConLibro.setApellidos(rs.getString("apellidos"));
+                    usuarioConLibro.setDni(rs.getInt("dni"));
+                    usuarioConLibro.setCorreo(rs.getString("correo"));
+                    usuarioConLibro.setEstado(rs.getBoolean("estado"));
+                    usuarioConLibro.setTitulo(rs.getString("titulo"));
+                    usuariosConLibro.add(usuarioConLibro);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return usuarios;
+        return usuariosConLibro;
     }
+
 }
