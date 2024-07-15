@@ -138,13 +138,14 @@ public class App extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         tbl_usuariosAtrasados_reportes = new javax.swing.JTable();
         btn_descargarLibrosSinStock_reportes = new javax.swing.JButton();
+        btn_enviarEmailsTodos_reportes = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbl_recuenciaPrestamos_reportes = new javax.swing.JTable();
         btn_descargarFrecuenciaPrestamos_reportes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtF_quienesTienenLibro_reportes = new javax.swing.JTextField();
         jScrollPane8 = new javax.swing.JScrollPane();
         tbl_quienesTienenElLibro_reportes1 = new javax.swing.JTable();
         btn_quienesTienenElLibro_reportes1 = new javax.swing.JButton();
@@ -894,6 +895,13 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        btn_enviarEmailsTodos_reportes.setText("Enviar Emails");
+        btn_enviarEmailsTodos_reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_enviarEmailsTodos_reportesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -901,18 +909,21 @@ public class App extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-                            .addComponent(jScrollPane6)))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(184, 184, 184)
                         .addComponent(btn_descargarLibrosSinStock_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(btn_usuariosAtrasados_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGap(189, 189, 189)
+                            .addComponent(btn_usuariosAtrasados_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_enviarEmailsTodos_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGap(15, 15, 15)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                                .addComponent(jScrollPane6)))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -929,7 +940,9 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_usuariosAtrasados_reportes)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_usuariosAtrasados_reportes)
+                    .addComponent(btn_enviarEmailsTodos_reportes))
                 .addGap(39, 39, 39))
         );
 
@@ -998,7 +1011,7 @@ public class App extends javax.swing.JFrame {
                             .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGap(147, 147, 147)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtF_quienesTienenLibro_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
@@ -1022,7 +1035,7 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtF_quienesTienenLibro_reportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1256,7 +1269,7 @@ public class App extends javax.swing.JFrame {
 
     private void btn_quienesTienenElLibro_reportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_quienesTienenElLibro_reportes1ActionPerformed
         try {
-            int libroId = Integer.parseInt(jTextField1.getText());
+            int libroId = Integer.parseInt(txtF_quienesTienenLibro_reportes.getText());
             reportTableUpdater.updateQuienesTienenLibroTable(tbl_quienesTienenElLibro_reportes1, libroId);
             List<UsuarioConLibro> usuariosConLibro = repository.spQuienesTienenLibro(libroId);
             reportGenerator.generateQuienesTienenLibroReport(usuariosConLibro, libroId);
@@ -1491,6 +1504,33 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbl_autores_actualizarBibliotecaMouseClicked
 
+    private void btn_enviarEmailsTodos_reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarEmailsTodos_reportesActionPerformed
+        // a toda persona que tenga un libro atrasado, enviar un correo
+        List<Usuario> usuariosAtrasados = repository.spUsuariosAtrasados();
+        for (Usuario usuario : usuariosAtrasados) {
+            CompletableFuture.supplyAsync(() -> {
+                System.out.println("Entró al hilo - Intentando enviar correo...");
+
+                AvisosEmail avisosEmail = new AvisosEmail();
+                String cuerpoCorreo = "<html>" +
+                        "<body>" +
+                        "<h1>Devolución de Libro Atrasada</h1>" +
+                        "<p>Estimado/a " + usuario.getNombres() + " " + usuario.getApellidos() + ",</p>" +
+                        "<p>Le recordamos que tiene un libro atrasado en su poder. Por favor, devuélvalo a la brevedad posible.</p>" +
+                        "</body>" +
+                        "</html>";
+
+                // coincidencia de correo regex
+                if (usuario.getCorreo() != null && usuario.getCorreo().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+                    avisosEmail.enviarCorreo(usuario.getCorreo(), "Devolución de Libro Atrasada", cuerpoCorreo);
+                } else {
+                    System.out.println("El usuario no tiene un correo válido");
+                }
+                return null;
+            });
+        }
+    }//GEN-LAST:event_btn_enviarEmailsTodos_reportesActionPerformed
+
     private void tbl_libros_actualizarBibliotecaMouseClicked(java.awt.event.MouseEvent evt) {
 
     }                                                            
@@ -1653,6 +1693,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton btn_crearUsuario_registroUsuario;
     private javax.swing.JButton btn_descargarFrecuenciaPrestamos_reportes;
     private javax.swing.JButton btn_descargarLibrosSinStock_reportes;
+    private javax.swing.JButton btn_enviarEmailsTodos_reportes;
     private javax.swing.JButton btn_quienesTienenElLibro_reportes1;
     private javax.swing.JButton btn_realizarPrestamo;
     private javax.swing.JButton btn_usuariosAtrasados_reportes;
@@ -1693,7 +1734,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panelLibros;
     private javax.swing.JPanel panel_actualizarBiblioteca;
     private javax.swing.JPanel panel_devoluciones;
@@ -1722,6 +1762,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField txtF_idLibro_prestamo;
     private javax.swing.JTextField txtF_isbn_actualizarBiblioteca;
     private javax.swing.JTextField txtF_nombre_registroUsuario;
+    private javax.swing.JTextField txtF_quienesTienenLibro_reportes;
     private javax.swing.JTextField txtF_tituloLibro_actualizarBiblioteca;
     private javax.swing.JTextField txtxF_apellido_registroUsuario;
     // End of variables declaration//GEN-END:variables
