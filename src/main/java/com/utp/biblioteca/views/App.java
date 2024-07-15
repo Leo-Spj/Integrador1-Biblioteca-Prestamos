@@ -1396,7 +1396,7 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_autores_actualizarBibliotecaKeyPressed
 
     private void tbl_libros_actualizarBibliotecaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_libros_actualizarBibliotecaKeyPressed
-        // preguntar al usuario si desea agregar un nuevo libro si se da enter en una fila sin id
+        // al dar enter en una fila sin id, preguntar si se desea agregar un nuevo libro
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             int row = tbl_libros_actualizarBiblioteca.getSelectedRow();
             Integer libroId = (Integer) tbl_libros_actualizarBiblioteca.getValueAt(row, 0);
@@ -1404,26 +1404,57 @@ public class App extends javax.swing.JFrame {
                 String isbn = (String) tbl_libros_actualizarBiblioteca.getValueAt(row, 1);
                 String titulo = (String) tbl_libros_actualizarBiblioteca.getValueAt(row, 2);
                 String autor = (String) tbl_libros_actualizarBiblioteca.getValueAt(row, 3);
-                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea agregar un nuevo libro con los siguientes datos?\n"
-                        + "ISBN: " + isbn + "\n"
-                        + "Título: " + titulo + "\n"
-                        + "Autor: " + autor);
+                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea agregar un nuevo libro con el título: " + titulo + "?");
                 if (confirmacion == 0) {
                     Libro libro = new Libro();
                     libro.setIsbn(isbn);
                     libro.setTitulo(titulo);
-                    Autor autorObj = new Autor();
-                    autorObj.setNombre(autor);
+                    AutorDao autorDao = new AutorDao();
+                    Autor autorObj = autorDao.buscarNombre(autor);
                     libro.setAutor(autorObj);
-                    libro.setStock(0);
-
                     LibroDao libroDao = new LibroDao();
                     libroDao.crear(libro);
+                    buscarLibros("", "", "");
+                }
+            } else {
+                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea actualizar el libro?");
+                if (confirmacion == 0) {
+                    int idLibro = (int) tbl_libros_actualizarBiblioteca.getValueAt(row, 0);
+                    String isbn = (String) tbl_libros_actualizarBiblioteca.getValueAt(row, 1);
+                    String titulo = (String) tbl_libros_actualizarBiblioteca.getValueAt(row, 2);
+                    String autor = (String) tbl_libros_actualizarBiblioteca.getValueAt(row, 3);
+                    int stock = (int) tbl_libros_actualizarBiblioteca.getValueAt(row, 4);
 
-                    buscarLibros(titulo, isbn, autor);
+                    Libro libro = new Libro();
+                    libro.setLibro_id(idLibro);
+                    libro.setIsbn(isbn);
+                    libro.setTitulo(titulo);
+                    AutorDao autorDao = new AutorDao();
+                    Autor autorObj = autorDao.buscarNombre(autor);
+                    libro.setAutor(autorObj);
+                    libro.setStock(stock);
+
+                    LibroDao libroDao = new LibroDao();
+                    libroDao.actualizar(libro);
+                    buscarLibros("", "", "");
                 }
             }
+
         }
+
+        // si es la tecla suprimir, preguntar si se desea eliminar el libro
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_DELETE) {
+            int row = tbl_libros_actualizarBiblioteca.getSelectedRow();
+            int libroId = (int) tbl_libros_actualizarBiblioteca.getValueAt(row, 0);
+            String titulo = (String) tbl_libros_actualizarBiblioteca.getValueAt(row, 2);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el libro: " + titulo + "?");
+            if (confirmacion == 0) {
+                LibroDao libroDao = new LibroDao();
+                libroDao.eliminar(libroId);
+                buscarLibros("", "", "");
+            }
+        }
+
     }//GEN-LAST:event_tbl_libros_actualizarBibliotecaKeyPressed
 
     private void tbl_autores_actualizarBibliotecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_autores_actualizarBibliotecaMouseClicked
@@ -1433,8 +1464,14 @@ public class App extends javax.swing.JFrame {
         if (autorId != null) {
             String nombre = (String) tbl_autores_actualizarBiblioteca.getValueAt(row, 1);
             DefaultTableModel model = (DefaultTableModel) tbl_libros_actualizarBiblioteca.getModel();
-            int rowLibro = model.getRowCount() - 1;
-            model.setValueAt(nombre, rowLibro, 3);
+            // para enviar el mombre del autor a la fila de la tabla libros, se debe seleeccionar la fila a la cual volcar el nombre
+            int rowLibros = tbl_libros_actualizarBiblioteca.getSelectedRow();
+            if (rowLibros == -1) {
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila en la tabla de libros.");
+            } else if (model.getValueAt(rowLibros, 0) == null || model.getValueAt(rowLibros, 2) == null) {
+                model.setValueAt(nombre, rowLibros, 3);
+            }
+
         }
     }//GEN-LAST:event_tbl_autores_actualizarBibliotecaMouseClicked
 

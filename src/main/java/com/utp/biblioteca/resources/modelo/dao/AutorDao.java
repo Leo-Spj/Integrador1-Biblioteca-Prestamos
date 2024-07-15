@@ -60,6 +60,23 @@ public class AutorDao implements CrudDao<Autor, Integer> {
         return autor;
     }
 
+    public Autor buscarNombre(String nombre) {
+        Autor autor = new Autor();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Autor WHERE nombre = ?")) {
+            ps.setString(1, nombre);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    autor.setAutor_id(rs.getInt("autor_id"));
+                    autor.setNombre(rs.getString("nombre"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return autor;
+    }
+
     @Override
     public void actualizar(Autor entidad) {
         try (Connection conn = getConnection();
