@@ -7,17 +7,17 @@ package com.utp.biblioteca.views;
 import com.utp.biblioteca.reports.ReportGenerator;
 import com.utp.biblioteca.reports.ReportTableUpdater;
 import com.utp.biblioteca.resources.modelo.*;
-import com.utp.biblioteca.resources.modelo.dao.LibroDao;
-import com.utp.biblioteca.resources.modelo.dao.PrestamoDao;
-import com.utp.biblioteca.resources.modelo.dao.RolDao;
-import com.utp.biblioteca.resources.modelo.dao.UsuarioDao;
+import com.utp.biblioteca.resources.modelo.dao.*;
 import com.utp.biblioteca.resources.modelo.dao.sp.StoredProcedureRepository;
 import com.utp.biblioteca.resources.servicio.AvisosEmail;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -116,6 +116,17 @@ public class App extends javax.swing.JFrame {
         txtxF_apellido_registroUsuario = new javax.swing.JTextField();
         txtF_corro_registroUsuario = new javax.swing.JTextField();
         btn_crearUsuario_registroUsuario = new javax.swing.JButton();
+        panel_actualizarBiblioteca = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtF_tituloLibro_actualizarBiblioteca = new javax.swing.JTextField();
+        txtF_isbn_actualizarBiblioteca = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtF_autor_actualizarBiblioteca = new javax.swing.JTextField();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        tbl_autores_actualizarBiblioteca = new javax.swing.JTable();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        tbl_libros_actualizarBiblioteca = new javax.swing.JTable();
         panel_reportes = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
@@ -243,7 +254,7 @@ public class App extends javax.swing.JFrame {
                     .addComponent(cbx_buscarAtributo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(0, 153, 153));
@@ -530,7 +541,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panel_devolucionesLayout = new javax.swing.GroupLayout(panel_devoluciones);
@@ -645,10 +656,182 @@ public class App extends javax.swing.JFrame {
             .addGroup(panel_registarUsuarioLayout.createSequentialGroup()
                 .addGap(102, 102, 102)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         pestañas.addTab("Registrar Usuario", panel_registarUsuario);
+
+        jLabel3.setText("Titulo:");
+
+        jLabel7.setText("ISBN:");
+
+        txtF_tituloLibro_actualizarBiblioteca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtF_tituloLibro_actualizarBibliotecaKeyPressed(evt);
+            }
+        });
+
+        txtF_isbn_actualizarBiblioteca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtF_isbn_actualizarBibliotecaKeyPressed(evt);
+            }
+        });
+
+        jLabel12.setText("Autor:");
+
+        txtF_autor_actualizarBiblioteca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtF_autor_actualizarBibliotecaKeyPressed(evt);
+            }
+        });
+
+        tbl_autores_actualizarBiblioteca.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_autores_actualizarBiblioteca.setColumnSelectionAllowed(true);
+        tbl_autores_actualizarBiblioteca.getTableHeader().setReorderingAllowed(false);
+        tbl_autores_actualizarBiblioteca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tbl_autores_actualizarBibliotecaKeyPressed(evt);
+            }
+        });
+        jScrollPane10.setViewportView(tbl_autores_actualizarBiblioteca);
+        tbl_autores_actualizarBiblioteca.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tbl_autores_actualizarBiblioteca.getColumnModel().getColumnCount() > 0) {
+            tbl_autores_actualizarBiblioteca.getColumnModel().getColumn(0).setPreferredWidth(24);
+            tbl_autores_actualizarBiblioteca.getColumnModel().getColumn(0).setMaxWidth(24);
+        }
+
+        tbl_libros_actualizarBiblioteca.setAutoCreateRowSorter(true);
+        tbl_libros_actualizarBiblioteca.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "ISBN", "Titulo", "Autor", "Stock"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_libros_actualizarBiblioteca.getTableHeader().setReorderingAllowed(false);
+        tbl_libros_actualizarBiblioteca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tbl_libros_actualizarBibliotecaKeyPressed(evt);
+            }
+        });
+        jScrollPane11.setViewportView(tbl_libros_actualizarBiblioteca);
+        if (tbl_libros_actualizarBiblioteca.getColumnModel().getColumnCount() > 0) {
+            tbl_libros_actualizarBiblioteca.getColumnModel().getColumn(0).setPreferredWidth(16);
+            tbl_libros_actualizarBiblioteca.getColumnModel().getColumn(4).setPreferredWidth(36);
+            tbl_libros_actualizarBiblioteca.getColumnModel().getColumn(4).setMaxWidth(36);
+        }
+
+        javax.swing.GroupLayout panel_actualizarBibliotecaLayout = new javax.swing.GroupLayout(panel_actualizarBiblioteca);
+        panel_actualizarBiblioteca.setLayout(panel_actualizarBibliotecaLayout);
+        panel_actualizarBibliotecaLayout.setHorizontalGroup(
+            panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_actualizarBibliotecaLayout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addGroup(panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_actualizarBibliotecaLayout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtF_autor_actualizarBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_actualizarBibliotecaLayout.createSequentialGroup()
+                        .addGroup(panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtF_tituloLibro_actualizarBiblioteca)
+                            .addComponent(txtF_isbn_actualizarBiblioteca)))
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))
+                .addGap(103, 103, 103))
+        );
+        panel_actualizarBibliotecaLayout.setVerticalGroup(
+            panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_actualizarBibliotecaLayout.createSequentialGroup()
+                .addGroup(panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_actualizarBibliotecaLayout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addGroup(panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(txtF_autor_actualizarBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_actualizarBibliotecaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtF_tituloLibro_actualizarBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txtF_isbn_actualizarBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)))
+                .addGroup(panel_actualizarBibliotecaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+
+        pestañas.addTab("Arcualizar Biblioteca", panel_actualizarBiblioteca);
 
         jPanel7.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -730,7 +913,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_descargarLibrosSinStock_reportes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -807,25 +990,25 @@ public class App extends javax.swing.JFrame {
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(223, 223, 223)
-                .addComponent(btn_descargarFrecuenciaPrestamos_reportes)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_quienesTienenElLibro_reportes1)
                 .addGap(224, 224, 224))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(224, 224, 224)
+                .addComponent(btn_descargarFrecuenciaPrestamos_reportes)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_descargarFrecuenciaPrestamos_reportes)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1079,6 +1262,69 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_quienesTienenElLibro_reportes1ActionPerformed
 
+    private void txtF_tituloLibro_actualizarBibliotecaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtF_tituloLibro_actualizarBibliotecaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtF_tituloLibro_actualizarBibliotecaKeyPressed
+
+    private void txtF_isbn_actualizarBibliotecaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtF_isbn_actualizarBibliotecaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtF_isbn_actualizarBibliotecaKeyPressed
+
+    public void tablaAutores(String nombre){
+        AutorDao autorDao = new AutorDao();
+        List<Autor> todosAutores = autorDao.buscarTodos();
+
+        // Filtrar la lista de todos los autores para incluir solo aquellos que coincidan con la búsqueda
+        List<Autor> autoresFiltrados = todosAutores.stream()
+                .filter(autor -> autor.getNombre().toLowerCase().contains(nombre))
+                .collect(Collectors.toList());
+
+        DefaultTableModel model = (DefaultTableModel) tbl_autores_actualizarBiblioteca.getModel();
+        model.setRowCount(0);
+        for (Autor a : autoresFiltrados) {
+            Object[] row = new Object[]{
+                    a.getAutor_id(),
+                    a.getNombre()
+            };
+            model.addRow(row);
+        }
+
+        if (autoresFiltrados.isEmpty()) {
+            Object[] row = new Object[]{null, nombre}; // null valor temporal para el ID
+            model.addRow(row);
+        }
+    }
+    private void txtF_autor_actualizarBibliotecaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtF_autor_actualizarBibliotecaKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            String autorBusqueda = txtF_autor_actualizarBiblioteca.getText().toLowerCase();
+            tablaAutores(autorBusqueda);
+        }
+    }//GEN-LAST:event_txtF_autor_actualizarBibliotecaKeyPressed
+
+    private void tbl_autores_actualizarBibliotecaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_autores_actualizarBibliotecaKeyPressed
+        // si se da enter en una fila sin id, preguntar al usuario si desa agregar un nuevo autor
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            int row = tbl_autores_actualizarBiblioteca.getSelectedRow();
+            Integer autorId = (Integer) tbl_autores_actualizarBiblioteca.getValueAt(row, 0);
+            if (autorId == null) {
+                String nombre = (String) tbl_autores_actualizarBiblioteca.getValueAt(row, 1);
+                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea agregar un nuevo autor con el nombre: " + nombre + "?");
+                if (confirmacion == 0) {
+                    Autor autor = new Autor();
+                    autor.setNombre(nombre);
+                    AutorDao autorDao = new AutorDao();
+                    autorDao.crear(autor);
+
+                    tablaAutores(autor.getNombre());
+                }
+            }
+        }
+    }//GEN-LAST:event_tbl_autores_actualizarBibliotecaKeyPressed
+
+    private void tbl_libros_actualizarBibliotecaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_libros_actualizarBibliotecaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_libros_actualizarBibliotecaKeyPressed
+
     private void tbl_historialUsuario_devolucionMouseClicked(java.awt.event.MouseEvent evt) {
         int row = tbl_historialUsuario_devolucion.getSelectedRow();
         int prestamoId = (int) tbl_historialUsuario_devolucion.getValueAt(row, 0);
@@ -1244,6 +1490,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1253,9 +1500,11 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1265,6 +1514,8 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1274,19 +1525,23 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panelLibros;
+    private javax.swing.JPanel panel_actualizarBiblioteca;
     private javax.swing.JPanel panel_devoluciones;
     private javax.swing.JPanel panel_prestamos;
     private javax.swing.JPanel panel_registarUsuario;
     private javax.swing.JPanel panel_reportes;
     private javax.swing.JTabbedPane pestañas;
+    private javax.swing.JTable tbl_autores_actualizarBiblioteca;
     private javax.swing.JTable tbl_historialUsuario_devolucion;
     private javax.swing.JTable tbl_librosBusqueda_prestamos;
     private javax.swing.JTable tbl_librosSinStock_reportes;
+    private javax.swing.JTable tbl_libros_actualizarBiblioteca;
     private javax.swing.JTable tbl_quienesTienenElLibro_reportes1;
     private javax.swing.JTable tbl_recuenciaPrestamos_reportes;
     private javax.swing.JTable tbl_usuarioEncontrado_devolucion;
     private javax.swing.JTable tbl_usuarioEncontrado_prestamo;
     private javax.swing.JTable tbl_usuariosAtrasados_reportes;
+    private javax.swing.JTextField txtF_autor_actualizarBiblioteca;
     private javax.swing.JTextField txtF_barraBusquedaLibros_prestamos;
     private javax.swing.JTextField txtF_buscarDNI_devolucion;
     private javax.swing.JTextField txtF_buscarDNI_prestamo;
@@ -1295,7 +1550,9 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField txtF_dni_prestamo;
     private javax.swing.JTextField txtF_dni_registroUsuario;
     private javax.swing.JTextField txtF_idLibro_prestamo;
+    private javax.swing.JTextField txtF_isbn_actualizarBiblioteca;
     private javax.swing.JTextField txtF_nombre_registroUsuario;
+    private javax.swing.JTextField txtF_tituloLibro_actualizarBiblioteca;
     private javax.swing.JTextField txtxF_apellido_registroUsuario;
     // End of variables declaration//GEN-END:variables
 }
