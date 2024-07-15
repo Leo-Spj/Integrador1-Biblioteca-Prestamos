@@ -32,21 +32,14 @@ public class ReportGenerator {
 
 
     public void generateReport(String jrxmlFilePath, String outputFileName, Map<String, Object> parameters, JRBeanCollectionDataSource dataSource) {
-        try {
-            // Verificar si el archivo existe
-            if (!Files.exists(Paths.get(jrxmlFilePath))) {
+        try (InputStream jrxmlInputStream = getClass().getResourceAsStream(jrxmlFilePath)) {
+            if (jrxmlInputStream == null) {
                 JOptionPane.showMessageDialog(null, "El archivo JRXML no se encontró en la ruta especificada.");
                 return;
             }
 
-            // Verificar si el archivo es legible
-            if (!Files.isReadable(Paths.get(jrxmlFilePath))) {
-                JOptionPane.showMessageDialog(null, "El archivo JRXML no es legible.");
-                return;
-            }
-
-            // Cargar y compilar el archivo JRXML desde la ruta absoluta
-            JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlFilePath);
+            // Cargar y compilar el archivo JRXML desde el stream
+            JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlInputStream);
 
             // Rellenar el reporte con los datos y parámetros
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
@@ -62,10 +55,12 @@ public class ReportGenerator {
             JOptionPane.showMessageDialog(null, "Reporte generado exitosamente: " + outputFilePath);
         } catch (JRException e) {
             JOptionPane.showMessageDialog(null, "Error al generar el reporte: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
         }
     }
     public void generateLibrosSinStockReport(List<Libro> libros) {
-        String jrxmlFilePath = "/Users/brandonluismenesessolorzano/Desktop/Integrador1-Biblioteca-Prestamos/src/main/resources/reports/librosSinStockReport.jrxml";
+        String jrxmlFilePath = "/reports/librosSinStockReport.jrxml";
 
         // Convertir los objetos a un formato adecuado para el reporte
         List<Map<String, Object>> reportData = new ArrayList<>();
@@ -86,7 +81,7 @@ public class ReportGenerator {
     }
 
     public void generateUsuariosAtrasadosReport(List<Usuario> usuarios) {
-        String jrxmlFilePath = "/Users/brandonluismenesessolorzano/Desktop/Integrador1-Biblioteca-Prestamos/src/main/resources/reports/usuariosAtrasadosReport.jrxml";
+        String jrxmlFilePath = "/reports/usuariosAtrasadosReport.jrxml";
 
         // Convertir los objetos a un formato adecuado para el reporte
         List<Map<String, Object>> reportData = new ArrayList<>();
@@ -110,7 +105,7 @@ public class ReportGenerator {
 
 
     public void generateFrecuenciaPrestamosReport(List<FrecuenciaPrestamo> frecuenciaPrestamos) {
-        String jrxmlFilePath = "/Users/brandonluismenesessolorzano/Desktop/Integrador1-Biblioteca-Prestamos/src/main/resources/reports/frecuenciaPrestamosReport.jrxml";
+        String jrxmlFilePath = "/reports/frecuenciaPrestamosReport.jrxml";
 
         // Convertir los objetos a un formato adecuado para el reporte
         List<Map<String, Object>> reportData = new ArrayList<>();
@@ -129,7 +124,7 @@ public class ReportGenerator {
     }
 
     public void generateQuienesTienenLibroReport(List<UsuarioConLibro> usuarios, int libroId) {
-        String jrxmlFilePath = "/Users/brandonluismenesessolorzano/Desktop/Integrador1-Biblioteca-Prestamos/src/main/resources/reports/quienesTienenLibroReport.jrxml";
+        String jrxmlFilePath = "/reports/quienesTienenLibroReport.jrxml";
 
         // Convertir los objetos a un formato adecuado para el reporte
         List<Map<String, Object>> reportData = new ArrayList<>();
