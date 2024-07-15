@@ -19,10 +19,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,7 +45,12 @@ public class ReportGenerator {
             // Obtener la ruta de la carpeta de descargas del usuario
             String userHome = System.getProperty("user.home");
             String downloadsDir = Paths.get(userHome, "Downloads").toString();
-            String outputFilePath = Paths.get(downloadsDir, outputFileName).toString();
+
+            // Obtener la fecha y hora actual
+            String timeStamp = new SimpleDateFormat("dd-MM-yyyy_HH.mm.ss").format(new Date());
+            String uniqueOutputFileName = outputFileName.replace(".pdf", "_" + timeStamp + ".pdf");
+
+            String outputFilePath = Paths.get(downloadsDir, uniqueOutputFileName).toString();
 
             // Exportar el reporte a un archivo PDF
             JasperExportManager.exportReportToPdfFile(jasperPrint, outputFilePath);
