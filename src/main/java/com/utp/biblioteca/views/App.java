@@ -769,7 +769,7 @@ public class App extends javax.swing.JFrame {
         tbl_libros_actualizarBiblioteca.getTableHeader().setReorderingAllowed(false);
         tbl_libros_actualizarBiblioteca.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_libros_actualizarBibliotecaMouseClicked(evt);
+
             }
         });
         tbl_libros_actualizarBiblioteca.addKeyListener(new java.awt.event.KeyAdapter() {
