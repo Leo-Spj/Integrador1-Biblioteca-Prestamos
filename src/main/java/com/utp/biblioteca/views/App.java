@@ -887,6 +887,40 @@ public class App extends javax.swing.JFrame {
                     model_librosPrestamos.addRow(row);
                 }
             }
+            if("Autor".equals(seleccionCbx)){
+                String autorBusqueda = txtF_barraBusquedaLibros_prestamos.getText();
+                LibroDao libroDao = new LibroDao();
+                List<Libro> libros = libroDao.buscarPorAutor(autorBusqueda);
+
+                model_librosPrestamos.setRowCount(0);
+                for (Libro libro : libros) {
+                    Object[] row = new Object[]{
+                        libro.getLibro_id(),
+                        libro.getIsbn(),
+                        libro.getTitulo(),
+                        libro.getAutor().getNombre(),
+                        libro.getStock()
+                    };
+                    model_librosPrestamos.addRow(row);
+                }
+            }
+            if("ISBN".equals(seleccionCbx)) {
+                String isbnBusqueda = txtF_barraBusquedaLibros_prestamos.getText();
+                LibroDao libroDao = new LibroDao();
+                List<Libro> libros = libroDao.buscarPorIsbn(isbnBusqueda);
+
+                model_librosPrestamos.setRowCount(0);
+                for (Libro libro : libros) {
+                    Object[] row = new Object[]{
+                            libro.getLibro_id(),
+                            libro.getIsbn(),
+                            libro.getTitulo(),
+                            libro.getAutor().getNombre(),
+                            libro.getStock()
+                    };
+                    model_librosPrestamos.addRow(row);
+                }
+            }
         }
     }//GEN-LAST:event_txtF_barraBusquedaLibros_prestamosKeyPressed
 
