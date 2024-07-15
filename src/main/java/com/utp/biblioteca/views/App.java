@@ -99,6 +99,7 @@ public class App extends javax.swing.JFrame {
                 usuario.getNombres(),
                 usuario.getApellidos(),
                 usuario.getDni(),
+                    usuario.getCorreo(),
                 usuario.isEstado()
             };
             model.addRow(row);

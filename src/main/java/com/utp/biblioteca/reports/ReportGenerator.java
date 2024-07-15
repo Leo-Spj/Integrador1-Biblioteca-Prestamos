@@ -95,6 +95,7 @@ public class ReportGenerator {
             item.put("nombres", usuario.getNombres());
             item.put("apellidos", usuario.getApellidos());
             item.put("dni", usuario.getDni());
+            item.put("correo", usuario.getCorreo());
             item.put("estado", usuario.isEstado());
             reportData.add(item);
         }
