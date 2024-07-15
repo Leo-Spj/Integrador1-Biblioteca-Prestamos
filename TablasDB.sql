@@ -68,11 +68,11 @@ INSERT INTO Usuario (nombres, apellidos, dni, correo, contraseña, rol_id) VALUE
 
 -- usuarios bloqueados
 INSERT INTO Usuario (nombres, apellidos, dni, rol_id, estado) VALUES
-('Usuario2', 'Usuario2', 87654321, 2, FALSE),
-('Usuario3', 'Usuario3', 87654322, 2, FALSE);
+('Usuario1', 'Usuario1', 87654321, 2, FALSE),
+('Usuario2', 'Usuario2', 87654322, 2, FALSE);
 
 INSERT INTO Usuario (nombres, apellidos, dni, rol_id) VALUES
-('Usuario4', 'Usuario4', 87654323, 2);
+('Usuario3', 'Usuario3', 87654323, 2);
 
 -- Insertar registros en Autor
 INSERT INTO Autor (nombre) VALUES
