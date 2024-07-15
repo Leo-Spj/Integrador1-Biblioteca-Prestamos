@@ -13,8 +13,7 @@ import com.utp.biblioteca.resources.servicio.AvisosEmail;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -768,6 +767,11 @@ public class App extends javax.swing.JFrame {
             }
         });
         tbl_libros_actualizarBiblioteca.getTableHeader().setReorderingAllowed(false);
+        tbl_libros_actualizarBiblioteca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_libros_actualizarBibliotecaMouseClicked(evt);
+            }
+        });
         tbl_libros_actualizarBiblioteca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbl_libros_actualizarBibliotecaKeyPressed(evt);
@@ -1263,12 +1267,52 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_quienesTienenElLibro_reportes1ActionPerformed
 
     private void txtF_tituloLibro_actualizarBibliotecaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtF_tituloLibro_actualizarBibliotecaKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            String titulo = txtF_tituloLibro_actualizarBiblioteca.getText().toLowerCase();
+            String isbn = txtF_isbn_actualizarBiblioteca.getText().toLowerCase();
+            String autor = txtF_autor_actualizarBiblioteca.getText().toLowerCase();
+            buscarLibros(titulo, isbn, autor);
+        }
     }//GEN-LAST:event_txtF_tituloLibro_actualizarBibliotecaKeyPressed
 
     private void txtF_isbn_actualizarBibliotecaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtF_isbn_actualizarBibliotecaKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            String titulo = txtF_tituloLibro_actualizarBiblioteca.getText().toLowerCase();
+            String isbn = txtF_isbn_actualizarBiblioteca.getText().toLowerCase();
+            String autor = txtF_autor_actualizarBiblioteca.getText().toLowerCase();
+            buscarLibros(titulo, isbn, autor);
+        }
     }//GEN-LAST:event_txtF_isbn_actualizarBibliotecaKeyPressed
+
+    public void buscarLibros(String titulo, String isbn, String autor){
+        LibroDao libroDao = new LibroDao();
+        List<Libro> libros = libroDao.buscarTodos();
+
+        // siltrar por coincidencias. obligatorio el titulo, opcionales isbn y autor
+        List<Libro> librosFiltrados = libros.stream()
+                .filter(libro -> libro.getTitulo().toLowerCase().contains(titulo))
+                .filter(libro -> isbn.isEmpty() || libro.getIsbn().toLowerCase().contains(isbn))
+                .filter(libro -> autor.isEmpty() || libro.getAutor().getNombre().toLowerCase().contains(autor))
+                .collect(Collectors.toList());
+
+        DefaultTableModel model = (DefaultTableModel) tbl_libros_actualizarBiblioteca.getModel();
+        model.setRowCount(0);
+        for (Libro libro : librosFiltrados) {
+            Object[] row = new Object[]{
+                libro.getLibro_id(),
+                libro.getIsbn(),
+                libro.getTitulo(),
+                libro.getAutor().getNombre(),
+                libro.getStock()
+            };
+            model.addRow(row);
+        }
+
+        if (librosFiltrados.isEmpty()) {
+            Object[] row = new Object[]{null, isbn, titulo, autor, null}; // null valor temporal para el ID
+            model.addRow(row);
+        }
+    }
 
     public void tablaAutores(String nombre){
         AutorDao autorDao = new AutorDao();
