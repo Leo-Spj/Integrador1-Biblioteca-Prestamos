@@ -32,6 +32,8 @@ public class App extends javax.swing.JFrame {
         initComponents();
         iniciandoTablaPrestamos();
         cargarTablasReportes();
+        buscarLibros("","","");
+        tablaAutores("");
     }
     private final ReportTableUpdater reportTableUpdater = new ReportTableUpdater();
     private final StoredProcedureRepository repository = new StoredProcedureRepository();
@@ -1379,6 +1381,11 @@ public class App extends javax.swing.JFrame {
                     autor.setNombre(nuevoNombre);
                     AutorDao autorDao = new AutorDao();
                     autorDao.actualizar(autor);
+
+                    String tituloLibro = txtF_tituloLibro_actualizarBiblioteca.getText().toLowerCase();
+                    String isbn = txtF_isbn_actualizarBiblioteca.getText().toLowerCase();
+
+                    buscarLibros(tituloLibro, isbn, "");
                 }
             }
             // si es la tecla suprimir, preguntar si se desea eliminar el autor
@@ -1393,6 +1400,7 @@ public class App extends javax.swing.JFrame {
                 tablaAutores("");
             }
         }
+        iniciandoTablaPrestamos();
     }//GEN-LAST:event_tbl_autores_actualizarBibliotecaKeyPressed
 
     private void tbl_libros_actualizarBibliotecaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_libros_actualizarBibliotecaKeyPressed
@@ -1414,7 +1422,11 @@ public class App extends javax.swing.JFrame {
                     libro.setAutor(autorObj);
                     LibroDao libroDao = new LibroDao();
                     libroDao.crear(libro);
-                    buscarLibros("", "", "");
+
+                    String tituloLibro = txtF_tituloLibro_actualizarBiblioteca.getText().toLowerCase();
+                    String isbnBusqueda = txtF_isbn_actualizarBiblioteca.getText().toLowerCase();
+
+                    buscarLibros(tituloLibro, isbnBusqueda, "");
                 }
             } else {
                 int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea actualizar el libro?");
@@ -1436,12 +1448,14 @@ public class App extends javax.swing.JFrame {
 
                     LibroDao libroDao = new LibroDao();
                     libroDao.actualizar(libro);
-                    buscarLibros("", "", "");
+
+                    String tituloLibro = txtF_tituloLibro_actualizarBiblioteca.getText().toLowerCase();
+                    String isbnBusqueda = txtF_isbn_actualizarBiblioteca.getText().toLowerCase();
+
+                    buscarLibros(tituloLibro, isbnBusqueda, "");
                 }
             }
-
         }
-
         // si es la tecla suprimir, preguntar si se desea eliminar el libro
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_DELETE) {
             int row = tbl_libros_actualizarBiblioteca.getSelectedRow();
@@ -1454,6 +1468,8 @@ public class App extends javax.swing.JFrame {
                 buscarLibros("", "", "");
             }
         }
+
+        iniciandoTablaPrestamos();
 
     }//GEN-LAST:event_tbl_libros_actualizarBibliotecaKeyPressed
 
