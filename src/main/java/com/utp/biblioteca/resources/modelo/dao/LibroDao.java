@@ -244,28 +244,4 @@ public class LibroDao implements CrudDao<Libro, Integer> {
         }
         return existe;
     }
-    public List<Libro> buscarLibrosSinStock() {
-        List<Libro> librosSinStock = new ArrayList<>();
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Libro WHERE stock = 0");
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                AutorDao autorDao = new AutorDao();
-                Autor autor = autorDao.buscarUno(rs.getInt("autor_id"));
-
-                Libro libro = new Libro();
-                libro.setLibro_id(rs.getInt("libro_id"));
-                libro.setIsbn(rs.getString("isbn"));
-                libro.setTitulo(rs.getString("titulo"));
-                libro.setAutor(autor);
-                libro.setLink_imagen(rs.getString("link_imagen"));
-                libro.setDescripcion(rs.getString("descripcion"));
-                libro.setStock(rs.getInt("stock"));
-                librosSinStock.add(libro);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return librosSinStock;
-    }
 }
