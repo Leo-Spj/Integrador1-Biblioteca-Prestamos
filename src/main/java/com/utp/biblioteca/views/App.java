@@ -10,7 +10,6 @@ import com.utp.biblioteca.resources.modelo.Libro;
 import com.utp.biblioteca.resources.modelo.Prestamo;
 import com.utp.biblioteca.resources.modelo.Usuario;
 import com.utp.biblioteca.resources.modelo.FrecuenciaPrestamo;
-import com.utp.biblioteca.resources.modelo.dao.FrecuenciaPrestamoDao;
 import com.utp.biblioteca.resources.modelo.dao.LibroDao;
 import com.utp.biblioteca.resources.modelo.dao.PrestamoDao;
 import com.utp.biblioteca.resources.modelo.dao.RolDao;
@@ -30,10 +29,6 @@ import java.util.concurrent.CompletableFuture;
 public class App extends javax.swing.JFrame {
 
     private DefaultTableModel model_librosPrestamos;
-    private DefaultTableModel model_librosSinStock;
-    private DefaultTableModel model_usuariosAtrasados;
-    private DefaultTableModel model_frecuenciaPrestamos;
-    private DefaultTableModel model_quienesTienenElLibro;
     /**
      * Creates new form NewJFrame
      */
@@ -1047,16 +1042,9 @@ public class App extends javax.swing.JFrame {
 
     private void btn_quienesTienenElLibro_reportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_quienesTienenElLibro_reportes1ActionPerformed
         try {
-            // Convertir el texto a un entero
             int libroId = Integer.parseInt(jTextField1.getText());
-
-            // Actualizar la tabla con los datos de usuarios que tienen el libro
             reportTableUpdater.updateQuienesTienenLibroTable(tbl_quienesTienenElLibro_reportes1, libroId);
-
-            // Generar el reporte
-            UsuarioDao usuarioDao = new UsuarioDao();
-            List<Usuario> usuariosConLibro = usuarioDao.spQuienesTienenLibro(libroId);
-            ReportGenerator reportGenerator = new ReportGenerator();
+            List<Usuario> usuariosConLibro = repository.spQuienesTienenLibro(libroId);
             reportGenerator.generateQuienesTienenLibroReport(usuariosConLibro, libroId);
 
             // Mostrar mensaje de éxito al usuario
