@@ -36,6 +36,18 @@ public class App extends javax.swing.JFrame {
         initComponents();
         iniciandoTablaPrestamos();
         cargarTablasReportes();
+
+        // Crear una instancia de MiPanel
+        MiPanel miPanel = new MiPanel();
+
+        // Agregar MiPanel a este JFrame (App)
+        this.add(miPanel);
+
+        // Opcional: Configurar la ubicación y tamaño de MiPanel si es necesario
+        miPanel.setBounds(10, 10, 300, 200); // Ejemplo de configuración de posición y tamaño
+
+        // Asegúrate de llamar a este método si agregas componentes después de que el JFrame sea visible
+        this.validate();
     }
     private final ReportTableUpdater reportTableUpdater = new ReportTableUpdater();
     private final StoredProcedureRepository repository = new StoredProcedureRepository();
@@ -886,6 +898,40 @@ public class App extends javax.swing.JFrame {
                         libro.getTitulo(),
                         libro.getAutor().getNombre(),
                         libro.getStock()
+                    };
+                    model_librosPrestamos.addRow(row);
+                }
+            }
+            if("Autor".equals(seleccionCbx)){
+                String autorBusqueda = txtF_barraBusquedaLibros_prestamos.getText();
+                LibroDao libroDao = new LibroDao();
+                List<Libro> libros = libroDao.buscarPorAutor(autorBusqueda);
+
+                model_librosPrestamos.setRowCount(0);
+                for (Libro libro : libros) {
+                    Object[] row = new Object[]{
+                        libro.getLibro_id(),
+                        libro.getIsbn(),
+                        libro.getTitulo(),
+                        libro.getAutor().getNombre(),
+                        libro.getStock()
+                    };
+                    model_librosPrestamos.addRow(row);
+                }
+            }
+            if("ISBN".equals(seleccionCbx)) {
+                String isbnBusqueda = txtF_barraBusquedaLibros_prestamos.getText();
+                LibroDao libroDao = new LibroDao();
+                List<Libro> libros = libroDao.buscarPorIsbn(isbnBusqueda);
+
+                model_librosPrestamos.setRowCount(0);
+                for (Libro libro : libros) {
+                    Object[] row = new Object[]{
+                            libro.getLibro_id(),
+                            libro.getIsbn(),
+                            libro.getTitulo(),
+                            libro.getAutor().getNombre(),
+                            libro.getStock()
                     };
                     model_librosPrestamos.addRow(row);
                 }
