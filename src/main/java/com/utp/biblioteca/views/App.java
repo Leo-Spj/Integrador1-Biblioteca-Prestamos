@@ -36,18 +36,6 @@ public class App extends javax.swing.JFrame {
         initComponents();
         iniciandoTablaPrestamos();
         cargarTablasReportes();
-
-        // Crear una instancia de MiPanel
-        MiPanel miPanel = new MiPanel();
-
-        // Agregar MiPanel a este JFrame (App)
-        this.add(miPanel);
-
-        // Opcional: Configurar la ubicación y tamaño de MiPanel si es necesario
-        miPanel.setBounds(10, 10, 300, 200); // Ejemplo de configuración de posición y tamaño
-
-        // Asegúrate de llamar a este método si agregas componentes después de que el JFrame sea visible
-        this.validate();
     }
     private final ReportTableUpdater reportTableUpdater = new ReportTableUpdater();
     private final StoredProcedureRepository repository = new StoredProcedureRepository();
